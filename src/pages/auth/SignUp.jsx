@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBar from '../components/NavBar'
+import NavBar from "../../components/NavBar"
 
 function SignUp() {
   return (
@@ -12,6 +12,10 @@ function SignUp() {
           
         <div >
         <label>Username:</label>
+        <input type='text'></input> 
+        </div>
+        <div >
+        <label>Name:</label>
         <input type='text'></input> 
         </div>
         <div>

@@ -4,8 +4,8 @@ import viteLogo from '/vite.svg'
 import "../src/css/App.css"
 import { Route, Routes } from 'react-router-dom'
 import Dashboard from './pages/Dashboard'
-import SignUp from './pages/SignUp'
-import Login from './pages/Login'
+import SignUp from '../src/pages/auth/SignUp'
+import Login from '../src/pages/auth/Login'
 
 
 function App() {

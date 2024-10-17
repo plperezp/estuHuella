@@ -1,11 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext,useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import BtnNav from './BtnNav'
 import { AuthContext } from '../context/auth.context'
+import services from '../services/config'
+import { useParams } from 'react-router-dom'
 
 function NavBar() {
+  const params= useParams()
   const navigate = useNavigate()
-  const { isLoggedIn, authenticateUser } = useContext(AuthContext)
+  const { isLoggedIn, authenticateUser,loggedUserId } = useContext(AuthContext)
 
   const handleLogout = async () => {
     try {
@@ -13,6 +16,17 @@ function NavBar() {
       await authenticateUser()
       navigate('/')
     } catch (error) {
+      console.log(error)
+    }
+  }
+  useEffect(()=>{
+    userId()
+  },[])
+  const userId =async ()=>{
+    try {
+      const response = await services.get(`/user/${loggedUserId}`)
+ 
+    } catch (error) {loggedUserId
       console.log(error)
     }
   }
@@ -46,7 +60,7 @@ function NavBar() {
         <BtnNav color={'#93b628'} value={'Foro'} />
       </Link>
       {isLoggedIn && (
-        <Link to={'/huella'}>
+        <Link to={`/huella/${loggedUserId}`}>
           <BtnNav color={'#2e5301'} value={'Crea tu huella'} />
         </Link>
       )}

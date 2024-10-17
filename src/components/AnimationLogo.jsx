@@ -28,7 +28,7 @@ function AnimationLogo() {
     ref.current = []
     setItems([])
     ref.current.push(setTimeout(() => setItems(['ES TU...', 'MUNDO']), 1500))
-    ref.current.push(setTimeout(() => setItems(['ES TU...', 'VIDA']), 3500))
+    ref.current.push(setTimeout(() => setItems(['ES TU...', 'MOMENTO']), 3500))
     ref.current.push(setTimeout(() => setItems(['ES TU', 'HUELLA']), 5500))
   }, [])
 

@@ -1,87 +1,193 @@
-import React from 'react'
-import NavBar from '../components/NavBar'
+import React from "react";
+import NavBar from "../components/NavBar";
+import { AuthContext } from "../context/auth.context";
+import { useState, useEffect, useContext } from "react";
+import services from "../services/config";
+import { useNavigate, useParams } from "react-router-dom";
 
 function Foro() {
+  const params = useParams();
+  const navigate = useNavigate();
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+  const { loggedUserId } = useContext(AuthContext);
+  const [errorMessage, setErrorMesage] = useState("");
+  const [data, setdata] = useState([]);
+  const [dataPost, setdataPost] = useState({});
+
+  const handleTitleOnChange = (e) => {
+    setTitle(e.target.value);
+  };
+  const handleTextOnChange = (e) => {
+    setText(e.target.value);
+  };
+
+  useEffect(() => {
+     getDataAll()
+     console.log(data)
+
+   
+  }, []);
+  useEffect(() => {
+    console.log("Data actualizada:", data); 
+  }, [data]);
+  /*const getData = async () => {
+    try {
+      const response = await services.get(`/foro/${dataPost._id}`);
+      setdata(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };*/
+  const handleSubmitCrear = async (e) => {
+    e.preventDefault();
+    try {
+      const formPostCreate = {
+        title,
+        text,
+        user: loggedUserId,
+      };
+
+      const responsePost = await services.post("/foro", formPostCreate);
+      setdataPost(responsePost.data);
+
+      console.log("Post creado correctamente");
+      console.log(getDataAll)
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 400) {
+        setErrorMesage(error.response.data.message);
+      } else {
+        navigate("/error");
+      }
+    }
+  };
+  const handleSubmitEditar = async (e) => {
+    e.preventDefault();
+    try {
+      const formPostCreate = {
+        title,
+        text,
+        user: loggedUserId,
+      };
+      const response = await services.put();
+    } catch (error) {}
+  };
+
+  const handleSubmitEliminar = async (e,id) => {
+    e.preventDefault();
+
+    try {
+      await services.delete(`/foro/${id}`);
+     
+    } catch (error) {
+      if (error.response.status === 400) {
+        setErrorMesage(error.response.data.message);
+      } else {
+        navigate("/error");
+      }
+    }
+  };
+  const getDataAll = async ()=>{
+    try {
+      const response = await services.get(`/foro`)
+      console.log(response)
+      setdata(response.data)
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  /*const handleSubmitGet = async (e) =>{
+  e.preventDefault()
+  
+  try {
+    const response = await services.get("/foro")
+    console.log(response)
+  } catch (error) {
+    if (error.response.status === 400) {
+      setErrorMesage(error.response.data.message);
+    } else {
+      navigate("/error");
+    }
+  }
+}*/
+if(data.length <= 0){
+  return <h2> ...Loading</h2>
+}
+
   return (
     <div
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        flexDirection: 'column',
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        height: "100%",
+        flexDirection: "column",
       }}
     >
       <NavBar></NavBar>
 
       <form
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-          background: '#aae6aa',
-          padding: '50px',
-          gap: '20px',
-          marginTop: '100px',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          background: "#aae6aa",
+          padding: "50px",
+          gap: "20px",
+          marginTop: "100px",
         }}
       >
         <div>
-          <label htmlFor="title">Título:</label>
+          <label>Título:</label>
           <input
             type="text"
-            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+            onChange={handleTitleOnChange}
             required
             style={{
-              width: '100%',
-              padding: '8px',
-              marginBottom: '10px',
-              borderRadius: '4px',
-              border: '1px solid #ccc',
+              width: "100%",
+              padding: "8px",
+              marginBottom: "10px",
+              borderRadius: "4px",
+              border: "1px solid #ccc",
             }}
           />
         </div>
 
         <div>
-          <label htmlFor="description">Descripción:</label>
+          <label>Descripción:</label>
           <textarea
+            value={text}
+            onChange={handleTextOnChange}
             required
             style={{
-              width: '100%',
-              height: '80px',
-              padding: '8px',
-              marginBottom: '10px',
-              borderRadius: '4px',
-              border: '1px solid #ccc',
+              width: "100%",
+              height: "80px",
+              padding: "8px",
+              marginBottom: "10px",
+              borderRadius: "4px",
+              border: "1px solid #ccc",
             }}
           />
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <button
-            type="button"
-            style={{
-              backgroundColor: '#ff4d4d',
-              color: '#fff',
-              border: 'none',
-              padding: '8px 12px',
-              borderRadius: '4px',
-              cursor: 'pointer',
-            }}
-          >
-            Eliminar
-          </button>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+       
 
           <button
             type="button"
             style={{
-              backgroundColor: '#4d79ff',
-              color: '#fff',
-              border: 'none',
-              padding: '8px 12px',
-              borderRadius: '4px',
-              cursor: 'pointer',
+              backgroundColor: "#4d79ff",
+              color: "#fff",
+              border: "none",
+              padding: "8px 12px",
+              borderRadius: "4px",
+              cursor: "pointer",
             }}
           >
             Editar
@@ -89,21 +195,44 @@ function Foro() {
 
           <button
             type="submit"
+            onClick={handleSubmitCrear}
             style={{
-              backgroundColor: '#4CAF50',
-              color: '#fff',
-              border: 'none',
-              padding: '8px 12px',
-              borderRadius: '4px',
-              cursor: 'pointer',
+              backgroundColor: "#4CAF50",
+              color: "#fff",
+              border: "none",
+              padding: "8px 12px",
+              borderRadius: "4px",
+              cursor: "pointer",
             }}
           >
-            Enviar
+            crear
           </button>
         </div>
       </form>
+{data.map((post)=>{
+  return(
+      <div>
+        <h2>{post.title}</h2>
+        <p>{post.text}</p>
+        <button
+            onClick={()=>handleSubmitEliminar(post.id)}
+            type="button"
+            style={{
+              backgroundColor: "#ff4d4d",
+              color: "#fff",
+              border: "none",
+              padding: "8px 12px",
+              borderRadius: "4px",
+              cursor: "pointer",
+            }}
+          >
+            Eliminar
+          </button >
+      </div>
+  )   
+})}
     </div>
-  )
+  );
 }
 
-export default Foro
+export default Foro;

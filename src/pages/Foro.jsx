@@ -1,36 +1,35 @@
-import React from "react";
-import NavBar from "../components/NavBar";
-import { AuthContext } from "../context/auth.context";
-import { useState, useEffect, useContext } from "react";
-import services from "../services/config";
-import { useNavigate, useParams } from "react-router-dom";
+import React from 'react'
+import NavBar from '../components/NavBar'
+import { AuthContext } from '../context/auth.context'
+import { useState, useEffect, useContext } from 'react'
+import services from '../services/config'
+import { useNavigate, useParams } from 'react-router-dom'
 
 function Foro() {
-  const params = useParams();
-  const navigate = useNavigate();
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const { loggedUserId } = useContext(AuthContext);
-  const [errorMessage, setErrorMesage] = useState("");
-  const [data, setdata] = useState([]);
-  const [dataPost, setdataPost] = useState({});
+  const params = useParams()
+  const navigate = useNavigate()
+  const [title, setTitle] = useState('')
+  const [text, setText] = useState('')
+  const { loggedUserId } = useContext(AuthContext)
+  const [errorMessage, setErrorMesage] = useState('')
+  const [data, setdata] = useState([])
+  const [dataPost, setdataPost] = useState({})
+  const [editingPostId, setEditingPostId] = useState(null)
 
   const handleTitleOnChange = (e) => {
-    setTitle(e.target.value);
-  };
+    setTitle(e.target.value)
+  }
   const handleTextOnChange = (e) => {
-    setText(e.target.value);
-  };
+    setText(e.target.value)
+  }
 
   useEffect(() => {
-     getDataAll()
-     console.log(data)
-
-   
-  }, []);
+    getDataAll()
+    console.log(data)
+  }, [])
   useEffect(() => {
-    console.log("Data actualizada:", data); 
-  }, [data]);
+    console.log('Data actualizada:', data)
+  }, [data])
   /*const getData = async () => {
     try {
       const response = await services.get(`/foro/${dataPost._id}`);
@@ -40,55 +39,69 @@ function Foro() {
     }
   };*/
   const handleSubmitCrear = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
       const formPostCreate = {
         title,
         text,
         user: loggedUserId,
-      };
+      }
 
-      const responsePost = await services.post("/foro", formPostCreate);
-      setdataPost(responsePost.data);
+      const responsePost = await services.post('/foro', formPostCreate)
+      setdataPost(responsePost.data)
 
-      console.log("Post creado correctamente");
+      console.log('Post creado correctamente')
       console.log(getDataAll)
+      getDataAll()
     } catch (error) {
-      console.log(error);
+      console.log(error)
       if (error.response.status === 400) {
-        setErrorMesage(error.response.data.message);
+        setErrorMesage(error.response.data.message)
       } else {
-        navigate("/error");
+        navigate('/error')
       }
     }
-  };
-  const handleSubmitEditar = async (e) => {
-    e.preventDefault();
+  }
+  const handleSubmitEditar = async (e, postId) => {
+    e.preventDefault()
+    console.log('ediar')
     try {
-      const formPostCreate = {
+      const formPostEditar = {
         title,
         text,
         user: loggedUserId,
-      };
-      const response = await services.put();
-    } catch (error) {}
-  };
+      }
 
-  const handleSubmitEliminar = async (e,id) => {
-    e.preventDefault();
+      const response = await services.put(`/foro/${postId}`, formPostEditar)
 
-    try {
-      await services.delete(`/foro/${id}`);
-     
+      console.log('Post editado correctamente', response.data)
+      getDataAll()
     } catch (error) {
-      if (error.response.status === 400) {
-        setErrorMesage(error.response.data.message);
+      console.log(error)
+
+      if (error.response && error.response.status === 400) {
+        setErrorMesage(error.response.data.message)
       } else {
-        navigate("/error");
+        navigate('/error')
       }
     }
-  };
-  const getDataAll = async ()=>{
+  }
+
+  const handleSubmitEliminar = async (e, postId) => {
+    e.preventDefault()
+
+    try {
+      await services.delete(`/foro/${postId}`)
+      getDataAll()
+    } catch (error) {
+      if (error.response.status === 400) {
+        setErrorMesage(error.response.data.message)
+      } else {
+        navigate('/error')
+      }
+    }
+  }
+  const getDataAll = async () => {
     try {
       const response = await services.get(`/foro`)
       console.log(response)
@@ -113,33 +126,34 @@ function Foro() {
     }
   }
 }*/
-if(data.length <= 0){
-  return <h2> ...Loading</h2>
-}
+
+  if (data.length <= 0) {
+    return <h2> ...Loading</h2>
+  }
 
   return (
     <div
       style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "100%",
-        flexDirection: "column",
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '100%',
+        flexDirection: 'column',
       }}
     >
       <NavBar></NavBar>
 
       <form
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          background: "#aae6aa",
-          padding: "50px",
-          gap: "20px",
-          marginTop: "100px",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+          background: '#aae6aa',
+          padding: '50px',
+          gap: '20px',
+          marginTop: '100px',
         }}
       >
         <div>
@@ -150,11 +164,11 @@ if(data.length <= 0){
             onChange={handleTitleOnChange}
             required
             style={{
-              width: "100%",
-              padding: "8px",
-              marginBottom: "10px",
-              borderRadius: "4px",
-              border: "1px solid #ccc",
+              width: '100%',
+              padding: '8px',
+              marginBottom: '10px',
+              borderRadius: '4px',
+              border: '1px solid #ccc',
             }}
           />
         </div>
@@ -166,73 +180,85 @@ if(data.length <= 0){
             onChange={handleTextOnChange}
             required
             style={{
-              width: "100%",
-              height: "80px",
-              padding: "8px",
-              marginBottom: "10px",
-              borderRadius: "4px",
-              border: "1px solid #ccc",
+              width: '100%',
+              height: '80px',
+              padding: '8px',
+              marginBottom: '10px',
+              borderRadius: '4px',
+              border: '1px solid #ccc',
             }}
           />
         </div>
 
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-       
-
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <button
-            type="button"
-            style={{
-              backgroundColor: "#4d79ff",
-              color: "#fff",
-              border: "none",
-              padding: "8px 12px",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
-          >
-            Editar
-          </button>
-
-          <button
-            type="submit"
             onClick={handleSubmitCrear}
+            type="submit"
             style={{
-              backgroundColor: "#4CAF50",
-              color: "#fff",
-              border: "none",
-              padding: "8px 12px",
-              borderRadius: "4px",
-              cursor: "pointer",
+              backgroundColor: '#4CAF50',
+              color: '#fff',
+              border: 'none',
+              padding: '8px 12px',
+              borderRadius: '4px',
+              cursor: 'pointer',
             }}
           >
-            crear
+            Crear
           </button>
         </div>
       </form>
-{data.map((post)=>{
-  return(
-      <div>
-        <h2>{post.title}</h2>
-        <p>{post.text}</p>
-        <button
-            onClick={()=>handleSubmitEliminar(post._id)}
-            type="button"
+      {data.map((post) => {
+        return (
+          <div
+            key={post._id}
             style={{
-              backgroundColor: "#ff4d4d",
-              color: "#fff",
-              border: "none",
-              padding: "8px 12px",
-              borderRadius: "4px",
-              cursor: "pointer",
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+              padding: '30px',
+              border: '1px solid, black',
             }}
           >
-            Eliminar
-          </button >
-      </div>
-  )   
-})}
+            <h2>{post.title}</h2>
+            <p>{post.text}</p>
+            <div style={{ display: 'flex' }}>
+              <button
+                onClick={(e) => handleSubmitEliminar(e, post._id)}
+                type="button"
+                style={{
+                  backgroundColor: '#ff4d4d',
+                  color: '#fff',
+                  border: 'none',
+                  padding: '8px 12px',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                }}
+              >
+                Eliminar
+              </button>
+              <button
+                onClick={(e) => {
+                  handleSubmitEditar(e, post._id)
+                }}
+                type="button"
+                style={{
+                  backgroundColor: '#4d79ff',
+                  color: '#fff',
+                  border: 'none',
+                  padding: '8px 12px',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                }}
+              >
+                Editar
+              </button>
+            </div>
+          </div>
+        )
+      })}
     </div>
-  );
+  )
 }
 
-export default Foro;
+export default Foro

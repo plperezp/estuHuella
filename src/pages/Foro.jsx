@@ -215,7 +215,7 @@ if(data.length <= 0){
         <h2>{post.title}</h2>
         <p>{post.text}</p>
         <button
-            onClick={()=>handleSubmitEliminar(post.id)}
+            onClick={()=>handleSubmitEliminar(post._id)}
             type="button"
             style={{
               backgroundColor: "#ff4d4d",

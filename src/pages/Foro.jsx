@@ -14,7 +14,8 @@ function Foro() {
   const [errorMessage, setErrorMesage] = useState('')
   const [data, setdata] = useState([])
   const [dataPost, setdataPost] = useState({})
-  const [editingPostId, setEditingPostId] = useState(null)
+  const [esEditar, setEsEditar] = useState(false)
+  const [idEditar, setIdEditar] = useState('')
 
   const handleTitleOnChange = (e) => {
     setTitle(e.target.value)
@@ -62,8 +63,11 @@ function Foro() {
       }
     }
   }
-  const handleSubmitEditar = async (e, postId) => {
+  const handleSubmitEditar = async (e) => {
     e.preventDefault()
+    setEsEditar(!esEditar)
+    setTitle('')
+    setText('')
     console.log('ediar')
     try {
       const formPostEditar = {
@@ -72,7 +76,7 @@ function Foro() {
         user: loggedUserId,
       }
 
-      const response = await services.put(`/foro/${postId}`, formPostEditar)
+      const response = await services.put(`/foro/${idEditar}`, formPostEditar)
 
       console.log('Post editado correctamente', response.data)
       getDataAll()
@@ -126,6 +130,13 @@ function Foro() {
     }
   }
 }*/
+  const handleEditar = (e, post) => {
+    e.preventDefault()
+    setTitle(post.title)
+    setText(post.text)
+    setEsEditar(true)
+    setIdEditar(post._id)
+  }
 
   if (data.length <= 0) {
     return <h2> ...Loading</h2>
@@ -145,6 +156,7 @@ function Foro() {
       <NavBar></NavBar>
 
       <form
+        onSubmit={esEditar ? handleSubmitEditar : handleSubmitCrear}
         style={{
           display: 'flex',
           justifyContent: 'center',
@@ -192,7 +204,6 @@ function Foro() {
 
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <button
-            onClick={handleSubmitCrear}
             type="submit"
             style={{
               backgroundColor: '#4CAF50',
@@ -203,7 +214,7 @@ function Foro() {
               cursor: 'pointer',
             }}
           >
-            Crear
+            {esEditar ? 'Guardar' : 'Crear'}
           </button>
         </div>
       </form>
@@ -239,7 +250,7 @@ function Foro() {
               </button>
               <button
                 onClick={(e) => {
-                  handleSubmitEditar(e, post._id)
+                  handleEditar(e, post)
                 }}
                 type="button"
                 style={{

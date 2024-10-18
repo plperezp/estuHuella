@@ -19,18 +19,7 @@ function NavBar() {
       console.log(error)
     }
   }
-  useEffect(()=>{
-    userId()
-  },[])
-  const userId =async ()=>{
-    try {
-      const response = await services.get(`/user/${loggedUserId}`)
  
-    } catch (error) {loggedUserId
-      console.log(error)
-    }
-  }
-
   return (
     <div
       style={{
@@ -60,7 +49,7 @@ function NavBar() {
         <BtnNav color={'#93b628'} value={'Foro'} />
       </Link>
       {isLoggedIn && (
-        <Link to={`/huella/${loggedUserId}`}>
+        <Link to={`/huella`}>
           <BtnNav color={'#2e5301'} value={'Crea tu huella'} />
         </Link>
       )}

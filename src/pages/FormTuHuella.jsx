@@ -19,7 +19,7 @@ function FormTuHuella() {
   const[consumoEnergetico,setConsumoEnergetico]= useState("")
   const[esRenovable,setEsRenovable]= useState(false)
   const[recicla,setRecicla]= useState(false)
-  const [errorMessage, setErrorMesage] = useState("")
+  const [errorMessage, setErrorMesage] = useState("") 
   const { loggedUserId } = useContext(AuthContext)
 
 

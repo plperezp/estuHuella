@@ -26,19 +26,9 @@ function Foro() {
 
   useEffect(() => {
     getDataAll()
-    console.log(data)
   }, [])
-  useEffect(() => {
-    console.log('Data actualizada:', data)
-  }, [data])
-  /*const getData = async () => {
-    try {
-      const response = await services.get(`/foro/${dataPost._id}`);
-      setdata(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };*/
+ 
+
   const handleSubmitCrear = async (e) => {
     e.preventDefault()
     try {
@@ -112,24 +102,15 @@ function Foro() {
       setdata(response.data)
       console.log(data)
     } catch (error) {
-      console.log(error)
+      if (error.response.status === 400) {
+        setErrorMesage(error.response.data.message)
+      } else {
+        navigate('/error')
+      }
     }
   }
 
-  /*const handleSubmitGet = async (e) =>{
-  e.preventDefault()
-  
-  try {
-    const response = await services.get("/foro")
-    console.log(response)
-  } catch (error) {
-    if (error.response.status === 400) {
-      setErrorMesage(error.response.data.message);
-    } else {
-      navigate("/error");
-    }
-  }
-}*/
+ 
   const handleEditar = (e, post) => {
     e.preventDefault()
     setTitle(post.title)
@@ -139,7 +120,7 @@ function Foro() {
   }
 
   if (data.length <= 0) {
-    return <h2> ...Loading</h2>
+    return <h2> ...No hay posts</h2>
   }
 
   return (
@@ -231,6 +212,7 @@ function Foro() {
               border: '1px solid, black',
             }}
           >
+            <h5>{post.user.username}</h5>
             <h2>{post.title}</h2>
             <p>{post.text}</p>
             <div style={{ display: 'flex' }}>

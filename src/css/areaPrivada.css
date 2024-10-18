@@ -1,0 +1,27 @@
+.conatainer-areaprivada{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background-color: #6ee95fd6;
+}
+.avatar{
+  display: flex;
+  justify-content: flex-end;
+margin: 20px;
+border-radius: 50%; align-items: center;
+}
+.tu-huella{
+  background-color: aliceblue;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+  padding: 50px;
+}
+.info-avatar{
+  margin: 50px ;
+}

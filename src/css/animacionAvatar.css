@@ -1,0 +1,67 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+}
+
+.container {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Ajustar columnas */
+  grid-gap: 20px;
+  padding: 0px 300px;
+  cursor: pointer;
+  will-change: width, height;
+  z-index: 10;
+}
+
+/* Cambiar el estilo del contenedor para centrar el avatar seleccionado */
+.selected-avatar-container {
+  display: flex; /* Usar flexbox para centrar */
+  align-items: center; /* Centra verticalmente */
+  justify-content: center; /* Centra horizontalmente */
+  margin-bottom: 20px; /* Espaciado con respecto al contenedor */
+}
+
+/* Estilo para el avatar seleccionado */
+.selected-avatar {
+  position: absolute;
+  right: 10px;
+  top: 100px;
+  width: 250px; /* Ajusta el tamaño como desees */
+  height: 250px; /* Ajusta el tamaño como desees */
+  border-radius: 50%; /* Hacerlo redondo */
+  background-size: cover; /* Asegura que la imagen cubra el elemento */
+  background-position: center; /* Centra la imagen */
+  box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+}
+
+.item {
+  width: 200px; /* Establece un ancho fijo */
+  height: 200px; /* Establece una altura fija */
+  border-radius: 50%; /* Hacerlo redondo */
+  background: white;
+  background-size: cover; /* Asegura que la imagen cubra el elemento */
+  background-position: center; /* Centra la imagen */
+  display: flex; /* Usar flexbox para centrar contenido */
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center; /* Centra horizontalmente el contenido */
+  will-change: transform, opacity;
+
+  box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.1); /* Asegura que esté por encima de otros elementos */
+}
+.edit-icon {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 200px;
+  top: 300px;
+  z-index: 10;
+}

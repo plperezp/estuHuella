@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom"
 import services from "../services/config"
 import { AgGauge } from "ag-charts-react";
 import "ag-charts-enterprise";
-import CalculoHuella from '../utils/CalculoHuella'
+import CalculoHuella from "../utils/CalculoHuella"
 import AnimacionAvatar from '../components/AnimacionAvatar'
 
 
@@ -148,7 +148,7 @@ function PrivateArea() {
         <h1>Es tu Huella de hoy:{dataUser.huella[0]}</h1>
         <h3> es tu media {mediaHuella}</h3>
         <p>sigue mejorando</p>
-      </div>
+       </div>
 
 
 <div className='avatar'>

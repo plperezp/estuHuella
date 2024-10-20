@@ -1,24 +1,24 @@
-import React from "react";
-import NavBar from "../../components/NavBar";
-import { useState } from "react";
-import services from "../../services/config";
-import { useNavigate } from "react-router-dom";
+import React from 'react'
+import NavBar from '../../components/NavBar'
+import { useState } from 'react'
+import services from '../../services/config'
+import { useNavigate } from 'react-router-dom'
 
 function SignUp() {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMesage] = useState("");
+  const navigate = useNavigate()
+  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
+  const [name, setName] = useState('')
+  const [password, setPassword] = useState('')
+  const [errorMessage, setErrorMesage] = useState('')
 
-  const handleEmailChange = (e) => setEmail(e.target.value);
-  const handleUsernameChange = (e) => setUsername(e.target.value);
-  const handleNameChange = (e) => setName(e.target.value);
-  const handlePasswordChange = (e) => setPassword(e.target.value);
+  const handleEmailChange = (e) => setEmail(e.target.value)
+  const handleUsernameChange = (e) => setUsername(e.target.value)
+  const handleNameChange = (e) => setName(e.target.value)
+  const handlePasswordChange = (e) => setPassword(e.target.value)
 
   const handleSignup = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
       const newUser = {
@@ -26,30 +26,30 @@ function SignUp() {
         username,
         name,
         password,
-      };
-      await services.post("/auth/signup", newUser);
+      }
+      await services.post('/auth/signup', newUser)
 
-      navigate("/login");
+      navigate('/login')
     } catch (error) {
-      console.log(error);
+      console.log(error)
 
       if (error.response.status === 400) {
-        setErrorMesage(error.response.data.message);
+        setErrorMesage(error.response.data.message)
       } else {
-        navigate("/error");
+        navigate('/error')
       }
     }
-  };
+  }
 
   return (
     <div
       style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "100%",
-        flexDirection: "column",
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '100%',
+        flexDirection: 'column',
       }}
     >
       <NavBar />
@@ -57,14 +57,14 @@ function SignUp() {
       <form
         onSubmit={handleSignup}
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          background: "#aae6aa",
-          padding: "50px",
-          gap: "20px",
-          marginTop: "100px",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+          background: '#aae6aa',
+          padding: '50px',
+          gap: '20px',
+          marginTop: '100px',
         }}
       >
         <div>
@@ -78,7 +78,12 @@ function SignUp() {
         </div>
         <div>
           <label>Name:</label>
-          <input type="text" name="name" value={name} onChange={handleNameChange}></input>
+          <input
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleNameChange}
+          ></input>
         </div>
         <div>
           <label>Email:</label>
@@ -101,7 +106,7 @@ function SignUp() {
         <button type="submit">send</button>
       </form>
     </div>
-  );
+  )
 }
 
-export default SignUp;
+export default SignUp

@@ -27,7 +27,6 @@ function Foro() {
   useEffect(() => {
     getDataAll()
   }, [])
- 
 
   const handleSubmitCrear = async (e) => {
     e.preventDefault()
@@ -35,7 +34,6 @@ function Foro() {
       const formPostCreate = {
         title,
         text,
-        user: loggedUserId,
       }
 
       const responsePost = await services.post('/foro', formPostCreate)
@@ -110,7 +108,6 @@ function Foro() {
     }
   }
 
- 
   const handleEditar = (e, post) => {
     e.preventDefault()
     setTitle(post.title)

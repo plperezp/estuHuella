@@ -92,4 +92,26 @@ fieldset {
 th {
   font: inherit;
 }
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+.google-login-button {
+  display: inline-block;
+  background-color: #4285f4;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.google-login-button:hover {
+  background-color: #357ae8;
+}
 /*font-family: "Kanit", sans-serif;*/

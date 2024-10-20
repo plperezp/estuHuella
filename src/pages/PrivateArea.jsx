@@ -12,13 +12,39 @@ import NavBar from "../components/NavBar"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import services from "../services/config"
+import { AgGauge } from "ag-charts-react";
+import "ag-charts-enterprise";
 
 
 function PrivateArea() {
+
+
+  
+
   const navigate = useNavigate()
   const [img, setImg] = useState("")
   const [dataUser, setDataUser] = useState({})
   const [mediaHuella, setMediaHuella] = useState(0)
+
+  const [options, setOptions] = useState({
+    type: "radial-gauge",  // Especificamos que es un gráfico de tipo radial
+    value: mediaHuella,  // Valor inicial del gráfico
+    scale: {
+      min: 0,
+      max: 100,  // Escala del gráfico
+      label: {
+        enabled: false,  // Deshabilitamos las etiquetas en la escala
+      },
+    },
+    label: {
+      formatter({ value }) {
+        return `${value.toFixed(0)}%`;  // Formato para la etiqueta del valor
+      },
+    },
+    secondaryLabel: {
+      text: "Test Score",  // Texto adicional en el gráfico
+    },
+  });
 
   useEffect(()=>{
       handleGetUser();
@@ -60,6 +86,13 @@ function PrivateArea() {
     return sumar / array.length; 
   };
      
+  useEffect(() => {
+    setOptions((prevOptions) => ({
+      ...prevOptions,
+      value: mediaHuella, // Actualiza el valor del gráfico
+    }));
+  }, [mediaHuella]);
+
 
   if(dataUser.huella === undefined){
     return (<h3>Loading</h3>)
@@ -111,6 +144,13 @@ function PrivateArea() {
 
 </div>
 
+    <div className = "graficaMediHuella">
+
+    <h2>El progreso de tu Huella</h2>
+      <AgGauge options={options} />
+
+    </div>
+    
 
     </div> 
   )

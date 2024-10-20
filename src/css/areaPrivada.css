@@ -23,3 +23,27 @@
 .info-avatar {
   margin: 50px;
 }
+
+/* Estilo del gráfico */
+.graficaMediHuella {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px; /* Espacio superior para separación */
+  width: 100%; /* Ancho completo del contenedor */
+  max-width: 600px; /* Ancho máximo del gráfico */
+  background-color: transparent;
+  border: 1px solid black;
+  margin-bottom: 20px;
+  background-color: transparent;
+
+
+}
+.graficaMediHuella h1 {
+  text-align: center;
+}
+
+.graficaMediHuella canvas {
+  border: 1px solid black;
+  padding-bottom: 1vh;
+}

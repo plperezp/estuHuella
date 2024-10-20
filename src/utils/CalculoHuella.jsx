@@ -60,7 +60,7 @@ function CalculoHuella() {
   const GetDataHabitos = async () => {
     try {
       const response = await services.get(`huella/user`)
-      console.log(response.data)
+
       setDataHabitos(response.data)
     } catch (error) {
       console.log(error)
@@ -77,7 +77,7 @@ function CalculoHuella() {
   const otros = dataHabitos.filter((cadaHabito) => {
     return cadaHabito.otros && cadaHabito.createdAt.startsWith(fechaHoy)
   })
-  console.log(otros)
+
   function calcularHuellaAlimento(alimento, cantidad, esDeProximidad) {
     let cantidadKg = cantidad / 1000
     let factor = factoresEmision[alimento]
@@ -141,7 +141,6 @@ function CalculoHuella() {
     let huellaTotal = 0
 
     transportes.forEach((cadaHabito) => {
-      console.log(cadaHabito)
       const vehiculo = cadaHabito.transporte.vehiculo
       const tiempo = cadaHabito.transporte.tiempo
       const motor = cadaHabito.transporte.motor
@@ -200,9 +199,9 @@ function CalculoHuella() {
 
   const huellaTotal =
     huellaDiariaenergia + huellaGeneraltransportes + huellaTotalAlimento
-  console.log(
-    `Huella de carbono total diaria: ${huellaTotal.toFixed(2)} kg CO₂`
-  )
+  // console.log(
+  //  `Huella de carbono total diaria: ${huellaTotal.toFixed(2)} kg CO₂`
+  //)
   /* const patchMediHuella = async () => {
     try {
     } catch (error) {}

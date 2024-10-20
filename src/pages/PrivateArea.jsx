@@ -19,12 +19,11 @@ import AnimacionAvatar from '../components/AnimacionAvatar'
 
 function PrivateArea() {
   const navigate = useNavigate()
-  const [img, setImg] = useState('')
   const [dataUser, setDataUser] = useState({})
   const [mediaHuella, setMediaHuella] = useState(0)
 
   const [options, setOptions] = useState({
-    type: 'radial-gauge', // Especificamos que es un gráfico de tipo radial
+    type: 'radial-gauge',
     value: mediaHuella, // Valor inicial del gráfico
     scale: {
       min: 0,
@@ -103,11 +102,11 @@ function PrivateArea() {
   }
 
   const avatar = imgAvatar(dataUser.img)
-
+  console.log(avatar)
   return (
     <div className="conatainer-areaprivada">
       <NavBar />
-      <AnimacionAvatar />
+      <AnimacionAvatar handleGetUser={handleGetUser} />
       <div className="avatar">
         <img style={{ width: '250px' }} src={avatar} alt="avatar" />
       </div>

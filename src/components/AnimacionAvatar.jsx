@@ -18,23 +18,36 @@ import hipstree from '../assets/avatar.assets/hipstree.png'
 import editar from '../assets/editar.png'
 
 import '../css/animacionAvatar.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import services from '../services/config'
 
+// Aquí solo almacenamos los nombres de los avatares
 const avatarData = [
-  { imageUrl: princesaGalactica },
-  { imageUrl: recicledBoy },
-  { imageUrl: recicledGollum },
-  { imageUrl: SuperNature },
-  { imageUrl: mrBotellita },
-  { imageUrl: niñaRama },
-  { imageUrl: neoShrek },
-  { imageUrl: emoNature },
-  { imageUrl: hipstree },
+  { name: 'princesaGalactica', imageUrl: princesaGalactica },
+  { name: 'recicledBoy', imageUrl: recicledBoy },
+  { name: 'recicledGollum', imageUrl: recicledGollum },
+  { name: 'SuperNature', imageUrl: SuperNature },
+  { name: 'mrBotellita', imageUrl: mrBotellita },
+  { name: 'niñaRama', imageUrl: niñaRama },
+  { name: 'neoShrek', imageUrl: neoShrek },
+  { name: 'emoNature', imageUrl: emoNature },
+  { name: 'hipstree', imageUrl: hipstree },
 ]
 
-export default function App() {
+export default function AnimacionAvatar(props) {
   const [open, setOpen] = useState(false)
   const [selectedAvatar, setSelectedAvatar] = useState(null)
+  useEffect(() => {
+    props.handleGetUser()
+  })
+  const changeImg = async (avatarName) => {
+    try {
+      await services.patch('/user', { img: avatarName })
+      console.log('Avatar actualizado:', avatarName)
+    } catch (error) {
+      console.log('Error al actualizar el avatar:', error)
+    }
+  }
 
   const springApi = useSpringRef()
   const { size, ...rest } = useSpring({
@@ -53,7 +66,7 @@ export default function App() {
     from: { opacity: 0, scale: 0 },
     enter: { opacity: 1, scale: 1 },
     leave: { opacity: 0, scale: 0 },
-    keys: (item) => item.imageUrl,
+    keys: (item) => item.name,
   })
 
   useChain(open ? [springApi, transApi] : [transApi, springApi], [
@@ -61,9 +74,11 @@ export default function App() {
     open ? 0.1 : 0.6,
   ])
 
-  const handleClick = (imageUrl) => {
-    setSelectedAvatar(imageUrl)
+  // Manejar la selección de un avatar
+  const handleClick = (avatarName) => {
+    setSelectedAvatar(avatarName)
     setOpen(false) // Cierra el contenedor de avatares
+    changeImg(avatarName) // Llamar a changeImg con el nombre del avatar
   }
 
   return (
@@ -77,14 +92,6 @@ export default function App() {
         <img src={editar} alt="editar" />
       </div>
 
-      <div className="selected-avatar-container">
-        {selectedAvatar && (
-          <div
-            className="selected-avatar"
-            style={{ backgroundImage: `url(${selectedAvatar})` }}
-          ></div>
-        )}
-      </div>
       <animated.div
         style={{
           ...rest,
@@ -99,7 +106,7 @@ export default function App() {
             className={'item'}
             onClick={(e) => {
               e.stopPropagation()
-              handleClick(item.imageUrl)
+              handleClick(item.name) // Pasamos solo el nombre
             }}
             style={{
               ...style,

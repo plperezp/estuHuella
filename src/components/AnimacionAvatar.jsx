@@ -39,7 +39,7 @@ export default function AnimacionAvatar(props) {
   const [selectedAvatar, setSelectedAvatar] = useState(null)
   useEffect(() => {
     props.handleGetUser()
-  })
+  }, [])
   const changeImg = async (avatarName) => {
     try {
       await services.patch('/user', { img: avatarName })

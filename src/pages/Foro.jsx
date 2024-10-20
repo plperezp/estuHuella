@@ -1,110 +1,65 @@
-import React from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import NavBar from '../components/NavBar'
 import { AuthContext } from '../context/auth.context'
-import { useState, useEffect, useContext } from 'react'
 import services from '../services/config'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import ModalForo from '../components/ModalForo'
+import '../css/foro.css'
 
-function Foro() {
-  const params = useParams()
+const Foro = () => {
   const navigate = useNavigate()
-  const [title, setTitle] = useState('')
-  const [text, setText] = useState('')
   const { loggedUserId } = useContext(AuthContext)
-  const [errorMessage, setErrorMesage] = useState('')
-  const [data, setdata] = useState([])
-  const [dataPost, setdataPost] = useState({})
+  const [data, setData] = useState([])
   const [esEditar, setEsEditar] = useState(false)
   const [idEditar, setIdEditar] = useState('')
-
-  const handleTitleOnChange = (e) => {
-    setTitle(e.target.value)
-  }
-  const handleTextOnChange = (e) => {
-    setText(e.target.value)
-  }
+  const [isOpen, setIsOpen] = useState(false)
+  const [title, setTitle] = useState('')
+  const [text, setText] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
     getDataAll()
   }, [])
 
-  const handleSubmitCrear = async (e) => {
-    e.preventDefault()
-    try {
-      const formPostCreate = {
-        title,
-        text,
-      }
-
-      const responsePost = await services.post('/foro', formPostCreate)
-      setdataPost(responsePost.data)
-
-      console.log('Post creado correctamente')
-      console.log(getDataAll)
-      getDataAll()
-    } catch (error) {
-      console.log(error)
-      if (error.response.status === 400) {
-        setErrorMesage(error.response.data.message)
-      } else {
-        navigate('/error')
-      }
-    }
-  }
-  const handleSubmitEditar = async (e) => {
-    e.preventDefault()
-    setEsEditar(!esEditar)
-    setTitle('')
-    setText('')
-    console.log('ediar')
-    try {
-      const formPostEditar = {
-        title,
-        text,
-        user: loggedUserId,
-      }
-
-      const response = await services.put(`/foro/${idEditar}`, formPostEditar)
-
-      console.log('Post editado correctamente', response.data)
-      getDataAll()
-    } catch (error) {
-      console.log(error)
-
-      if (error.response && error.response.status === 400) {
-        setErrorMesage(error.response.data.message)
-      } else {
-        navigate('/error')
-      }
-    }
-  }
-
-  const handleSubmitEliminar = async (e, postId) => {
-    e.preventDefault()
-
-    try {
-      await services.delete(`/foro/${postId}`)
-      getDataAll()
-    } catch (error) {
-      if (error.response.status === 400) {
-        setErrorMesage(error.response.data.message)
-      } else {
-        navigate('/error')
-      }
-    }
-  }
   const getDataAll = async () => {
     try {
-      const response = await services.get(`/foro`)
-      console.log(response)
-      setdata(response.data)
-      console.log(data)
+      const response = await services.get('/foro')
+      const sortedData = response.data.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      )
+      setData(sortedData)
     } catch (error) {
-      if (error.response.status === 400) {
-        setErrorMesage(error.response.data.message)
-      } else {
-        navigate('/error')
-      }
+      handleError(error)
+    }
+  }
+
+  const handleSubmitCrear = async () => {
+    try {
+      const formPostCreate = { title, text }
+      await services.post('/foro', formPostCreate)
+      getDataAll()
+    } catch (error) {
+      handleError(error)
+    }
+  }
+
+  const handleSubmitEditar = async () => {
+    try {
+      const formPostEditar = { title, text, user: loggedUserId }
+      await services.put(`/foro/${idEditar}`, formPostEditar)
+      getDataAll()
+      setTitle('')
+      setText('')
+    } catch (error) {
+      handleError(error)
+    }
+  }
+
+  const handleError = (error) => {
+    if (error.response && error.response.status === 400) {
+      setErrorMessage(error.response.data.message)
+    } else {
+      navigate('/error')
     }
   }
 
@@ -112,141 +67,101 @@ function Foro() {
     e.preventDefault()
     setTitle(post.title)
     setText(post.text)
-    setEsEditar(true)
+    setIsOpen(true)
     setIdEditar(post._id)
+    setEsEditar(true)
+  }
+
+  const handleSubmitEliminar = async (e, postId) => {
+    e.preventDefault()
+    try {
+      await services.delete(`/foro/${postId}`)
+      getDataAll()
+    } catch (error) {
+      handleError(error)
+    }
   }
 
   if (data.length <= 0) {
-    return <h2> ...No hay posts</h2>
+    return <h2>...No hay posts</h2>
   }
 
+  const [mainPost, ...otherPosts] = data
+  console.log(mainPost.user)
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        flexDirection: 'column',
-      }}
-    >
-      <NavBar></NavBar>
+    <div className="fondo-foro">
+      <NavBar />
+      <div className="container-post">
+        <ModalForo
+          esEditar={esEditar}
+          handleSubmitEditar={handleSubmitEditar}
+          handleSubmitCrear={handleSubmitCrear}
+          setIsOpen={setIsOpen}
+          isOpen={isOpen}
+          title={title}
+          text={text}
+          setTitle={setTitle}
+          setText={setText}
+          setEsEditar={setEsEditar}
+        />
 
-      <form
-        onSubmit={esEditar ? handleSubmitEditar : handleSubmitCrear}
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-          background: '#aae6aa',
-          padding: '50px',
-          gap: '20px',
-          marginTop: '100px',
-        }}
-      >
-        <div>
-          <label>Título:</label>
-          <input
-            type="text"
-            value={title}
-            onChange={handleTitleOnChange}
-            required
-            style={{
-              width: '100%',
-              padding: '8px',
-              marginBottom: '10px',
-              borderRadius: '4px',
-              border: '1px solid #ccc',
-            }}
-          />
-        </div>
-
-        <div>
-          <label>Descripción:</label>
-          <textarea
-            value={text}
-            onChange={handleTextOnChange}
-            required
-            style={{
-              width: '100%',
-              height: '80px',
-              padding: '8px',
-              marginBottom: '10px',
-              borderRadius: '4px',
-              border: '1px solid #ccc',
-            }}
-          />
-        </div>
-
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <button
-            type="submit"
-            style={{
-              backgroundColor: '#4CAF50',
-              color: '#fff',
-              border: 'none',
-              padding: '8px 12px',
-              borderRadius: '4px',
-              cursor: 'pointer',
-            }}
-          >
-            {esEditar ? 'Guardar' : 'Crear'}
-          </button>
-        </div>
-      </form>
-      {data.map((post) => {
-        return (
-          <div
-            key={post._id}
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexDirection: 'column',
-              padding: '30px',
-              border: '1px solid, black',
-            }}
-          >
-            <h5>{post.user.username}</h5>
-            <h2>{post.title}</h2>
-            <p>{post.text}</p>
-            <div style={{ display: 'flex' }}>
+        {mainPost && (
+          <div className="main-post">
+            <div className="boxname">
+              <h5>{mainPost.user.username}</h5>
+              <img
+                src={mainPost.user.profilePicture}
+                alt="avatar"
+                className="user-image"
+              />
+            </div>
+            <h2>{mainPost.title}</h2>
+            <p>{mainPost.text}</p>
+            <div className="post-actions">
               <button
-                onClick={(e) => handleSubmitEliminar(e, post._id)}
+                onClick={(e) => handleSubmitEliminar(e, mainPost._id)}
                 type="button"
-                style={{
-                  backgroundColor: '#ff4d4d',
-                  color: '#fff',
-                  border: 'none',
-                  padding: '8px 12px',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                }}
+                className="delete-button"
               >
                 Eliminar
               </button>
-              <button
-                onClick={(e) => {
-                  handleEditar(e, post)
-                }}
-                type="button"
-                style={{
-                  backgroundColor: '#4d79ff',
-                  color: '#fff',
-                  border: 'none',
-                  padding: '8px 12px',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                }}
-              >
+              <button onClick={(e) => handleEditar(e, mainPost)} type="button">
                 Editar
               </button>
             </div>
           </div>
-        )
-      })}
+        )}
+
+        <div className="posts-grid">
+          {otherPosts.map((post) => (
+            <div key={post._id} className="post">
+              <div className="boxname">
+                <h5>{post.user.username}</h5>
+                <img
+                  src={post.user.profilePicture}
+                  alt="avatar"
+                  className="user-image"
+                />
+              </div>
+
+              <h2>{post.title}</h2>
+              <p>{post.text}</p>
+              <div className="post-actions">
+                <button
+                  onClick={(e) => handleSubmitEliminar(e, post._id)}
+                  type="button"
+                  className="delete-button"
+                >
+                  Eliminar
+                </button>
+                <button onClick={(e) => handleEditar(e, post)} type="button">
+                  Editar
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

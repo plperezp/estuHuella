@@ -21,17 +21,7 @@ function NavBar() {
   }
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        background: 'transparent',
-        height: '10%',
-        width: '100%',
-        padding: '1px',
-      }}
-    >
+    <div className="navBar">
       <Link to={'/'}>
         <BtnNav color={'#d1e2cd'} value={'Home'} />
       </Link>

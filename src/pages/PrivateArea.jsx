@@ -27,19 +27,33 @@ function PrivateArea() {
     value: mediaHuella, // Valor inicial del gráfico
     scale: {
       min: 0,
-      max: 100, // Escala del gráfico
+      max: 50, // Escala del gráfico
       label: {
-        enabled: false, // Deshabilitamos las etiquetas en la escala
+        enabled: true, // Habilitar etiquetas en la escala
+        fontSize: 10, // Tamaño de la fuente para las etiquetas
       },
+      ticks: {
+        // Opciones para las líneas de la escala
+        enabled: true, // Habilitar ticks
+        size: 5, // Tamaño de los ticks
+        color: '#999', // Color de los ticks
+      },
+    },
+    bar: {
+      fills: Array.from({ length: 50 }, (_, index) => {
+        const green = Math.round(224 - (index * (224 - 80)) / 49)
+        const gray = 66 // Mantener gris constante
+        return { color: `rgb(${green}, ${green}, ${gray})` }
+      }),
+      fillMode: 'discrete',
     },
     label: {
       formatter({ value }) {
-        return `${value.toFixed(0)}%` // Formato para la etiqueta del valor
+        return `${value.toFixed(0)} kg CO₂` // Etiqueta principal
       },
     },
-    secondaryLabel: {
-      text: 'Test Score', // Texto adicional en el gráfico
-    },
+    outerRadius: 200,
+    innerRadius: 150,
   })
 
   useEffect(() => {
@@ -71,7 +85,7 @@ function PrivateArea() {
   useEffect(() => {
     setOptions((prevOptions) => ({
       ...prevOptions,
-      value: mediaHuella, // Actualiza el valor del gráfico
+      value: mediaHuella,
     }))
   }, [mediaHuella])
 
@@ -107,30 +121,37 @@ function PrivateArea() {
     <div className="conatainer-areaprivada">
       <NavBar />
       <AnimacionAvatar handleGetUser={handleGetUser} />
-      <div className="avatar">
-        <img style={{ width: '250px' }} src={avatar} alt="avatar" />
-      </div>
-      <div className="tu-huella">
-        <h1>Es tu Huella de hoy:{dataUser.huella[0]}</h1>
-        <h3> es tu media {mediaHuella}</h3>
-        <p>sigue mejorando</p>
+      <div className="info-user">
+        <div className="tu-huella">
+          <h1 style={{ color: 'white', fontSize: '50px' }}>
+            Es tu Huella de hoy: {dataUser.huella[0]}kg CO₂
+          </h1>
+          <div className="graficaMediHuella">
+            <h2 style={{ color: 'white', fontSize: '35px' }}>
+              El progreso de tu Huella
+            </h2>
+            <AgGauge
+              options={options}
+              style={{ width: '500px', height: '300px' }}
+            />
+          </div>
+          <p>sigue mejorando</p>
+        </div>
+        <div className="avatar">
+          <img style={{ width: '250px' }} src={avatar} alt="avatar" />
+        </div>
       </div>
 
       <div className="info-avatar">
-        <h3>Name: {dataUser.name}</h3>
-        <h4>Username: {dataUser.username}</h4>
-        <h4>mail: {dataUser.email}</h4>
-      </div>
-
-      <div className="graficaMediHuella">
-        <h2>El progreso de tu Huella</h2>
-        <AgGauge options={options} />
-      </div>
-
-      <div className="info-avatar">
-        <h3>Name: {dataUser.name}</h3>
-        <h4>Username: {dataUser.username}</h4>
-        <h4>mail: {dataUser.email}</h4>
+        <h3>
+          Name: <span>{dataUser.name}</span>
+        </h3>
+        <h4>
+          Username: <span>{dataUser.username}</span>
+        </h4>
+        <h4>
+          Email: <span>{dataUser.email}</span>
+        </h4>
       </div>
 
       <CalculoHuella />

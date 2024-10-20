@@ -92,6 +92,14 @@ fieldset {
 th {
   font: inherit;
 }
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: transparent;
+  height: 10%;
+  width: 100%;
+}
 .auth-container {
   display: flex;
   justify-content: center;

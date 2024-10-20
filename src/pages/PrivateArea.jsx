@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import princesaGalactica from "../assets/avatar.assets/princesaGalactica.png"
 import recicledBoy from "../assets/avatar.assets/recicledBoy.png"
 import recicledGollum from "../assets/avatar.assets/recicledGollum.png"
@@ -15,25 +15,9 @@ import { useNavigate } from "react-router-dom"
 import services from "../services/config"
 import { AgGauge } from "ag-charts-react";
 import "ag-charts-enterprise";
-
-=======
-import princesaGalactica from '../assets/avatar.assets/princesaGalactica.png'
-import recicledBoy from '../assets/avatar.assets/recicledBoy.png'
-import recicledGollum from '../assets/avatar.assets/recicledGollum.png'
-import SuperNature from '../assets/avatar.assets/SuperNature.png'
-import mrBotellita from '../assets/avatar.assets/mrBotellita.png'
-import niñaRama from '../assets/avatar.assets/niñaRama.png'
-import neoShrek from '../assets/avatar.assets/neoShrek.png'
-import emoNature from '../assets/avatar.assets/emoNature.png'
-import hipstree from '../assets/avatar.assets/hipstree.png'
-import '../css/areaprivada.css'
-import NavBar from '../components/NavBar'
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import services from '../services/config'
 import CalculoHuella from '../utils/CalculoHuella'
 import AnimacionAvatar from '../components/AnimacionAvatar'
->>>>>>> dd4c07ab5990eb3f8aef675295c3f49b4b3cb8aa
+
 
 function PrivateArea() {
 
@@ -45,7 +29,6 @@ function PrivateArea() {
   const [dataUser, setDataUser] = useState({})
   const [mediaHuella, setMediaHuella] = useState(0)
 
-<<<<<<< HEAD
   const [options, setOptions] = useState({
     type: "radial-gauge",  // Especificamos que es un gráfico de tipo radial
     value: mediaHuella,  // Valor inicial del gráfico
@@ -69,10 +52,6 @@ function PrivateArea() {
   useEffect(()=>{
       handleGetUser();
 
-=======
-  useEffect(() => {
-    handleGetUser()
->>>>>>> dd4c07ab5990eb3f8aef675295c3f49b4b3cb8aa
   }, [])
 
   const handleGetUser = async () => {
@@ -91,15 +70,15 @@ function PrivateArea() {
     }
   }
 
-  const handleMediaHuella = (array) => {
-    if (!array || array.length === 0) return 0
-    const sumar = array.reduce((acu, valor) => acu + valor, 0)
-    return sumar / array.length
-  }
+  // const handleMediaHuella = (array) => {
+  //   if (!array || array.length === 0) return 0
+  //   const sumar = array.reduce((acu, valor) => acu + valor, 0)
+  //   return sumar / array.length
+  // }
 
-  if (dataUser.huella === undefined) {
-    return <h3>Loading</h3>
-  }
+  // if (dataUser.huella === undefined) {
+  //   return <h3>Loading</h3>
+  // }
   // const handleChangeImg = async () =>{
   //   try {
   //     const img = mrBotellita
@@ -111,7 +90,7 @@ function PrivateArea() {
 
   // }
 
-<<<<<<< HEAD
+
   const handleMediaHuella =  (array) => {
     if (!array || array.length === 0) return 0; 
     const sumar = array.reduce((acu, valor) => acu + valor, 0);
@@ -133,10 +112,9 @@ function PrivateArea() {
   const imgAvatar = (img) =>{
 
     if(img === "mrBotellita"){
-=======
+
   const imgAvatar = (img) => {
     if (img === 'mrBotellita') {
->>>>>>> dd4c07ab5990eb3f8aef675295c3f49b4b3cb8aa
       return mrBotellita
     } else if (img === 'emoNature') {
       return emoNature
@@ -157,8 +135,9 @@ function PrivateArea() {
     }
   }
   const avatar = imgAvatar(dataUser.img)
-
+    }
   return (
+
     <div className="conatainer-areaprivada">
       <NavBar />
       <AnimacionAvatar />
@@ -171,7 +150,6 @@ function PrivateArea() {
         <p>sigue mejorando</p>
       </div>
 
-<<<<<<< HEAD
 
 <div className='avatar'>
   <img style={{width:'250px'}} src={avatar} alt="avatar" />
@@ -196,17 +174,13 @@ function PrivateArea() {
 
     </div>
     
-
-    </div> 
-=======
       <div className="info-avatar">
         <h3>Name: {dataUser.name}</h3>
         <h4>Username: {dataUser.username}</h4> <h4>mail:{dataUser.email} </h4>
       </div>
       <CalculoHuella />
     </div>
->>>>>>> dd4c07ab5990eb3f8aef675295c3f49b4b3cb8aa
   )
 }
-
+}
 export default PrivateArea

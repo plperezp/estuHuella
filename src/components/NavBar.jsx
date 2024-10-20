@@ -1,4 +1,4 @@
-import React, { useContext,useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import BtnNav from './BtnNav'
 import { AuthContext } from '../context/auth.context'
@@ -6,9 +6,9 @@ import services from '../services/config'
 import { useParams } from 'react-router-dom'
 
 function NavBar() {
-  const params= useParams()
+  const params = useParams()
   const navigate = useNavigate()
-  const { isLoggedIn, authenticateUser,loggedUserId } = useContext(AuthContext)
+  const { isLoggedIn, authenticateUser, loggedUserId } = useContext(AuthContext)
 
   const handleLogout = async () => {
     try {
@@ -19,7 +19,7 @@ function NavBar() {
       console.log(error)
     }
   }
- 
+
   return (
     <div
       style={{

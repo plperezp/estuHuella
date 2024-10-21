@@ -6,8 +6,9 @@ import { useNavigate } from 'react-router-dom'
 import ModalForo from '../components/ModalForo'
 import '../css/foro.css'
 import SearchBar from '../components/SearchBar'
+import imgAvatar from '../../utils/avatar'
 
-const Foro = (props) => {
+const Foro = () => {
   const navigate = useNavigate()
   const { loggedUserId } = useContext(AuthContext)
   const [data, setData] = useState([])
@@ -18,10 +19,25 @@ const Foro = (props) => {
   const [text, setText] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [searchValue, setSearchValue] = useState('')
-  const { avatar, dataUser } = props
+  const [userData, setUserData] = useState({})
+
   useEffect(() => {
     getDataAll()
   }, [])
+
+  const getUserData = async () => {
+    try {
+      const response = await services.get('/user')
+      const avatar = imgAvatar(response.data.img)
+      setUserData(response.data)
+    } catch (error) {
+      console.log(error)
+      if (error.response && error.response.status === 400) {
+        setErrorMessage(error.response.data.message)
+        navigate('/error')
+      }
+    }
+  }
 
   const getDataAll = async () => {
     try {
@@ -135,7 +151,7 @@ const Foro = (props) => {
         {mainPost && (
           <div className="main-post">
             <div className="boxname">
-              <h5>{dataUser.username}</h5>
+              <h5>{userData.username}</h5>
               <img src={avatar} alt="avatar" className="user-image" />
             </div>
             <h2>{mainPost.title}</h2>

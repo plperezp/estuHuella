@@ -202,19 +202,17 @@ function CalculoHuella() {
   )
 
   const huellaDiaria = huellaTotal.toFixed(2)
-  patchTotalHuella()
-  const patchTotalHuella = async () => {
-    try {
-      await services.patch('/user/huella', { huella: huellaDiaria })
-    } catch (error) {}
-  }
 
   if (dataHabitos.length === undefined) {
     return <h3>Loading...o eso creo</h3>
   }
   //! CONSULTAR A JORGE
 
-  return <div>CalculoHuella</div>
+  return (
+    <button className="big-button" onClick={patchTotalHuella}>
+      calcula huella
+    </button>
+  )
 }
 
 export default CalculoHuella

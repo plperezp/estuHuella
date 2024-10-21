@@ -3,3 +3,26 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+.big-button {
+  background-color: #4caf50; /* Color de fondo */
+  border: none; /* Sin borde */
+  color: white; /* Color del texto */
+  padding: 20px 40px; /* Espaciado interno */
+  text-align: center; /* Alineación del texto */
+  text-decoration: none; /* Sin subrayado */
+  display: inline-block; /* Para comportarse como un botón */
+  font-size: 24px; /* Tamaño del texto */
+  font-weight: bold; /* Negrita */
+  border-radius: 10px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor a puntero */
+  transition: background-color 0.3s ease; /* Suaviza el cambio de color */
+}
+
+.big-button:hover {
+  background-color: #45a049; /* Cambia de color al pasar el ratón */
+}
+
+.big-button:active {
+  background-color: #3e8e41; /* Color al hacer clic */
+  transform: scale(0.98); /* Efecto de presión al hacer clic */
+}

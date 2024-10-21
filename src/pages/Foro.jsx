@@ -7,7 +7,7 @@ import ModalForo from '../components/ModalForo'
 import '../css/foro.css'
 import SearchBar from '../components/SearchBar'
 
-const Foro = () => {
+const Foro = (props) => {
   const navigate = useNavigate()
   const { loggedUserId } = useContext(AuthContext)
   const [data, setData] = useState([])
@@ -18,6 +18,7 @@ const Foro = () => {
   const [text, setText] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [searchValue, setSearchValue] = useState('')
+  const { avatar, dataUser } = props
   useEffect(() => {
     getDataAll()
   }, [])
@@ -68,6 +69,7 @@ const Foro = () => {
         user: loggedUserId,
       }
       await services.put(`/foro/${idEditar}`, formPostEditar)
+      console.log(idEditar)
       getDataAll()
       setEsEditar(false)
       setTitle('')
@@ -133,12 +135,8 @@ const Foro = () => {
         {mainPost && (
           <div className="main-post">
             <div className="boxname">
-              <h5>{mainPost.user.username}</h5>
-              <img
-                src={mainPost.user.profilePicture}
-                alt="avatar"
-                className="user-image"
-              />
+              <h5>{dataUser.username}</h5>
+              <img src={avatar} alt="avatar" className="user-image" />
             </div>
             <h2>{mainPost.title}</h2>
             <p>{mainPost.text}</p>
@@ -161,12 +159,8 @@ const Foro = () => {
           {otherPosts.map((post) => (
             <div key={post._id} className="post">
               <div className="boxname">
-                <h5>{post.user.username}</h5>
-                <img
-                  src={post.user.profilePicture}
-                  alt="avatar"
-                  className="user-image"
-                />
+                <h5>{dataUser.username}</h5>
+                <img src={avatar} alt="avatar" className="user-image" />
               </div>
 
               <h2>{post.title}</h2>

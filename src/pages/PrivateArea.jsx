@@ -19,8 +19,8 @@ import AnimacionAvatar from '../components/AnimacionAvatar'
 
 function PrivateArea() {
   const navigate = useNavigate()
-  const [dataUser, setDataUser] = useState({})
-  const [mediaHuella, setMediaHuella] = useState(0)
+  // const [dataUser, setDataUser] = useState({})
+  // const [mediaHuella, setMediaHuella] = useState(0)
 
   const [options, setOptions] = useState({
     type: 'radial-gauge',
@@ -56,32 +56,32 @@ function PrivateArea() {
     innerRadius: 150,
   })
 
-  useEffect(() => {
-    handleGetUser()
-  }, [])
+  // useEffect(() => {
+  //   handleGetUser()
+  // }, [])
 
-  const handleGetUser = async () => {
-    try {
-      const response = await services.get(`/user`)
+  // const handleGetUser = async () => {
+  //   try {
+  //     const response = await services.get(`/user`)
 
-      setDataUser(response.data)
-      const numHuella = await handleMediaHuella(response.data.huella)
-      console.log(numHuella)
-      setMediaHuella(parseFloat(numHuella.toFixed(2)))
-    } catch (error) {
-      if (error.response.status === 400) {
-        setErrorMesage(error.response.data.message)
-      } else {
-        navigate('/error')
-      }
-    }
-  }
+  //     setDataUser(response.data)
+  //     const numHuella = await handleMediaHuella(response.data.huella)
+  //     console.log(numHuella)
+  //     setMediaHuella(parseFloat(numHuella.toFixed(2)))
+  //   } catch (error) {
+  //     if (error.response.status === 400) {
+  //       setErrorMesage(error.response.data.message)
+  //     } else {
+  //       navigate('/error')
+  //     }
+  //   }
+  // }
 
-  const handleMediaHuella = (array) => {
-    if (!array || array.length === 0) return 0
-    const sumar = array.reduce((acu, valor) => acu + valor, 0)
-    return sumar / array.length
-  }
+  // const handleMediaHuella = (array) => {
+  //   if (!array || array.length === 0) return 0
+  //   const sumar = array.reduce((acu, valor) => acu + valor, 0)
+  //   return sumar / array.length
+  // }
 
   useEffect(() => {
     setOptions((prevOptions) => ({
@@ -94,29 +94,29 @@ function PrivateArea() {
     return <h3>Loading</h3>
   }
 
-  const imgAvatar = (img) => {
-    if (img === 'mrBotellita') {
-      return mrBotellita
-    } else if (img === 'emoNature') {
-      return emoNature
-    } else if (img === 'hipstree') {
-      return hipstree
-    } else if (img === 'neoShrek') {
-      return neoShrek
-    } else if (img === 'niñaRama') {
-      return niñaRama
-    } else if (img === 'princesaGalactica') {
-      return princesaGalactica
-    } else if (img === 'recicledBoy') {
-      return recicledBoy
-    } else if (img === 'recicledGollum') {
-      return recicledGollum
-    } else if (img === 'SuperNature') {
-      return SuperNature
-    }
-  }
+  // const imgAvatar = (img) => {
+  //   if (img === 'mrBotellita') {
+  //     return mrBotellita
+  //   } else if (img === 'emoNature') {
+  //     return emoNature
+  //   } else if (img === 'hipstree') {
+  //     return hipstree
+  //   } else if (img === 'neoShrek') {
+  //     return neoShrek
+  //   } else if (img === 'niñaRama') {
+  //     return niñaRama
+  //   } else if (img === 'princesaGalactica') {
+  //     return princesaGalactica
+  //   } else if (img === 'recicledBoy') {
+  //     return recicledBoy
+  //   } else if (img === 'recicledGollum') {
+  //     return recicledGollum
+  //   } else if (img === 'SuperNature') {
+  //     return SuperNature
+  //   }
+  // }
 
-  const avatar = imgAvatar(dataUser.img)
+  // const avatar = imgAvatar(dataUser.img)
 
   return (
     <div className="conatainer-areaprivada">

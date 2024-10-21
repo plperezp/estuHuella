@@ -209,7 +209,7 @@ function CalculoHuella() {
   //! CONSULTAR A JORGE
 
   return (
-    <button className="big-button" onClick={patchTotalHuella}>
+    <button className="big-button" onClick={null}>
       calcula huella
     </button>
   )

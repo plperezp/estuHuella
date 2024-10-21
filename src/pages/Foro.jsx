@@ -90,6 +90,16 @@ const Foro = () => {
     setEsEditar(true)
   }
 
+  const handleSubmitEliminar = async (e, postId) => {
+    e.preventDefault()
+    try {
+      await services.delete(`/foro/${postId}`)
+      getDataAll()
+    } catch (error) {
+      handleError(error)
+    }
+  }
+
   if (data.length <= 0) {
     return <h2>...No hay posts</h2>
   }

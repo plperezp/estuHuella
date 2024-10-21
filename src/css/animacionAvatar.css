@@ -10,8 +10,8 @@
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
-  padding: 0px 300px;
+  grid-gap: 10px;
+  padding: 30px 300px 60px;
   cursor: pointer;
   will-change: width, height;
 }
@@ -35,8 +35,8 @@
 }
 
 .item {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   background: white;
   background-size: cover;
@@ -45,17 +45,18 @@
   align-items: center;
   justify-content: center;
   will-change: transform, opacity;
-
   box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.1);
 }
+
 .edit-icon {
+  color: white;
   width: 30px;
   height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
-  right: 200px;
-  top: 300px;
+  right: 221px;
+  top: 249px;
   z-index: 10;
 }

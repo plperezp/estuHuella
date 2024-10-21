@@ -54,57 +54,62 @@ function SignUp() {
     >
       <NavBar />
 
-      <form
-        onSubmit={handleSignup}
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-          background: '#aae6aa',
-          padding: '50px',
-          gap: '20px',
-          marginTop: '100px',
-        }}
-      >
-        <div>
-          <label>Username:</label>
-          <input
-            type="text"
-            name="username"
-            value={username}
-            onChange={handleUsernameChange}
-          ></input>
-        </div>
-        <div>
-          <label>Name:</label>
-          <input
-            type="text"
-            name="name"
-            value={name}
-            onChange={handleNameChange}
-          ></input>
-        </div>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleEmailChange}
-          ></input>
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handlePasswordChange}
-          ></input>
-        </div>
-        <button type="submit">send</button>
-      </form>
+      <div className="auth-container">
+        <button className="google-login-button ">
+          Iniciar sesión con Google
+        </button>
+        <form
+          onSubmit={handleSignup}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+            background: '#aae6aa',
+            padding: '50px',
+            gap: '20px',
+            marginTop: '100px',
+          }}
+        >
+          <div>
+            <label>Username:</label>
+            <input
+              type="text"
+              name="username"
+              value={username}
+              onChange={handleUsernameChange}
+            ></input>
+          </div>
+          <div>
+            <label>Name:</label>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={handleNameChange}
+            ></input>
+          </div>
+          <div>
+            <label>Email:</label>
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={handleEmailChange}
+            ></input>
+          </div>
+          <div>
+            <label>Password:</label>
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={handlePasswordChange}
+            ></input>
+          </div>
+          <button type="submit">send</button>
+        </form>
+      </div>
     </div>
   )
 }

@@ -27,9 +27,9 @@ function AnimationLogo() {
     ref.current.forEach(clearTimeout)
     ref.current = []
     setItems([])
-    ref.current.push(setTimeout(() => setItems(['ES TU...', 'MUNDO']), 1500))
-    ref.current.push(setTimeout(() => setItems(['ES TU...', 'MOMENTO']), 3500))
-    ref.current.push(setTimeout(() => setItems(['ES TU', 'HUELLA']), 5500))
+    ref.current.push(setTimeout(() => setItems(['ES TU...', 'MUNDO']), 1000))
+    ref.current.push(setTimeout(() => setItems(['ES TU...', 'MOMENTO']), 3000))
+    ref.current.push(setTimeout(() => setItems(['ES TU', 'HUELLA']), 5000))
   }, [])
 
   useEffect(() => {

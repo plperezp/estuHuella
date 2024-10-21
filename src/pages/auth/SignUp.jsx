@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import NavBar from '../../components/NavBar'
 import { useState } from 'react'
 import services from '../../services/config'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { AuthContext } from '../../context/auth.context'
 
 function SignUp() {
   const navigate = useNavigate()
@@ -12,6 +13,7 @@ function SignUp() {
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMesage] = useState('')
+  const { authenticateUser } = useContext(AuthContext)
 
   const handleEmailChange = (e) => setEmail(e.target.value)
   const handleUsernameChange = (e) => setUsername(e.target.value)
@@ -42,11 +44,11 @@ function SignUp() {
     }
   }
 
-  const handleGetGoogle = async (e) => {
+  /* const handleGetGoogle = async (e) => {
     e.preventDefault()
 
     try {
-      const response = await axios.get('api/auth/google')
+      const response = await services.get('api/auth/google')
 
       if (response.status === 200) {
         window.location.href = response.data.redirectUrl
@@ -57,7 +59,7 @@ function SignUp() {
       console.error(error)
       setErrorMesage('Error durante la autenticación')
     }
-  }
+  }*/
   return (
     <div
       style={{
@@ -72,10 +74,7 @@ function SignUp() {
       <NavBar />
 
       <div className="auth-container">
-        <button
-          className="google-login-button "
-          onClick={(e) => handleGetGoogle(e)}
-        >
+        <button className="google-login-button " onClick={null}>
           Iniciar sesión con Google
         </button>
         <form

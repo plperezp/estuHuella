@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-function SearchBar({ searchValue, setSearchValue }) {
+function SearchBar({ searchValue, setSearchValue, getDataAll }) {
   const handleChange = (e) => {
     setSearchValue(e.target.value)
   }
+  useEffect(() => {
+    if (searchValue) {
+      getDataAll(searchValue)
+    }
+  }, [searchValue])
   return (
     <div id="search-bar">
       SearchBar

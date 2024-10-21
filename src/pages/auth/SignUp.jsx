@@ -1,10 +1,9 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import NavBar from '../../components/NavBar'
-import { useState } from 'react'
 import services from '../../services/config'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/auth.context'
+import '../../css/login.css'
 
 function SignUp() {
   const navigate = useNavigate()
@@ -44,7 +43,7 @@ function SignUp() {
     }
   }
 
-  /* const handleGetGoogle = async (e) => {
+  /*const handleGetGoogle = async (e) => {
     e.preventDefault()
 
     try {
@@ -60,74 +59,48 @@ function SignUp() {
       setErrorMesage('Error durante la autenticación')
     }
   }*/
+
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        flexDirection: 'column',
-      }}
-    >
+    <div className="home-container">
       <NavBar />
 
-      <div className="auth-container">
-        <button className="google-login-button " onClick={null}>
-          Iniciar sesión con Google
-        </button>
-        <form
-          onSubmit={handleSignup}
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-            background: '#aae6aa',
-            padding: '50px',
-            gap: '20px',
-            marginTop: '100px',
-          }}
-        >
-          <div>
-            <label>Username:</label>
+      <div className="box-login">
+        <div className="form-login">
+          <form className="register-form-login" onSubmit={handleSignup}>
             <input
               type="text"
+              placeholder="Username"
               name="username"
               value={username}
               onChange={handleUsernameChange}
-            ></input>
-          </div>
-          <div>
-            <label>Name:</label>
+            />
             <input
               type="text"
+              placeholder="Name"
               name="name"
               value={name}
               onChange={handleNameChange}
-            ></input>
-          </div>
-          <div>
-            <label>Email:</label>
+            />
             <input
               type="email"
+              placeholder="Email"
               name="email"
               value={email}
               onChange={handleEmailChange}
-            ></input>
-          </div>
-          <div>
-            <label>Password:</label>
+            />
             <input
               type="password"
+              placeholder="Password"
               name="password"
               value={password}
               onChange={handlePasswordChange}
-            ></input>
-          </div>
-          <button type="submit">send</button>
-        </form>
+            />
+            <button type="submit">Registrarte</button>
+            <p className="message">
+              ¿Estás registrado? <Link to="/login">Sign In</Link>
+            </p>
+          </form>
+        </div>
       </div>
     </div>
   )

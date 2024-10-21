@@ -30,7 +30,7 @@ const Foro = () => {
     try {
       const response = await services.get('/user')
       const avatar = imgAvatar(response.data.img)
-      setUserData(response.data)
+      setUserData({ ...response.data, avatar: avatar })
     } catch (error) {
       console.log(error)
       if (error.response && error.response.status === 400) {
@@ -44,7 +44,7 @@ const Foro = () => {
     try {
       const response = await services.get('/foro')
       const sortedData = response.data.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
       )
       setData(sortedData)
     } catch (error) {
@@ -124,17 +124,24 @@ const Foro = () => {
     setIdEditar(post._id)
     setEsEditar(true)
   }
+  const filteredPosts = data.filter((post) =>
+    post.title.toLowerCase().startsWith(searchValue.toLowerCase())
+  )
 
-  if (data.length <= 0) {
+  if (data.length <= 0 || filteredPosts.length <= 0) {
     return <h2>...No hay posts</h2>
   }
 
-  const [mainPost, ...otherPosts] = data
-
+  const [mainPost, ...otherPosts] = filteredPosts
+  console.log(userData.avatar)
   return (
     <div className="fondo-foro">
       <NavBar />
-      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
+      <SearchBar
+        getDataAll={getDataAll}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
       <div className="container-post">
         <ModalForo
           esEditar={esEditar}
@@ -153,7 +160,7 @@ const Foro = () => {
           <div className="main-post">
             <div className="boxname">
               <h5>{userData.username}</h5>
-              <img src={avatar} alt="avatar" className="user-image" />
+              <img src={userData.avatar} alt="avatar" className="user-image" />
             </div>
             <h2>{mainPost.title}</h2>
             <p>{mainPost.text}</p>
@@ -176,8 +183,12 @@ const Foro = () => {
           {otherPosts.map((post) => (
             <div key={post._id} className="post">
               <div className="boxname">
-                <h5>{dataUser.username}</h5>
-                <img src={avatar} alt="avatar" className="user-image" />
+                <h5>{userData.username}</h5>
+                <img
+                  src={userData.avatar}
+                  alt="avatar"
+                  className="user-image"
+                />
               </div>
 
               <h2>{post.title}</h2>

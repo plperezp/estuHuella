@@ -1,0 +1,57 @@
+.form-login {
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  width: 500px;
+  margin: 100px auto;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form-login input {
+  font-family: 'Roboto', sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form-login button {
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #aae343;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.form-login .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form-login .message a {
+  color: #aae343;
+  text-decoration: none;
+}
+.box-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.home-container {
+  height: 100vh;
+  width: 100%;
+  background-image: url('../assets/home-fondo.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}

@@ -99,8 +99,10 @@ export default function AnimacionAvatar(props) {
           height: size,
           background: open ? '#00000093' : 'transparent',
           backdropFilter: open ? 'blur(10px)' : 'nome',
+          display: open ? 'grid' : 'none',
+          zIndex: open ? '10' : '0',
         }}
-        className={'container'}
+        className={'container-avatar'}
       >
         {transition((style, item) => (
           <animated.div

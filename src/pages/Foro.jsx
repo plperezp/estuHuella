@@ -16,7 +16,6 @@ const Foro = () => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
-
   useEffect(() => {
     getDataAll()
   }, [])
@@ -30,30 +29,47 @@ const Foro = () => {
       setData(sortedData)
     } catch (error) {
       console.log(error)
-      if (error.response.status === 400) {
-        setErrorMesage(error.response.data.message)
+      if (error.response && error.response.status === 400) {
+        setErrorMessage(error.response.data.message)
+        navigate('/error')
+      }
+    }
+  }
+
+  const handleSubmitCrear = async (e) => {
+    e.preventDefault()
+    try {
+      const formPostCreate = {
+        title,
+        text,
+      }
+      const responsePost = await services.post('/foro', formPostCreate)
+      setData([...data, responsePost.data])
+      console.log('Post creado correctamente')
+      getDataAll()
+    } catch (error) {
+      console.log(error)
+      if (error.response && error.response.status === 400) {
+        setErrorMessage(error.response.data.message)
       } else {
         navigate('/error')
       }
     }
   }
+
   const handleSubmitEditar = async (e) => {
     e.preventDefault()
-    setEsEditar(!esEditar)
-    setTitle('')
-    setText('')
-
-    console.log(idEditar)
     try {
       const formPostEditar = {
         title,
         text,
         user: loggedUserId,
       }
-
-      const response = await services.put(`/foro/${idEditar}`, formPostEditar)
-
+      await services.put(`/foro/${idEditar}`, formPostEditar)
       getDataAll()
+      setEsEditar(false)
+      setTitle('')
+      setText('')
     } catch (error) {
       handleError(error)
     }
@@ -61,9 +77,7 @@ const Foro = () => {
 
   const handleSubmitEliminar = async (e, postId) => {
     e.preventDefault()
-
     try {
-      console.log(postId)
       await services.delete(`/foro/${postId}`)
       getDataAll()
       setTitle('')
@@ -90,22 +104,12 @@ const Foro = () => {
     setEsEditar(true)
   }
 
-  const handleSubmitEliminar = async (e, postId) => {
-    e.preventDefault()
-    try {
-      await services.delete(`/foro/${postId}`)
-      getDataAll()
-    } catch (error) {
-      handleError(error)
-    }
-  }
-
   if (data.length <= 0) {
     return <h2>...No hay posts</h2>
   }
 
   const [mainPost, ...otherPosts] = data
-  console.log(mainPost.user)
+
   return (
     <div className="fondo-foro">
       <NavBar />

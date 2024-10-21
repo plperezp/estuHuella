@@ -17,7 +17,7 @@ function Dashboard() {
         </div>
       </div>
       <div className="new">
-        <div class="text-content">
+        <div className="text-content">
           <h1>¿Qué es la Huella de Carbono?</h1>
           <p>
             La huella de carbono mide la cantidad de gases que emitimos y que
@@ -42,7 +42,7 @@ function Dashboard() {
             <strong>gran diferencia</strong>.
           </p>
         </div>
-        <div class="image-content">
+        <div className="image-content">
           <img src={infoHuella} alt="Huella de Carbono" />
         </div>
       </div>
@@ -65,11 +65,11 @@ function Dashboard() {
           </div>
         </Link>
       </div>
-      <div class="new">
-        <div class="image-content">
+      <div className="new">
+        <div className="image-content">
           <img src={cambioHuella} alt="Conciencia sobre la Huella de Carbono" />
         </div>
-        <div class="text-content">
+        <div className="text-content">
           <h1>Tu Impacto en el Planeta: ¡Reduce Tu Huella de Carbono!</h1>
           <p>
             Cada acción que realizamos, por pequeña que sea, tiene un impacto en

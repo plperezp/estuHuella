@@ -22,9 +22,9 @@ const ModalForo = ({
   const handleSubmit = (e) => {
     e.preventDefault()
     if (esEditar) {
-      handleSubmitEditar()
+      handleSubmitEditar(e)
     } else {
-      handleSubmitCrear()
+      handleSubmitCrear(e)
     }
     setIsOpen(false)
 

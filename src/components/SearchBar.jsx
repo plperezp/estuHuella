@@ -1,8 +1,21 @@
 import React from 'react'
 
-function SearchBar() {
+function SearchBar({ searchValue, setSearchValue }) {
+  const handleChange = (e) => {
+    setSearchValue(e.target.value)
+  }
   return (
-    <div>SearchBar</div>
+    <div id="search-bar">
+      SearchBar
+      <label>Busqueda</label>
+      <input
+        onChange={handleChange}
+        id="search-bar"
+        type="text"
+        value={searchValue}
+        placeholder="Buscar"
+      />
+    </div>
   )
 }
 

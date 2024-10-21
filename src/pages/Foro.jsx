@@ -5,6 +5,7 @@ import services from '../services/config'
 import { useNavigate } from 'react-router-dom'
 import ModalForo from '../components/ModalForo'
 import '../css/foro.css'
+import SearchBar from '../components/SearchBar'
 
 const Foro = () => {
   const navigate = useNavigate()
@@ -16,6 +17,7 @@ const Foro = () => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
+  const [searchValue, setSearchValue] = useState('')
 
   useEffect(() => {
     getDataAll()
@@ -90,16 +92,6 @@ const Foro = () => {
     setEsEditar(true)
   }
 
-  const handleSubmitEliminar = async (e, postId) => {
-    e.preventDefault()
-    try {
-      await services.delete(`/foro/${postId}`)
-      getDataAll()
-    } catch (error) {
-      handleError(error)
-    }
-  }
-
   if (data.length <= 0) {
     return <h2>...No hay posts</h2>
   }
@@ -109,6 +101,7 @@ const Foro = () => {
   return (
     <div className="fondo-foro">
       <NavBar />
+      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
       <div className="container-post">
         <ModalForo
           esEditar={esEditar}

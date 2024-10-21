@@ -5,6 +5,7 @@ import services from '../services/config'
 import { AuthContext } from '../context/auth.context'
 import { useContext } from 'react'
 import '../css/formtuhuella.css'
+import CalculoHuella from '../components/CalculoHuella'
 
 function FormTuHuella() {
   const navigate = useNavigate()
@@ -111,18 +112,6 @@ function FormTuHuella() {
       console.log('Añadido correctamente')
     } catch (error) {
       console.log(error)
-      if (error.response.status === 400) {
-        setErrorMesage(error.response.data.message)
-      } else {
-        navigate('/error')
-      }
-    }
-  }
-  const patchTotalHuella = async () => {
-    console.log('funciona')
-    try {
-      await services.patch('/user/huella')
-    } catch (error) {
       if (error.response.status === 400) {
         setErrorMesage(error.response.data.message)
       } else {
@@ -275,9 +264,7 @@ function FormTuHuella() {
 
         <button type="submit">Enviar</button>
       </form>
-      <button className="big-button" onClick={patchTotalHuella}>
-        calcula huella
-      </button>
+      <CalculoHuella />
     </div>
   )
 }

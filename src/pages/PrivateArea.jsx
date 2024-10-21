@@ -14,17 +14,18 @@ import { useNavigate } from 'react-router-dom'
 import services from '../services/config'
 import { AgGauge } from 'ag-charts-react'
 import 'ag-charts-enterprise'
-import CalculoHuella from '../utils/CalculoHuella'
+import CalculoHuella from '../components/CalculoHuella'
 import AnimacionAvatar from '../components/AnimacionAvatar'
 
-function PrivateArea() {
+function PrivateArea(props) {
   const navigate = useNavigate()
+  const { mediaHuella, dataUser, avatar, handleGetUser } = props
   // const [dataUser, setDataUser] = useState({})
   // const [mediaHuella, setMediaHuella] = useState(0)
 
   const [options, setOptions] = useState({
     type: 'radial-gauge',
-    value: mediaHuella, // Valor inicial del gráfico
+    value: { mediaHuella }, // Valor inicial del gráfico
     scale: {
       min: 0,
       max: 50, // Escala del gráfico
@@ -154,8 +155,6 @@ function PrivateArea() {
           Email: <span>{dataUser.email}</span>
         </h4>
       </div>
-
-      <CalculoHuella />
     </div>
   )
 }

@@ -97,7 +97,14 @@ function App() {
         />
         <Route
           path="/private"
-          element={<PrivateArea dataUser={dataUser} avatar={avatar} />}
+          element={
+            <PrivateArea
+              mediaHuella={mediaHuella}
+              dataUser={dataUser}
+              avatar={avatar}
+              handleGetUser={handleGetUser}
+            />
+          }
         />
         <Route path="/error" element={<Error />} />
       </Routes>

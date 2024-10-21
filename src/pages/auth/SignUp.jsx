@@ -3,6 +3,7 @@ import NavBar from '../../components/NavBar'
 import { useState } from 'react'
 import services from '../../services/config'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 function SignUp() {
   const navigate = useNavigate()
@@ -41,6 +42,22 @@ function SignUp() {
     }
   }
 
+  const handleGetGoogle = async (e) => {
+    e.preventDefault()
+
+    try {
+      const response = await axios.get('api/auth/google')
+
+      if (response.status === 200) {
+        window.location.href = response.data.redirectUrl
+      } else {
+        setErrorMesage(response.data.message)
+      }
+    } catch (error) {
+      console.error(error)
+      setErrorMesage('Error durante la autenticación')
+    }
+  }
   return (
     <div
       style={{
@@ -55,7 +72,10 @@ function SignUp() {
       <NavBar />
 
       <div className="auth-container">
-        <button className="google-login-button ">
+        <button
+          className="google-login-button "
+          onClick={(e) => handleGetGoogle(e)}
+        >
           Iniciar sesión con Google
         </button>
         <form

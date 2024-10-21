@@ -1,7 +1,9 @@
 import services from '../services/config'
 import { useEffect, useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function CalculoHuella() {
+  const navigate = useNavigate()
   const [dataHabitos, setDataHabitos] = useState([])
 
   useEffect(() => {
@@ -19,14 +21,14 @@ function CalculoHuella() {
     coche: {
       gasolina: 192,
       diesel: 171,
-      electrico: 0,
+      electrico: 1,
       hibrido: 122,
     },
     autobus: 104,
     tren: 41,
     metro: 29,
-    bicicleta: 0,
-    caminar: 0,
+    bicicleta: 0.01,
+    caminar: 0.01,
     avion: 285,
   }
   const velocidadesPromedio = {
@@ -202,14 +204,31 @@ function CalculoHuella() {
   )
 
   const huellaDiaria = huellaTotal.toFixed(2)
-
+  console.log(huellaDiaria)
   if (dataHabitos.length === undefined) {
     return <h3>Loading...o eso creo</h3>
   }
-  //! CONSULTAR A JORGE
 
+  const patchTotalHuella = () => {
+    const huella = parseFloat(huellaDiaria)
+    console.log('Enviando huella:', huella)
+    try {
+      services.patch('/user/huella', { huella: huella })
+    } catch (error) {
+      if (error.response.status === 400) {
+        setErrorMesage(error.response.data.message)
+      } else {
+        navigate('/error')
+      }
+    }
+  }
+  const handleClickPach = () => {
+    console.log('Botón presionado, llamando a patchTotalHuella')
+    patchTotalHuella()
+    navigate('/private')
+  }
   return (
-    <button className="big-button" onClick={null}>
+    <button className="big-button" onClick={handleClickPach}>
       calcula huella
     </button>
   )

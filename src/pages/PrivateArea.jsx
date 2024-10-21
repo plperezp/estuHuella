@@ -52,7 +52,7 @@ function PrivateArea() {
 
       setDataUser(response.data)
       const numHuella = await handleMediaHuella(response.data.huella)
-      setMediaHuella(numHuella)
+      setMediaHuella(numHuella.toFixed(2))
     } catch (error) {
       if (error.response.status === 400) {
         setErrorMesage(error.response.data.message)
@@ -103,6 +103,7 @@ function PrivateArea() {
 
   const avatar = imgAvatar(dataUser.img)
   console.log(avatar)
+
   return (
     <div className="conatainer-areaprivada">
       <NavBar />

@@ -39,7 +39,7 @@ export default function AnimacionAvatar(props) {
   const [selectedAvatar, setSelectedAvatar] = useState(null)
   useEffect(() => {
     props.handleGetUser()
-  })
+  },[selectedAvatar])
   const changeImg = async (avatarName) => {
     try {
       await services.patch('/user', { img: avatarName })
@@ -97,7 +97,8 @@ export default function AnimacionAvatar(props) {
           ...rest,
           width: size,
           height: size,
-          background: open ? '#0a0a0a1f' : 'transparent',
+          background: open ? '#00000093' : 'transparent',
+          backdropFilter: open ? 'blur(10px)' : 'nome'
         }}
         className={'container'}
       >

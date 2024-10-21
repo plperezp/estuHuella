@@ -5,7 +5,13 @@ function CalculoHuella() {
   const [dataHabitos, setDataHabitos] = useState([])
 
   useEffect(() => {
+
+    
+  
+    
     GetDataHabitos()
+    patchTotalHuella()
+  
   }, [])
   const factoresEmision = {
     pollo: 6.9,
@@ -199,18 +205,26 @@ function CalculoHuella() {
 
   const huellaTotal =
     huellaDiariaenergia + huellaGeneraltransportes + huellaTotalAlimento
-  // console.log(
-  //  `Huella de carbono total diaria: ${huellaTotal.toFixed(2)} kg CO₂`
-  //)
-  /* const patchMediHuella = async () => {
+    
+   console.log(
+    `Huella de carbono total diaria: ${huellaTotal.toFixed(2)} kg CO₂`
+  )
+
+  const huellaDiaria = huellaTotal.toFixed(2)
+  
+  const patchTotalHuella = async () => {
     try {
+      await services.patch("/user/huella", {huella:huellaDiaria})
+
     } catch (error) {}
   }
-  const handleMediaHuella = (array) => {
-    const sumar = array.reduce((acu, valor) => acu + valor, 0)
-    return sumar / array.length
-  }*/
 
+  
+  if(dataHabitos.length === undefined){
+    return <h3>Loading...o eso creo</h3>
+  }
+//! CONSULTAR A JORGE
+  
   return <div>CalculoHuella</div>
 }
 

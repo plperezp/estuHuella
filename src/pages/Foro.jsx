@@ -56,7 +56,8 @@ function Foro() {
     setEsEditar(!esEditar)
     setTitle('')
     setText('')
-    console.log('ediar')
+  
+    console.log(idEditar)
     try {
       const formPostEditar = {
         title,
@@ -66,7 +67,6 @@ function Foro() {
 
       const response = await services.put(`/foro/${idEditar}`, formPostEditar)
 
-      console.log('Post editado correctamente', response.data)
       getDataAll()
     } catch (error) {
       console.log(error)
@@ -83,6 +83,7 @@ function Foro() {
     e.preventDefault()
 
     try {
+      console.log(postId)
       await services.delete(`/foro/${postId}`)
       getDataAll()
     } catch (error) {

@@ -118,6 +118,18 @@ function FormTuHuella() {
       }
     }
   }
+  const patchTotalHuella = async () => {
+    console.log('funciona')
+    try {
+      await services.patch('/user/huella')
+    } catch (error) {
+      if (error.response.status === 400) {
+        setErrorMesage(error.response.data.message)
+      } else {
+        navigate('/error')
+      }
+    }
+  }
 
   return (
     <div
@@ -263,6 +275,9 @@ function FormTuHuella() {
 
         <button type="submit">Enviar</button>
       </form>
+      <button className="big-button" onClick={patchTotalHuella}>
+        calcula huella
+      </button>
     </div>
   )
 }

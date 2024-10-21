@@ -82,7 +82,7 @@ export default function AnimacionAvatar(props) {
   }
 
   return (
-    <div className="wrapper">
+    <div className="wrapper" style={{ position: open ? 'block' : 'absolute' }}>
       {/* Icono de lápiz para abrir la animación */}
       <div
         className="edit-icon"

@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import services from '../services/config'
 import { AuthContext } from '../context/auth.context'
 import { useContext } from 'react'
+import '../css/formtuhuella.css'
 
 function FormTuHuella() {
   const navigate = useNavigate()
@@ -120,6 +121,7 @@ function FormTuHuella() {
 
   return (
     <div
+      className="formtuhuella-container"
       style={{
         display: 'flex',
         justifyContent: 'center',

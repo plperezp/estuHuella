@@ -6,7 +6,6 @@ function CalculoHuella() {
 
   useEffect(() => {
     GetDataHabitos()
-    patchTotalHuella()
   }, [])
 
   const factoresEmision = {
@@ -203,7 +202,7 @@ function CalculoHuella() {
   )
 
   const huellaDiaria = huellaTotal.toFixed(2)
-
+  patchTotalHuella()
   const patchTotalHuella = async () => {
     try {
       await services.patch('/user/huella', { huella: huellaDiaria })

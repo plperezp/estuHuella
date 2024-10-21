@@ -4,9 +4,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  top: 70px;
+  position: absolute;
 }
 
-.container {
+.container-avatar {
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);

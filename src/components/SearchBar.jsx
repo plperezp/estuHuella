@@ -11,7 +11,7 @@ function SearchBar({ searchValue, setSearchValue, getDataAll }) {
   }, [searchValue])
   return (
     <div id="search-bar">
-      <label style={{ fontSize: '20px' }}>Busqueda </label>
+      <label style={{ fontSize: '20px', color: 'white' }}>Busqueda </label>
       <input
         style={{
           width: '350px',

@@ -16,7 +16,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/huella" element={<FormTuHuella />} />
-        <Route path="/foro" element={<Foro />} />
+        <Route path="/foro" element={<Foro/>} />
         <Route path="/private" element={<PrivateArea />} />
         <Route path="/error" element={<Error />} />
       </Routes>

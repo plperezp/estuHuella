@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react'
 import NavBar from '../../components/NavBar'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/auth.context'
 import services from '../../services/config'
+import '../../css/login.css'
 
 function Login() {
   const navigate = useNavigate()
@@ -41,52 +42,32 @@ function Login() {
   }
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        flexDirection: 'column',
-      }}
-    >
+    <div className="home-container">
       <NavBar />
-
-      <form
-        onSubmit={handleLogin}
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-          background: '#aae6aa',
-          padding: '50px',
-          gap: '20px',
-          marginTop: '100px',
-        }}
-      >
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleEmailChange}
-          ></input>
+      <div className=" box-login">
+        <div className="form-login">
+          <form className="register-form-login" onSubmit={handleLogin}>
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={handleEmailChange}
+              placeholder="Email"
+            />
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={handlePasswordChange}
+              placeholder="password"
+            />
+            <button>login</button>
+            <p class="message">
+              No esta registrado? <Link to={'/signup'}>Registrar</Link>
+            </p>
+          </form>
         </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handlePasswordChange}
-          ></input>
-        </div>
-        <button type="submit">send</button>
-        {errorMessage && <p>{errorMessage}</p>}
-      </form>
+      </div>
     </div>
   )
 }

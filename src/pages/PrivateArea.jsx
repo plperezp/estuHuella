@@ -14,7 +14,6 @@ import { useNavigate } from 'react-router-dom'
 import services from '../services/config'
 import { AgGauge } from 'ag-charts-react'
 import 'ag-charts-enterprise'
-import CalculoHuella from '../components/CalculoHuella'
 import AnimacionAvatar from '../components/AnimacionAvatar'
 
 function PrivateArea() {
@@ -24,25 +23,25 @@ function PrivateArea() {
 
   const [options, setOptions] = useState({
     type: 'radial-gauge',
-    value: { mediaHuella }, // Valor inicial del gráfico
+    value: { mediaHuella },
     scale: {
       min: 0,
-      max: 50, // Escala del gráfico
+      max: 50,
       label: {
-        enabled: true, // Habilitar etiquetas en la escala
-        fontSize: 10, // Tamaño de la fuente para las etiquetas
+        enabled: true,
+        fontSize: 10,
+        as,
       },
       ticks: {
-        // Opciones para las líneas de la escala
-        enabled: true, // Habilitar ticks
-        size: 5, // Tamaño de los ticks
-        color: '#999', // Color de los ticks
+        enabled: true,
+        size: 5,
+        color: '#999',
       },
     },
     bar: {
       fills: Array.from({ length: 50 }, (_, index) => {
         const green = Math.round(224 - (index * (224 - 80)) / 49)
-        const gray = 66 // Mantener gris constante
+        const gray = 66
         return { color: `rgb(${green}, ${green}, ${gray})` }
       }),
       fillMode: 'discrete',

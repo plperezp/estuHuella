@@ -8,11 +8,6 @@ import Login from '../src/pages/auth/Login'
 import Error from './pages/Error'
 import FormTuHuella from './pages/FormTuHuella'
 
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
-import services from './services/config'
-
 function App() {
   return (
     <>

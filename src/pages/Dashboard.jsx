@@ -6,6 +6,7 @@ import infoHuella from '../assets/huella-new.jpg'
 import cambioHuella from '../assets/cambio-huella.jpg'
 import estuhuella from '../assets/estuhuellaLogo.png'
 import { Link } from 'react-router-dom'
+import TravelCO2Calculator from '../components/TravelCO2Calculator'
 
 function Dashboard() {
   return (
@@ -123,6 +124,9 @@ function Dashboard() {
             todos ponemos de nuestra parte, ¡lograremos grandes cambios!
           </p>
         </div>
+      </div>
+      <div>
+        <TravelCO2Calculator />
       </div>
     </div>
   )

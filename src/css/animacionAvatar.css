@@ -52,13 +52,13 @@
 
 .edit-icon {
   color: white;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
-  right: 221px;
-  top: 249px;
+  right: 300px;
+  top: 350px;
   z-index: 10;
 }

@@ -6,6 +6,18 @@ import { AuthContext } from '../context/auth.context'
 import { useContext } from 'react'
 import '../css/formtuhuella.css'
 import CalculoHuella from '../components/CalculoHuella'
+const cards = [
+  { title: 'transporte 1', content: 'Esta es la primer transporte.' },
+  { title: 'transporte 2', content: 'Esta es la segundo transporte.' },
+  { title: 'transporte 3', content: 'Esta es la tercero transporte.' },
+  { title: 'transporte 4', content: 'Esta es la cuarto transporte.' },
+  { title: 'transporte 5', content: 'Esta es la quinto transporte.' },
+  { title: 'transporte 6', content: 'Esta es la sexto transporte.' },
+  { title: 'transporte 7', content: 'Esta es la séptimo transporte.' },
+  { title: 'transporte 8', content: 'Esta es la octavo transporte.' },
+  { title: 'transporte 9', content: 'Esta es la noveno transporte.' },
+  { title: 'transporte 10', content: 'Esta es la décimo carta.' },
+]
 
 function FormTuHuella() {
   const navigate = useNavigate()
@@ -21,6 +33,8 @@ function FormTuHuella() {
   const [recicla, setRecicla] = useState(false)
   const [errorMessage, setErrorMesage] = useState('')
   const { loggedUserId } = useContext(AuthContext)
+  const [currentCardIndex, setCurrentCardIndex] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
 
   const handleOnChangeVehiculo = (e) => {
     setVehiculo(e.target.value)
@@ -69,6 +83,11 @@ function FormTuHuella() {
       } else {
         navigate('/error')
       }
+    }
+    if (currentCardIndex < cards.length - 1) {
+      setCurrentCardIndex(currentCardIndex + 1)
+    } else {
+      alert('Has completado todas las cartas!')
     }
   }
 
@@ -120,6 +139,18 @@ function FormTuHuella() {
     }
   }
 
+  const handleNextCard = () => {
+    // Iniciar animación de salida
+    setIsAnimating(true)
+    setTimeout(() => {
+      setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length)
+
+      // Iniciar animación de entrada después del cambio de carta
+      setTimeout(() => {
+        setIsAnimating(false)
+      }, 300) // Tiempo de la animación de entrada
+    }, 300) // Tiempo de la animación de salida
+  }
   return (
     <div
       className="formtuhuella-container"
@@ -133,56 +164,70 @@ function FormTuHuella() {
       }}
     >
       <NavBar />
-      <form
-        onSubmit={handleFormTransporteSubmit}
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-          background: '#aae6aa',
-          padding: '50px',
-          gap: '20px',
-          marginTop: '100px',
-        }}
-      >
-        <label>Medio de transporte:</label>
-        <select
-          onChange={handleOnChangeVehiculo}
-          name="transportes"
-          multiple
-          required
-        >
-          <option value="">--Selecciona una opción--</option>
-          <option value="coche">Coche</option>
-          <option value="autobús">Autobús</option>
-          <option value="tren">Tren</option>
-          <option value="metro">Metro</option>
-          <option value="bicicleta">Bicicleta</option>
-          <option value="caminar">Caminar</option>
-        </select>
+      <div className="card-container">
+        <div className={`card ${isAnimating ? 'fade-out' : 'fade-in'}`}>
+          <h2>{cards[currentCardIndex].title}</h2>
+          <p>{cards[currentCardIndex].content}</p>
 
-        <label>Tiempo (minutos):</label>
-        <input
-          type="number"
-          name="tiempo"
-          value={tiempo}
-          onChange={handleOnChangeTiempo}
-          min="1"
-          max="450"
-          required
-        />
+          <form
+            onSubmit={handleFormTransporteSubmit}
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+              background: '#aae343',
+              padding: '20px',
+              gap: '20px',
+              marginTop: '20px',
+              width: '100%',
+            }}
+          >
+            <label>Medio de transporte:</label>
+            <select
+              onChange={handleOnChangeVehiculo}
+              name="transportes"
+              multiple
+              required
+            >
+              <option value="">--Selecciona una opción--</option>
+              <option value="coche">Coche</option>
+              <option value="autobús">Autobús</option>
+              <option value="tren">Tren</option>
+              <option value="metro">Metro</option>
+              <option value="bicicleta">Bicicleta</option>
+              <option value="caminar">Caminar</option>
+            </select>
 
-        <label>Tipo de motor:</label>
-        <select onChange={handleOnChangeMotor} name="motor">
-          <option value="">--Selecciona una opción--</option>
-          <option value="gasolina">Gasolina</option>
-          <option value="diesel">Diesel</option>
-          <option value="electrico">Eléctrico</option>
-          <option value="hibrido">Híbrido</option>
-        </select>
-        <button type="submit">Enviar</button>
-      </form>
+            <label>Tiempo (minutos):</label>
+            <input
+              type="number"
+              name="tiempo"
+              value={tiempo}
+              onChange={handleOnChangeTiempo}
+              min="1"
+              max="450"
+              required
+            />
+
+            <label>Tipo de motor:</label>
+            <select onChange={handleOnChangeMotor} name="motor">
+              <option value="">--Selecciona una opción--</option>
+              <option value="gasolina">Gasolina</option>
+              <option value="diesel">Diesel</option>
+              <option value="electrico">Eléctrico</option>
+              <option value="hibrido">Híbrido</option>
+            </select>
+
+            <button type="submit">Enviar</button>
+          </form>
+
+          {/* Botón para avanzar a la siguiente carta */}
+          <button onClick={handleNextCard} style={{ marginTop: '20px' }}>
+            Siguiente Carta
+          </button>
+        </div>
+      </div>
       <form
         onSubmit={handleFormOtrosSubmit}
         style={{

@@ -30,7 +30,6 @@ function PrivateArea() {
       label: {
         enabled: true,
         fontSize: 10,
-        as,
       },
       ticks: {
         enabled: true,

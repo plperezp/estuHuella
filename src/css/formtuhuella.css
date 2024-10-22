@@ -1,7 +1,7 @@
 .formtuhuella-container {
   background-image: url('../assets/marco.jpg');
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
 }
 .big-button {
   background-color: #4caf50; /* Color de fondo */
@@ -25,4 +25,50 @@
 .big-button:active {
   background-color: #3e8e41; /* Color al hacer clic */
   transform: scale(0.98); /* Efecto de presión al hacer clic */
+}
+.card-container {
+  width: 500px;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.card {
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity 0.3s ease-in-out;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #829981;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #404940;
+}
+
+.fade-out {
+  opacity: 0;
+  transform: translateX(-150%);
+}
+
+.fade-in {
+  opacity: 1;
+  transform: translateX(0);
 }

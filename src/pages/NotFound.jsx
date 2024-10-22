@@ -1,8 +1,17 @@
 import React from 'react'
+import '../css/NotFound.css'
 
 function NotFound() {
   return (
-    <div>NotFound</div>
+    <div class="error-container">
+      <span>
+        <span>4</span>
+      </span>
+      <span>0</span>
+      <span>
+        <span>4</span>
+      </span>
+    </div>
   )
 }
 

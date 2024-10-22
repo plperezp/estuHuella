@@ -4,6 +4,7 @@ import services from '../../services/config'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/auth.context'
 import '../../css/login.css'
+import axios from 'axios'
 
 function SignUp() {
   const navigate = useNavigate()
@@ -43,11 +44,11 @@ function SignUp() {
     }
   }
 
-  /*const handleGetGoogle = async (e) => {
+  const handleGetGoogle = async (e) => {
     e.preventDefault()
 
     try {
-      const response = await services.get('api/auth/google')
+      const response = await axios.get('/api/auth/google')
 
       if (response.status === 200) {
         window.location.href = response.data.redirectUrl
@@ -58,50 +59,56 @@ function SignUp() {
       console.error(error)
       setErrorMesage('Error durante la autenticación')
     }
-  }*/
+  }
 
   return (
     <div className="home-container">
       <div className="overlay">
         <NavBar />
 
-        <div className="box-login">
-          <div className="form-login">
-            <form className="register-form-login" onSubmit={handleSignup}>
-              <input
-                type="text"
-                placeholder="Username"
-                name="username"
-                value={username}
-                onChange={handleUsernameChange}
-              />
-              <input
-                type="text"
-                placeholder="Name"
-                name="name"
-                value={name}
-                onChange={handleNameChange}
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={email}
-                onChange={handleEmailChange}
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={password}
-                onChange={handlePasswordChange}
-              />
-              <button type="submit">Registrarte</button>
-              <p className="message">
-                ¿Estás registrado? <Link to="/login">Sign In</Link>
-              </p>
-            </form>
-          </div>
+      <div className="box-login">
+        <div className="form-login">
+          <form className="register-form-login" onSubmit={handleSignup}>
+            <input
+              type="text"
+              placeholder="Username"
+              name="username"
+              value={username}
+              onChange={handleUsernameChange}
+            />
+            <input
+              type="text"
+              placeholder="Name"
+              name="name"
+              value={name}
+              onChange={handleNameChange}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              value={email}
+              onChange={handleEmailChange}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={handlePasswordChange}
+            />
+            <button type="submit">Registrarte</button>
+            <button
+              type="button"
+              style={{ backgroundColor: 'blue' }}
+              onClick={handleGetGoogle}
+            >
+              google
+            </button>
+            <p className="message">
+              ¿Estás registrado? <Link to="/login">Sign In</Link>
+            </p>
+          </form>
         </div>
       </div>
     </div>

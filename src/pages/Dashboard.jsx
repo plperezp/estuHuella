@@ -11,9 +11,11 @@ function Dashboard() {
   return (
     <div className="home">
       <div className="home-container">
-        <NavBar />
-        <div style={{ height: '90%' }}>
-          <AnimationLogo />
+        <div className="overlay-home">
+          <NavBar color={'#d1e2cd'} />
+          <div style={{ height: '90%' }}>
+            <AnimationLogo />
+          </div>
         </div>
       </div>
       <div className="new">

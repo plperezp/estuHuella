@@ -8,7 +8,22 @@
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-
+.overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute; /* Posiciona el overlay sobre el contenedor */
+  top: 0;
+  left: 0;
+  width: 100%; /* Ocupa todo el ancho */
+  height: 100%; /* Ocupa toda la altura */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0)
+  ); /* Degradado de oscuro a claro */
+  z-index: 1;
+}
 .form-login input {
   font-family: 'Roboto', sans-serif;
   outline: 0;

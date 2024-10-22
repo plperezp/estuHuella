@@ -100,6 +100,24 @@ th {
   height: 10%;
   width: 100%;
 }
+.home-boton {
+  color: #d1e2cd;
+  padding: 20px 40px;
+  font-size: 1.5em;
+  line-height: 1;
+  font-weight: bold;
+}
+.home-boton p {
+  margin: 0;
+}
+.menu {
+  display: flex;
+}
+.avatar-nav {
+  width: 50px;
+  height: 50px;
+  margin: 20px 40px 20px 40px;
+}
 .auth-container {
   display: flex;
   justify-content: center;

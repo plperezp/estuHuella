@@ -63,7 +63,8 @@ function SignUp() {
 
   return (
     <div className="home-container">
-      <NavBar />
+      <div className="overlay">
+        <NavBar />
 
       <div className="box-login">
         <div className="form-login">

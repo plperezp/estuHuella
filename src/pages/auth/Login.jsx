@@ -44,7 +44,7 @@ function Login() {
   return (
     <div className="home-container">
       <div className="overlay">
-        <NavBar />
+        <NavBar color={'#d1e2cd'} />
         <div className=" box-login">
           <div className="form-login">
             <form className="register-form-login" onSubmit={handleLogin}>

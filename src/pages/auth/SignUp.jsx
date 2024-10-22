@@ -64,7 +64,7 @@ function SignUp() {
   return (
     <div className="home-container">
       <div className="overlay">
-        <NavBar />
+        <NavBar color={'#d1e2cd'} />
 
         <div className="box-login">
           <div className="form-login">

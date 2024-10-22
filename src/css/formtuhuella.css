@@ -41,13 +41,22 @@
 }
 
 .big-button:active {
-  background-color: #4e7294; /* Color al hacer clic */
+  background-color: #4e7294;
   transform: scale(0.98); /* Efecto de presión al hacer clic */
 }
+
 .card-container {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
   width: 500px;
   height: 300px;
-  position: relative;
+}
+.card-container.active {
+  opacity: 1;
+  z-index: 2;
 }
 
 .card {

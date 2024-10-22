@@ -3,10 +3,10 @@
   gap: 5rem;
   min-height: 2rem;
   width: 100%;
-  height: 100%;
+  height: 100px;
   align-items: center;
   justify-content: space-between;
-  background-color: blue;
+  background-image: url('../assets/tierra.jpg');
   color: white;
   padding: 0 50px;
 }

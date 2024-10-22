@@ -58,11 +58,11 @@ h4 {
 }
 
 .info-avatar span {
-  font-weight: normal; /* Peso de fuente normal para los valores */
-  color: #555; /* Color de texto gris medio */
-  border-bottom: 1px dashed #ccc; /* Línea punteada debajo de los valores */
-  padding-bottom: 4px; /* Espaciado debajo de los valores */
-  font-size: 20px; /* Tamaño de fuente más grande para los valores */
+  font-weight: normal;
+  color: #555;
+  border-bottom: 1px dashed #ccc;
+  padding-bottom: 4px;
+  font-size: 20px;
 }
 
 .info-user {
@@ -71,12 +71,11 @@ h4 {
   justify-content: space-evenly;
 }
 
-/* Estilo del gráfico */
 .graficaMediHuella {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px; /* Espacio superior para separación */
+  margin-top: 20px;
   width: 100%;
   background-color: transparent;
   margin-bottom: 20px;
@@ -86,32 +85,28 @@ h4 {
   text-align: center;
 }
 
-.graficaMediHuella canvas {
-  border: 1px solid black;
-  padding-bottom: 1vh;
-}
 .big-button {
-  background-color: #4caf50; /* Color de fondo */
-  border: none; /* Sin borde */
-  color: white; /* Color del texto */
-  padding: 20px 40px; /* Espaciado interno */
-  text-align: center; /* Alineación del texto */
-  text-decoration: none; /* Sin subrayado */
-  display: inline-block; /* Para comportarse como un botón */
-  font-size: 24px; /* Tamaño del texto */
-  font-weight: bold; /* Negrita */
-  border-radius: 10px; /* Bordes redondeados */
-  cursor: pointer; /* Cambia el cursor a puntero */
-  transition: background-color 0.3s ease; /* Suaviza el cambio de color */
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 20px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .big-button:hover {
-  background-color: #45a049; /* Cambia de color al pasar el ratón */
+  background-color: #45a049;
 }
 
 .big-button:active {
-  background-color: #3e8e41; /* Color al hacer clic */
-  transform: scale(0.98); /* Efecto de presión al hacer clic */
+  background-color: #3e8e41;
+  transform: scale(0.98);
 }
 
 .frase {

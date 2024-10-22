@@ -138,12 +138,14 @@ const Foro = () => {
     <div className="fondo-foro">
       <div className="overlay">
         <NavBar color={'#71a0cd'} />
-        <SearchBar
-          getDataAll={getDataAll}
-          searchValue={searchValue}
-          setSearchValue={setSearchValue}
-        />
-        <div className="container-post">
+
+        <div className="topForo">
+          <SearchBar
+            getDataAll={getDataAll}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+          />
+
           <ModalForo
             esEditar={esEditar}
             handleSubmitEditar={handleSubmitEditar}
@@ -156,7 +158,8 @@ const Foro = () => {
             setText={setText}
             setEsEditar={setEsEditar}
           />
-
+        </div>
+        <div className="container-post">
           {mainPost && (
             <div className="main-post">
               <div className="boxname">

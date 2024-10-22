@@ -7,7 +7,11 @@ import cambioHuella from '../assets/cambio-huella.jpg'
 import estuhuella from '../assets/estuhuellaLogo.png'
 import { Link } from 'react-router-dom'
 import TravelCO2Calculator from '../components/TravelCO2Calculator'
+<<<<<<< HEAD
 import FadeInSection from '../components/FadeinSection'
+=======
+import Footer from '../components/Footer'
+>>>>>>> 15e83756d59943bbaaa6ea2f72b380274e653f7d
 
 function Dashboard() {
   return (
@@ -141,7 +145,13 @@ function Dashboard() {
           </div>
         </FadeInSection>
       </div>
+<<<<<<< HEAD
       <div>{/*<TravelCO2Calculator />*/}</div>
+=======
+      <div>
+        <Footer />
+      </div>
+>>>>>>> 15e83756d59943bbaaa6ea2f72b380274e653f7d
     </div>
   )
 }

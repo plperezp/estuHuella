@@ -43,29 +43,31 @@ function Login() {
 
   return (
     <div className="home-container">
-      <NavBar />
-      <div className=" box-login">
-        <div className="form-login">
-          <form className="register-form-login" onSubmit={handleLogin}>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={handleEmailChange}
-              placeholder="Email"
-            />
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={handlePasswordChange}
-              placeholder="password"
-            />
-            <button>login</button>
-            <p class="message">
-              No esta registrado? <Link to={'/signup'}>Registrar</Link>
-            </p>
-          </form>
+      <div className="overlay">
+        <NavBar />
+        <div className=" box-login">
+          <div className="form-login">
+            <form className="register-form-login" onSubmit={handleLogin}>
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={handleEmailChange}
+                placeholder="Email"
+              />
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={handlePasswordChange}
+                placeholder="password"
+              />
+              <button>login</button>
+              <p class="message">
+                No esta registrado? <Link to={'/signup'}>Registrar</Link>
+              </p>
+            </form>
+          </div>
         </div>
       </div>
     </div>

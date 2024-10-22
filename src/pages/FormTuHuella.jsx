@@ -152,164 +152,160 @@ function FormTuHuella() {
     }, 300) // Tiempo de la animación de salida
   }
   return (
-    <div
-      className="formtuhuella-container"
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        flexDirection: 'column',
-      }}
-    >
-      <NavBar />
-      <div className="card-container">
-        <div className={`card ${isAnimating ? 'fade-out' : 'fade-in'}`}>
-          <h2>{cards[currentCardIndex].title}</h2>
-          <p>{cards[currentCardIndex].content}</p>
+    <div className="formtuhuella-container">
+      <div className="overlay-form">
+        <NavBar color={'#4e7294'} />
+        <div className="card-container">
+          <div className={`card ${isAnimating ? 'fade-out' : 'fade-in'}`}>
+            <h2>{cards[currentCardIndex].title}</h2>
+            <p>{cards[currentCardIndex].content}</p>
 
-          <form
-            onSubmit={handleFormTransporteSubmit}
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexDirection: 'column',
-              background: '#aae343',
-              padding: '20px',
-              gap: '20px',
-              marginTop: '20px',
-              width: '100%',
-            }}
-          >
-            <label>Medio de transporte:</label>
-            <select
-              onChange={handleOnChangeVehiculo}
-              name="transportes"
-              multiple
-              required
+            <form
+              onSubmit={handleFormTransporteSubmit}
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column',
+                background: '#4e7294',
+                padding: '20px',
+                gap: '20px',
+                marginTop: '20px',
+                width: '100%',
+              }}
             >
-              <option value="">--Selecciona una opción--</option>
-              <option value="coche">Coche</option>
-              <option value="autobús">Autobús</option>
-              <option value="tren">Tren</option>
-              <option value="metro">Metro</option>
-              <option value="bicicleta">Bicicleta</option>
-              <option value="caminar">Caminar</option>
-            </select>
+              <label>Medio de transporte:</label>
+              <select
+                onChange={handleOnChangeVehiculo}
+                name="transportes"
+                multiple
+                required
+              >
+                <option value="">--Selecciona una opción--</option>
+                <option value="coche">Coche</option>
+                <option value="autobús">Autobús</option>
+                <option value="tren">Tren</option>
+                <option value="metro">Metro</option>
+                <option value="bicicleta">Bicicleta</option>
+                <option value="caminar">Caminar</option>
+              </select>
 
-            <label>Tiempo (minutos):</label>
-            <input
-              type="number"
-              name="tiempo"
-              value={tiempo}
-              onChange={handleOnChangeTiempo}
-              min="1"
-              max="450"
-              required
-            />
+              <label>Tiempo (minutos):</label>
+              <input
+                type="number"
+                name="tiempo"
+                value={tiempo}
+                onChange={handleOnChangeTiempo}
+                min="1"
+                max="450"
+                required
+              />
 
-            <label>Tipo de motor:</label>
-            <select onChange={handleOnChangeMotor} name="motor">
-              <option value="">--Selecciona una opción--</option>
-              <option value="gasolina">Gasolina</option>
-              <option value="diesel">Diesel</option>
-              <option value="electrico">Eléctrico</option>
-              <option value="hibrido">Híbrido</option>
-            </select>
+              <label>Tipo de motor:</label>
+              <select onChange={handleOnChangeMotor} name="motor">
+                <option value="">--Selecciona una opción--</option>
+                <option value="gasolina">Gasolina</option>
+                <option value="diesel">Diesel</option>
+                <option value="electrico">Eléctrico</option>
+                <option value="hibrido">Híbrido</option>
+              </select>
 
-            <button type="submit">Enviar</button>
-          </form>
+              <button type="submit">Enviar</button>
+            </form>
 
-          {/* Botón para avanzar a la siguiente carta */}
-          <button onClick={handleNextCard} style={{ marginTop: '20px' }}>
-            Siguiente Carta
-          </button>
+            {/* Botón para avanzar a la siguiente carta */}
+            <button onClick={handleNextCard} style={{ marginTop: '20px' }}>
+              Siguiente Carta
+            </button>
+          </div>
         </div>
-      </div>
-      <form
-        onSubmit={handleFormOtrosSubmit}
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-          background: '#aae6aa',
-          padding: '50px',
-          gap: '20px',
-          marginTop: '100px',
-        }}
-      >
-        <label>Consumo energético:</label>
-        <select
-          onChange={handleOnChangeConsumoEnergetico}
-          name="consumoEnergetico"
-          required
+        <form
+          onSubmit={handleFormOtrosSubmit}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+            background: '#4e7294',
+            padding: '50px',
+            gap: '20px',
+            marginTop: '100px',
+          }}
         >
-          <option value="">--Selecciona una opción--</option>
-          <option value="electricidad">Electricidad</option>
-          <option value="gas natural">Gas Natural</option>
-          <option value="butano">Butano</option>
-        </select>
+          <label>Consumo energético:</label>
+          <select
+            onChange={handleOnChangeConsumoEnergetico}
+            name="consumoEnergetico"
+            required
+          >
+            <option value="">--Selecciona una opción--</option>
+            <option value="electricidad">Electricidad</option>
+            <option value="gas natural">Gas Natural</option>
+            <option value="butano">Butano</option>
+          </select>
 
-        <label>¿Es renovable?</label>
-        <input
-          onClick={handleOnChangeEsRenovable}
-          value={esRenovable}
-          type="checkbox"
-          name="esRenovable"
-        />
-        <label>¿Reciclas?</label>
-        <input
-          onClick={handleOnChangeRecicla}
-          value={recicla}
-          type="checkbox"
-          name="recicla"
-        />
-        <button type="submit">Enviar</button>
-      </form>
-      <form
-        onSubmit={handleFormAlimentacionSubmit}
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-          background: '#aae6aa',
-          padding: '50px',
-          gap: '20px',
-          marginTop: '100px',
-        }}
-      >
-        <label>Tipo de alimentación:</label>
-        <select onChange={handleOnChangeAlimento} name="alimentacion" multiple>
-          <option value="pollo">Pollo</option>
-          <option value="cerdo">Cerdo</option>
-          <option value="ternera">Ternera</option>
-          <option value="vegetales">Vegetales</option>
-        </select>
+          <label>¿Es renovable?</label>
+          <input
+            onClick={handleOnChangeEsRenovable}
+            value={esRenovable}
+            type="checkbox"
+            name="esRenovable"
+          />
+          <label>¿Reciclas?</label>
+          <input
+            onClick={handleOnChangeRecicla}
+            value={recicla}
+            type="checkbox"
+            name="recicla"
+          />
+          <button type="submit">Enviar</button>
+        </form>
+        <form
+          onSubmit={handleFormAlimentacionSubmit}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+            background: '#4e7294',
+            padding: '50px',
+            gap: '20px',
+            marginTop: '100px',
+          }}
+        >
+          <label>Tipo de alimentación:</label>
+          <select
+            onChange={handleOnChangeAlimento}
+            name="alimentacion"
+            multiple
+          >
+            <option value="pollo">Pollo</option>
+            <option value="cerdo">Cerdo</option>
+            <option value="ternera">Ternera</option>
+            <option value="vegetales">Vegetales</option>
+          </select>
 
-        <label>Cantidad(g):</label>
-        <input
-          onChange={handleOnChangeCantidad}
-          value={cantidad}
-          type="number"
-          name="cantidadCarne"
-          min="0"
-        />
+          <label>Cantidad(g):</label>
+          <input
+            onChange={handleOnChangeCantidad}
+            value={cantidad}
+            type="number"
+            name="cantidadCarne"
+            min="0"
+          />
 
-        <label>¿Es de proximidad?</label>
-        <input
-          onClick={handleOnChangeEsDeProximidad}
-          value={esDeProximidad}
-          type="checkbox"
-          name="esDeProximidad"
-        />
+          <label>¿Es de proximidad?</label>
+          <input
+            onClick={handleOnChangeEsDeProximidad}
+            value={esDeProximidad}
+            type="checkbox"
+            name="esDeProximidad"
+          />
 
-        <button type="submit">Enviar</button>
-      </form>
-      <CalculoHuella />
+          <button type="submit">Enviar</button>
+        </form>
+        <CalculoHuella />
+      </div>
     </div>
   )
 }

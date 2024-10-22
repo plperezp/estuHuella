@@ -136,52 +136,29 @@ const Foro = () => {
   console.log(userData.avatar)
   return (
     <div className="fondo-foro">
-      <NavBar />
-      <SearchBar
-        getDataAll={getDataAll}
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-      />
-      <div className="container-post">
-        <ModalForo
-          esEditar={esEditar}
-          handleSubmitEditar={handleSubmitEditar}
-          handleSubmitCrear={handleSubmitCrear}
-          setIsOpen={setIsOpen}
-          isOpen={isOpen}
-          title={title}
-          text={text}
-          setTitle={setTitle}
-          setText={setText}
-          setEsEditar={setEsEditar}
+      <div className="overlay">
+        <NavBar color={'#71a0cd'} />
+        <SearchBar
+          getDataAll={getDataAll}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
         />
+        <div className="container-post">
+          <ModalForo
+            esEditar={esEditar}
+            handleSubmitEditar={handleSubmitEditar}
+            handleSubmitCrear={handleSubmitCrear}
+            setIsOpen={setIsOpen}
+            isOpen={isOpen}
+            title={title}
+            text={text}
+            setTitle={setTitle}
+            setText={setText}
+            setEsEditar={setEsEditar}
+          />
 
-        {mainPost && (
-          <div className="main-post">
-            <div className="boxname">
-              <h5>{userData.username}</h5>
-              <img src={userData.avatar} alt="avatar" className="user-image" />
-            </div>
-            <h2>{mainPost.title}</h2>
-            <p>{mainPost.text}</p>
-            <div className="post-actions">
-              <button
-                onClick={(e) => handleSubmitEliminar(e, mainPost._id)}
-                type="button"
-                className="delete-button"
-              >
-                Eliminar
-              </button>
-              <button onClick={(e) => handleEditar(e, mainPost)} type="button">
-                Editar
-              </button>
-            </div>
-          </div>
-        )}
-
-        <div className="posts-grid">
-          {otherPosts.map((post) => (
-            <div key={post._id} className="post">
+          {mainPost && (
+            <div className="main-post">
               <div className="boxname">
                 <h5>{userData.username}</h5>
                 <img
@@ -190,23 +167,55 @@ const Foro = () => {
                   className="user-image"
                 />
               </div>
-
-              <h2>{post.title}</h2>
-              <p>{post.text}</p>
+              <h2>{mainPost.title}</h2>
+              <p>{mainPost.text}</p>
               <div className="post-actions">
                 <button
-                  onClick={(e) => handleSubmitEliminar(e, post._id)}
+                  onClick={(e) => handleSubmitEliminar(e, mainPost._id)}
                   type="button"
                   className="delete-button"
                 >
                   Eliminar
                 </button>
-                <button onClick={(e) => handleEditar(e, post)} type="button">
+                <button
+                  onClick={(e) => handleEditar(e, mainPost)}
+                  type="button"
+                >
                   Editar
                 </button>
               </div>
             </div>
-          ))}
+          )}
+
+          <div className="posts-grid">
+            {otherPosts.map((post) => (
+              <div key={post._id} className="post">
+                <div className="boxname">
+                  <h5>{userData.username}</h5>
+                  <img
+                    src={userData.avatar}
+                    alt="avatar"
+                    className="user-image"
+                  />
+                </div>
+
+                <h2>{post.title}</h2>
+                <p>{post.text}</p>
+                <div className="post-actions">
+                  <button
+                    onClick={(e) => handleSubmitEliminar(e, post._id)}
+                    type="button"
+                    className="delete-button"
+                  >
+                    Eliminar
+                  </button>
+                  <button onClick={(e) => handleEditar(e, post)} type="button">
+                    Editar
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

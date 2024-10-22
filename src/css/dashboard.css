@@ -22,6 +22,7 @@
 .new {
   display: flex;
   justify-content: space-between;
+  margin: 20px;
 }
 
 .text-content {
@@ -58,6 +59,7 @@
 .image-content img {
   max-width: 100%;
   height: auto;
+  border-radius: 5px;
 }
 .opartunidad-box {
   height: 100vh;
@@ -65,11 +67,22 @@
   background-image: url('../assets/arboles.jpg');
   background-size: cover;
   background-position: center;
+
+  color: #fff;
+  position: relative;
+}
+.overlay-arbol {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
 }
 
 .text-oportunidad {

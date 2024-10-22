@@ -47,7 +47,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   background-color: #f1f8e9;
-  flex: 0 1 calc(50% - 20px);
+  width: 500px;
 }
 
 .post h5 {

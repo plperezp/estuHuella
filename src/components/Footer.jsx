@@ -1,13 +1,15 @@
 import React from 'react'
-
+import '../css/Footer.css'
 function Footer() {
+  //FALTAN LINK TO PARA LOS REPOS
   return (
-    <div>
-      <div>
-        <p>Javier Gascon© </p>
-        <p>Pedro Perez©</p>
+    <div className="footer-container">
+      <div className="devs-footer">
+        <p>Javier Gascon</p>
+        <p>|</p>
+        <p>Pedro Perez</p>
       </div>
-      <div>
+      <div className="socialMedia">
         <p>Instagram</p>
         <p>X</p>
         <p>Facebook</p>

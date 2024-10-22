@@ -116,6 +116,31 @@ function PrivateArea() {
 
   const avatar = imgAvatar(dataUser.img)
 
+  const mensajeHuella = (mediaHuella) => {
+    if (mediaHuella <= 16) {
+      return (
+        <p>
+          "Cada pequeño paso que das hacia un futuro más verde es un gran salto
+          para el planeta."
+        </p>
+      )
+    } else if (mediaHuella > 16 && mediaHuella <= 25) {
+      return (
+        <p>
+          "Vas por buen camino, ¡puedes hacer una gran diferencia para el
+          planeta!"
+        </p>
+      )
+    } else if (mediaHuella > 25 && mediaHuella < 50) {
+      return (
+        <p> Es momento de actuar: cada cambio cuenta para reducir tu impacto</p>
+      )
+    } else if (mediaHuella >= 50) {
+      return <p>Eres una Chernobyl con piernas, ¡Es hora del cambio!</p>
+    }
+  }
+  const frase = mensajeHuella(mediaHuella)
+
   return (
     <div className="conatainer-areaprivada">
       <div className="overlay">
@@ -135,7 +160,7 @@ function PrivateArea() {
                 style={{ width: '500px', height: '300px' }}
               />
             </div>
-            <p>sigue mejorando</p>
+            <p>{frase}</p>
           </div>
           <div className="avatar">
             <img style={{ width: '250px' }} src={avatar} alt="avatar" />

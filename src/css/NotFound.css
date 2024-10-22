@@ -1,8 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700');
 @import url('https://fonts.googleapis.com/css?family=Catamaran:400,800');
+
+.es404contenedor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .error-container {
   text-align: center;
-  font-size: 180px;
+  font-size: 300px;
   font-family: 'Catamaran', sans-serif;
   font-weight: 800;
   margin: 20px 15px;
@@ -11,7 +18,7 @@
   display: inline-block;
   line-height: 0.7;
   position: relative;
-  color: #ffb485;
+  color: #55a023;
 }
 .error-container > span > span {
   display: inline-block;
@@ -20,7 +27,7 @@
 .error-container > span:nth-of-type(1) {
   perspective: 1000px;
   perspective-origin: 500% 50%;
-  color: #f0e395;
+  color: #99c67b;
 }
 .error-container > span:nth-of-type(1) > span {
   transform-origin: 50% 100% 0px;
@@ -31,7 +38,7 @@
 .error-container > span:nth-of-type(3) {
   perspective: none;
   perspective-origin: 50% 50%;
-  color: #d15c95;
+  color: #88bd65;
 }
 .error-container > span:nth-of-type(3) > span {
   transform-origin: 100% 100% 0px;
@@ -134,4 +141,24 @@ a.more-link {
   text-decoration: none;
   margin-top: 50px;
   letter-spacing: 1px;
+}
+
+.texto404 {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw;
+  align-content: center;
+  justify-content: center;
+  margin-top: 5vh;
+  color: black;
+}
+
+.btn404 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-weight: bold;
+  color: whitesmoke;
 }

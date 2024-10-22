@@ -20,7 +20,7 @@ function App() {
         <Route path="/foro" element={<Foro />} />
         <Route path="/private" element={<PrivateArea />} />
         <Route path="/error" element={<Error />} />
-        <Route path="/not-found" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   )

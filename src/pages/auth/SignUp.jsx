@@ -66,49 +66,50 @@ function SignUp() {
       <div className="overlay">
         <NavBar />
 
-      <div className="box-login">
-        <div className="form-login">
-          <form className="register-form-login" onSubmit={handleSignup}>
-            <input
-              type="text"
-              placeholder="Username"
-              name="username"
-              value={username}
-              onChange={handleUsernameChange}
-            />
-            <input
-              type="text"
-              placeholder="Name"
-              name="name"
-              value={name}
-              onChange={handleNameChange}
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              name="email"
-              value={email}
-              onChange={handleEmailChange}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={password}
-              onChange={handlePasswordChange}
-            />
-            <button type="submit">Registrarte</button>
-            <button
-              type="button"
-              style={{ backgroundColor: 'blue' }}
-              onClick={handleGetGoogle}
-            >
-              google
-            </button>
-            <p className="message">
-              ¿Estás registrado? <Link to="/login">Sign In</Link>
-            </p>
-          </form>
+        <div className="box-login">
+          <div className="form-login">
+            <form className="register-form-login" onSubmit={handleSignup}>
+              <input
+                type="text"
+                placeholder="Username"
+                name="username"
+                value={username}
+                onChange={handleUsernameChange}
+              />
+              <input
+                type="text"
+                placeholder="Name"
+                name="name"
+                value={name}
+                onChange={handleNameChange}
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                value={email}
+                onChange={handleEmailChange}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={password}
+                onChange={handlePasswordChange}
+              />
+              <button type="submit">Registrarte</button>
+              <button
+                type="button"
+                style={{ backgroundColor: 'blue' }}
+                onClick={handleGetGoogle}
+              >
+                google
+              </button>
+              <p className="message">
+                ¿Estás registrado? <Link to="/login">Sign In</Link>
+              </p>
+            </form>
+          </div>
         </div>
       </div>
     </div>

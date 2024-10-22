@@ -154,7 +154,7 @@ function FormTuHuella() {
   return (
     <div className="formtuhuella-container">
       <div className="overlay-form">
-        <NavBar color={'#4e7294'} />
+        <NavBar color={'#73abdf'} />
         <div className="card-container">
           <div className={`card ${isAnimating ? 'fade-out' : 'fade-in'}`}>
             <h2>{cards[currentCardIndex].title}</h2>

@@ -40,7 +40,9 @@ const ModalForo = ({
 
   return (
     <div>
-      <button onClick={handleAbrir}>abrir</button>
+      <button className="botonCrear" onClick={handleAbrir}>
+        Add Post
+      </button>
       {isOpen && (
         <div className={`modal ${isOpen ? 'open' : ''}`}>
           <div className="modal-content">

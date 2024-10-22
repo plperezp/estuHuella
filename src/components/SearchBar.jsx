@@ -11,9 +11,14 @@ function SearchBar({ searchValue, setSearchValue, getDataAll }) {
   }, [searchValue])
   return (
     <div id="search-bar">
-      SearchBar
-      <label>Busqueda</label>
+      <label style={{ fontSize: '20px' }}>Busqueda </label>
       <input
+        style={{
+          width: '350px',
+          borderRadius: '5px',
+          padding: '10px',
+          marginLeft: '5px',
+        }}
         onChange={handleChange}
         id="search-bar"
         type="text"

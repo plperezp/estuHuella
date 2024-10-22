@@ -160,7 +160,7 @@ function PrivateArea() {
                 style={{ width: '500px', height: '300px' }}
               />
             </div>
-            <p>{frase}</p>
+            <p className="frase">{frase}</p>
           </div>
           <div className="avatar">
             <img style={{ width: '250px' }} src={avatar} alt="avatar" />

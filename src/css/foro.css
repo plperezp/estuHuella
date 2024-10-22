@@ -25,8 +25,9 @@
   margin-bottom: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 600px;
+  max-width: 1250px;
   background-color: #e8f5e9;
+  font-size: 25px;
 }
 
 .posts-container {
@@ -47,7 +48,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   background-color: #f1f8e9;
-  flex: 0 1 calc(50% - 20px);
+  width: 500px;
 }
 
 .post h5 {
@@ -69,8 +70,8 @@
 
 .post-actions {
   display: flex;
-  justify-content: flex-start;
   margin-top: 10px;
+  justify-content: flex-end;
 }
 
 .post-actions button {
@@ -85,7 +86,7 @@
 }
 
 .post-actions button:hover {
-  background-color: #4caf50;
+  background-color: #14a651;
 }
 
 .delete-button {
@@ -110,8 +111,17 @@
 }
 .fondo-foro {
   position: relative;
-  height: 100vh;
+  height: 200vh;
   background-image: url('../assets/reciclaje.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.topForo {
+  display: flex;
+  justify-content: space-around;
+  padding: 0px 280px 20px 280px;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
 }

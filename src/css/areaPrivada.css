@@ -113,3 +113,9 @@ h4 {
   background-color: #3e8e41; /* Color al hacer clic */
   transform: scale(0.98); /* Efecto de presión al hacer clic */
 }
+
+.frase {
+  font-size: 20px;
+  font-weight: 700px, bold;
+  color: white;
+}

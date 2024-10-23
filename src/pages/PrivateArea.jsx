@@ -16,6 +16,7 @@ import { AgGauge } from 'ag-charts-react'
 import 'ag-charts-enterprise'
 import AnimacionAvatar from '../components/AnimacionAvatar'
 import Footer from '../components/Footer'
+import { ClockLoader } from 'react-spinners'
 
 function PrivateArea() {
   const navigate = useNavigate()
@@ -90,7 +91,11 @@ function PrivateArea() {
   }, [mediaHuella])
 
   if (dataUser.huella === undefined) {
-    return <h3>Loading</h3>
+    return (
+      <h3 className="clockLoader">
+        <ClockLoader />
+      </h3>
+    )
   }
 
   const imgAvatar = (img) => {

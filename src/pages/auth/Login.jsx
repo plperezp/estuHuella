@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/auth.context'
 import services from '../../services/config'
 import '../../css/login.css'
+import { DotLoader } from 'react-spinners'
 
 function Login() {
   const navigate = useNavigate()
@@ -11,7 +12,8 @@ function Login() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [errorMessage, setErrorMesage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleEmailChange = (e) => setEmail(e.target.value)
   const handlePasswordChange = (e) => setPassword(e.target.value)
@@ -30,6 +32,7 @@ function Login() {
 
       localStorage.setItem('authToken', response.data.authToken)
       await authenticateUser()
+      setIsLoading(true)
 
       navigate('/')
     } catch (error) {
@@ -62,7 +65,15 @@ function Login() {
                 onChange={handlePasswordChange}
                 placeholder="password"
               />
-              <button>login</button>
+              <button disabled={isLoading} className="botonLogin">
+                {isLoading ? (
+                  <div className="spinner">
+                    <DotLoader color="#ffffff" size={30} />
+                  </div>
+                ) : (
+                  'Login' // Texto normal del botón
+                )}
+              </button>
               <p class="message">
                 No esta registrado? <Link to={'/signup'}>Registrar</Link>
               </p>

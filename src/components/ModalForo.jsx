@@ -1,5 +1,9 @@
 import '../css/foroModal.css'
-const ModalForo = ({
+import { useContext, useEffect } from 'react'
+import { AuthContext } from '../context/auth.context'
+import { useNavigate } from 'react-router-dom'
+
+function ModalForo({
   esEditar,
   handleSubmitEditar,
   handleSubmitCrear,
@@ -10,7 +14,10 @@ const ModalForo = ({
   setTitle,
   setText,
   setEsEditar,
-}) => {
+}) {
+  const { isLoggedIn } = useContext(AuthContext)
+  const navigate = useNavigate()
+
   const handleTitleOnChange = (e) => {
     setTitle(e.target.value)
   }
@@ -32,11 +39,21 @@ const ModalForo = ({
     setText('')
   }
   const handleAbrir = () => {
+    if (!isLoggedIn) {
+      navigate('/login') // Si no está logado, redirigir al login
+      return
+    }
     setIsOpen(true)
     setEsEditar(false)
     setTitle('')
     setText('')
   }
+
+  // useEffect(() => {
+  //   if (!isLoggedIn) {
+  //     navigate('/login')
+  //   }
+  // }, [handleAbrir])
 
   return (
     <div>

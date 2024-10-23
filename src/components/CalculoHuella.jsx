@@ -2,7 +2,7 @@ import services from '../services/config'
 import { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function CalculoHuella() {
+function CalculoHuella({ handleNextCategory, setStart }) {
   const navigate = useNavigate()
   const [dataHabitos, setDataHabitos] = useState([])
 
@@ -105,15 +105,18 @@ function CalculoHuella() {
 
   function calcularHuellaTransporte(vehiculo, tiempo, motor = null) {
     const velocidad = velocidadesPromedio[vehiculo]
+
     if (!velocidad) {
       console.error(`Tipo de vehículo no válido: ${vehiculo}`)
       return 0
     }
 
+    // Calcular la distancia recorrida en kilómetros
     const distanciaKm = (tiempo / 60) * velocidad
 
     let huellaCarbono
 
+    // Si el vehículo es un coche, necesitamos verificar el motor
     if (vehiculo === 'coche') {
       if (!motor) {
         console.error('Se requiere especificar el tipo de motor para el coche.')
@@ -128,6 +131,7 @@ function CalculoHuella() {
 
       huellaCarbono = distanciaKm * factor
     } else {
+      // Para otros vehículos, simplemente obtenemos el factor sin motor
       const factor = factoresEmisionTransporte[vehiculo]
       if (!factor) {
         console.error(`Tipo de vehículo no válido: ${vehiculo}`)
@@ -137,6 +141,7 @@ function CalculoHuella() {
       huellaCarbono = distanciaKm * factor
     }
 
+    // Devolvemos la huella de carbono en toneladas (kg/1000)
     return huellaCarbono / 1000
   }
 
@@ -225,11 +230,12 @@ function CalculoHuella() {
   const handleClickPach = () => {
     console.log('Botón presionado, llamando a patchTotalHuella')
     patchTotalHuella()
-    navigate('/private')
+    handleNextCategory()
+    setStart(true)
   }
   return (
     <button className="big-button" onClick={handleClickPach}>
-      calcula huella
+      Guardar Huella
     </button>
   )
 }

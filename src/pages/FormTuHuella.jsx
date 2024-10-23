@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import NavBar from '../components/NavBar'
 import { useNavigate, useParams } from 'react-router-dom'
 import services from '../services/config'
@@ -6,6 +6,7 @@ import { AuthContext } from '../context/auth.context'
 import { useContext } from 'react'
 import '../css/formtuhuella.css'
 import CalculoHuella from '../components/CalculoHuella'
+import AnimacionPorcentaje from '../components/AnimacionPorcentaje'
 
 function FormTuHuella() {
   const navigate = useNavigate()
@@ -24,45 +25,48 @@ function FormTuHuella() {
   const [currentCardIndex, setCurrentCardIndex] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
   const [currentCategory, setCurrentCategory] = useState('transporte')
+  const [start, setStart] = useState(false)
+
+  const [dataUser, setDataUser] = useState({})
   const cards = [
     {
-      title: `${currentCategory} 1`,
+      title: `Habito 1`,
       content: `Este es el primer ${currentCategory}.`,
     },
     {
-      title: `${currentCategory} 2`,
+      title: `Habito 2`,
       content: `Este es el segundo ${currentCategory}.`,
     },
     {
-      title: `${currentCategory} 3`,
+      title: `Habito 3`,
       content: `Este es el tercer ${currentCategory}.`,
     },
     {
-      title: `${currentCategory} 4`,
+      title: `Habito 4`,
       content: `Este es el cuarto ${currentCategory}.`,
     },
     {
-      title: `${currentCategory} 5`,
+      title: `Habito 5`,
       content: `Este es el quinto ${currentCategory}.`,
     },
     {
-      title: `${currentCategory} 6`,
+      title: `Habito 6`,
       content: `Este es el sexto ${currentCategory}.`,
     },
     {
-      title: `${currentCategory} 7`,
+      title: `Habito 7`,
       content: `Este es el séptimo ${currentCategory}.`,
     },
     {
-      title: `${currentCategory} 8`,
+      title: `Habito 8`,
       content: `Este es el octavo ${currentCategory}.`,
     },
     {
-      title: `${currentCategory} 9`,
+      title: `Habito 9`,
       content: `Este es el noveno ${currentCategory}.`,
     },
     {
-      title: `${currentCategory} 10`,
+      title: `Habito 10`,
       content: `Esta es la décima carta de ${currentCategory}.`,
     },
   ]
@@ -83,30 +87,35 @@ function FormTuHuella() {
     setCantidad(e.target.value)
   }
   const handleOnChangeEsDeProximidad = (e) => {
-    setEsDeProximidad(!esDeProximidad)
+    setEsDeProximidad(e.target.checked)
   }
   const handleOnChangeConsumoEnergetico = (e) => {
     setConsumoEnergetico(e.target.value)
   }
   const handleOnChangeRecicla = (e) => {
-    setRecicla(!recicla)
+    setRecicla(e.target.checked)
   }
   const handleOnChangeEsRenovable = (e) => {
-    setEsRenovable(!esRenovable)
+    setEsRenovable(e.target.checked)
   }
 
   const handleFormTransporteSubmit = async (e) => {
     e.preventDefault()
+
     try {
       const formTransport = {
         transporte: {
           vehiculo,
           tiempo,
-          motor,
+          ...(vehiculo === 'coche' && { motor }),
         },
       }
       await services.post(`/huella/transporte`, formTransport)
       console.log('Añadido correctamente')
+      setVehiculo('0')
+      setTiempo(0)
+      setMotor('')
+      handleNextCard()
     } catch (error) {
       console.log(error)
       if (error.response.status === 400) {
@@ -114,11 +123,6 @@ function FormTuHuella() {
       } else {
         navigate('/error')
       }
-    }
-    if (currentCardIndex < cards.length - 1) {
-      setCurrentCardIndex(currentCardIndex + 1)
-    } else {
-      alert('Has completado todas las cartas!')
     }
   }
 
@@ -135,6 +139,10 @@ function FormTuHuella() {
         user: loggedUserId,
       }
       await services.post('/huella/otros', formOtros)
+      setConsumoEnergetico('')
+      setEsRenovable(false)
+      setRecicla(false)
+      handleNextCard()
       console.log('Añadido correctamente')
     } catch (error) {
       console.log(error)
@@ -159,6 +167,8 @@ function FormTuHuella() {
       }
 
       await services.post('/huella/alimentacion', formAlimentacion)
+      handleNextCard
+      handleNextCard()
       console.log('Añadido correctamente')
     } catch (error) {
       console.log(error)
@@ -168,27 +178,85 @@ function FormTuHuella() {
         navigate('/error')
       }
     }
+    if (currentCardIndex < cards.length - 1) {
+      setCurrentCardIndex(currentCardIndex + 1)
+    } else {
+      alert('Has completado todas las cartas!')
+    }
   }
+  const resetFormState = () => {
+    setVehiculo('')
+    setTiempo(0)
+    setMotor('')
+    setAlimento('')
+    setCantidad(0)
+    setEsDeProximidad(false)
+    setConsumoEnergetico('')
+    setEsRenovable(false)
+    setRecicla(false)
+    setErrorMesage('') // Opcional: Resetear mensajes de error
+  }
+  /* const submitGeneral = (categoria) => {
+    try {
+      if (categoria === 'transporte' && currentCategory === 'transporte') {
+        handleFormTransporteSubmit()
+      } else if (categoria === 'consumo' && currentCategory === 'consumo') {
+        handleFormOtrosSubmit()
+      } else if (
+        categoria === 'alimentacion' &&
+        currentCategory === 'alimentacion'
+      ) {
+        handleFormAlimentacionSubmit()
+      }
+    } catch (error) {
+      console.error('Error al enviar el formulario:', error)
+    }
+  }*/
 
+  // Función para manejar el cambio de carta
   const handleNextCard = () => {
-    // Iniciar animación de salida
     setIsAnimating(true)
     setTimeout(() => {
-      setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length)
-
-      // Iniciar animación de entrada después del cambio de carta
-      setTimeout(() => {
-        setIsAnimating(false)
-      }, 300) // Tiempo de la animación de entrada
-    }, 300) // Tiempo de la animación de salida
+      setCurrentCardIndex((prevIndex) => {
+        const nextIndex = prevIndex + 1
+        if (nextIndex < cards.length) {
+          return nextIndex
+        } else {
+          alert(`Has completado todas las cartas! `) // Aquí puedes manejar el final del flujo
+          return prevIndex // Mantener el índice si ya se completaron todas las cartas
+        }
+      })
+      resetFormState() // Resetear el estado del formulario al cambiar de tarjeta
+      setIsAnimating(false) // Desactivar la animación
+    }, 400) // Este tiempo debe coincidir con la duración de la animación
   }
+
   const handleNextCategory = () => {
     if (currentCategory === 'transporte') {
-      setCurrentCategory('otros')
-    } else if (currentCategory === 'otros') {
+      setCurrentCategory('consumo')
+    } else if (currentCategory === 'consumo') {
       setCurrentCategory('alimentacion')
-    } else {
-      setCurrentCategory('transporte')
+    } else if (currentCategory === 'alimentacion') {
+      setCurrentCategory('')
+    }
+  }
+  useEffect(() => {
+    handleGetUser()
+  }, [start])
+
+  const handleGetUser = async () => {
+    try {
+      const response = await services.get(`/user`)
+
+      setDataUser(response.data)
+
+      console.log(response.data)
+    } catch (error) {
+      if (error.response.status === 400) {
+        setErrorMesage(error.response.data.message)
+      } else {
+        navigate('/error')
+      }
     }
   }
 
@@ -212,7 +280,6 @@ function FormTuHuella() {
                   background: '#4e7294',
                   padding: '20px',
                   gap: '20px',
-                  marginTop: '20px',
                   width: '100%',
                 }}
               >
@@ -244,32 +311,36 @@ function FormTuHuella() {
                 />
 
                 <label>Tipo de motor:</label>
-                <select onChange={handleOnChangeMotor} name="motor">
+                <select
+                  onChange={handleOnChangeMotor}
+                  name="motor"
+                  disabled={vehiculo !== 'coche'}
+                  required={vehiculo === 'coche'}
+                >
                   <option value="">--Selecciona una opción--</option>
                   <option value="gasolina">Gasolina</option>
                   <option value="diesel">Diesel</option>
                   <option value="electrico">Eléctrico</option>
                   <option value="hibrido">Híbrido</option>
                 </select>
-                <button type="submit">Enviar</button>
+
+                <button type="submit" style={{ marginTop: '20px' }}>
+                  Registrar nuevo {currentCategory}
+                </button>
 
                 <button
                   type="button"
                   onClick={() => {
-                    handleNextCategory('otros')
+                    handleNextCategory('consumo')
                   }}
                 >
-                  siguiente categoria
+                  Continuar
                 </button>
               </form>
-
-              <button onClick={handleNextCard} style={{ marginTop: '20px' }}>
-                Siguiente Carta
-              </button>
             </div>
           </div>
         )}
-        {currentCategory === 'otros' && (
+        {currentCategory === 'consumo' && (
           <div className={`card-container ${currentCategory ? 'active' : ''}`}>
             <div className={`card ${isAnimating ? 'fade-out' : 'fade-in'}`}>
               <h2>{cards[currentCardIndex].title}</h2>
@@ -282,9 +353,8 @@ function FormTuHuella() {
                   alignItems: 'center',
                   flexDirection: 'column',
                   background: '#4e7294',
-                  padding: '50px',
+                  padding: '20px',
                   gap: '20px',
-                  marginTop: '100px',
                 }}
               >
                 <label>Consumo energético:</label>
@@ -301,32 +371,31 @@ function FormTuHuella() {
 
                 <label>¿Es renovable?</label>
                 <input
-                  onClick={handleOnChangeEsRenovable}
-                  value={esRenovable}
+                  onChange={handleOnChangeEsRenovable}
+                  checked={esRenovable}
                   type="checkbox"
                   name="esRenovable"
                 />
                 <label>¿Reciclas?</label>
                 <input
-                  onClick={handleOnChangeRecicla}
-                  value={recicla}
+                  onChange={handleOnChangeRecicla}
+                  checked={recicla}
                   type="checkbox"
                   name="recicla"
                 />
+
+                <button type="submit" style={{ marginTop: '20px' }}>
+                  Registar nuevo {currentCategory}
+                </button>
                 <button
                   type="button"
                   onClick={() => {
                     handleNextCategory('alimentacion')
                   }}
                 >
-                  siguiente categoria
+                  Continuar
                 </button>
-
-                <button type="submit">Enviar</button>
               </form>
-              <button onClick={handleNextCard} style={{ marginTop: '20px' }}>
-                Siguiente Carta
-              </button>
             </div>
           </div>
         )}
@@ -343,13 +412,13 @@ function FormTuHuella() {
                   alignItems: 'center',
                   flexDirection: 'column',
                   background: '#4e7294',
-                  padding: '50px',
+                  padding: '20px',
                   gap: '20px',
-                  marginTop: '100px',
                 }}
               >
                 <label>Tipo de alimentación:</label>
                 <select
+                  required
                   onChange={handleOnChangeAlimento}
                   name="alimentacion"
                   multiple
@@ -371,21 +440,23 @@ function FormTuHuella() {
 
                 <label>¿Es de proximidad?</label>
                 <input
-                  onClick={handleOnChangeEsDeProximidad}
-                  value={esDeProximidad}
+                  onChange={handleOnChangeEsDeProximidad}
+                  checked={esDeProximidad}
                   type="checkbox"
                   name="esDeProximidad"
                 />
-
-                <button type="submit">Enviar</button>
+                <button type="submit" style={{ marginTop: '20px' }}>
+                  Registar nuevo {currentCategory}
+                </button>
               </form>
-              <button onClick={handleNextCard} style={{ marginTop: '20px' }}>
-                Siguiente Carta
-              </button>
+              <CalculoHuella
+                setStart={setStart}
+                handleNextCategory={handleNextCategory}
+              />
             </div>
           </div>
         )}
-        <CalculoHuella />
+        <AnimacionPorcentaje dataUser={dataUser} comenzar={start} />
       </div>
     </div>
   )

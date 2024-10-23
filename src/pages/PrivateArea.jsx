@@ -64,7 +64,7 @@ function PrivateArea() {
 
       setDataUser(response.data)
       const numHuella = await handleMediaHuella(response.data.huella)
-      console.log(numHuella)
+
       setMediaHuella(parseFloat(numHuella.toFixed(2)))
     } catch (error) {
       if (error.response.status === 400) {

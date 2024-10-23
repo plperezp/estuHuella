@@ -14,7 +14,6 @@ const TravelCO2Calculator = () => {
 
   const apiKey = '35KHQKD6SH3G3AY64XTKGWWB88'
 
-  // Manejar cambios en los campos del formulario
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prevData) => ({
@@ -23,7 +22,6 @@ const TravelCO2Calculator = () => {
     }))
   }
 
-  // Manejar el envío del formulario y hacer la llamada a la API
   const calculateCO2 = async () => {
     const { origin, destination, travel_mode, car_type, year, distance_km } =
       formData

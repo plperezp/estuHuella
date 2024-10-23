@@ -6,43 +6,39 @@
   position: relative;
 }
 .big-button {
-  background-color: #4e7294; /* Color de fondo */
-  border: none; /* Sin borde */
-  color: white; /* Color del texto */
-  padding: 20px 40px; /* Espaciado interno */
-  text-align: center; /* Alineación del texto */
-  text-decoration: none; /* Sin subrayado */
-  display: inline-block; /* Para comportarse como un botón */
-  font-size: 24px; /* Tamaño del texto */
-  font-weight: bold; /* Negrita */
-  border-radius: 10px; /* Bordes redondeados */
-  cursor: pointer; /* Cambia el cursor a puntero */
-  transition: background-color 0.3s ease; /* Suaviza el cambio de color */
+  background-color: #4e7294;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 20px;
 }
 .overlay-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute; /* Posiciona el overlay sobre el contenedor */
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100%; /* Ocupa todo el ancho */
-  height: 100%; /* Ocupa toda la altura */
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0)
-  ); /* Degradado de oscuro a claro */
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
   z-index: 1;
 }
 
 .big-button:hover {
-  background-color: #4e7294; /* Cambia de color al pasar el ratón */
+  background-color: #274561;
+  transform: scale(1.2);
 }
 
 .big-button:active {
-  background-color: #4e7294;
-  transform: scale(0.98); /* Efecto de presión al hacer clic */
+  background-color: #284968;
 }
 
 .card-container {

@@ -124,3 +124,20 @@
   width: 100%;
   margin: 0 auto;
 }
+
+.noPost {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url(../assets/reciclaje.jpg);
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 50px;
+  color: white;
+}
+
+.noPost h2 {
+  padding-bottom: 20px;
+}

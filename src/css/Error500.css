@@ -1,0 +1,40 @@
+.error-container {
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  color: #333;
+  padding: 50px;
+  font-size: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.error-container h2 {
+  color: #ff6b6b;
+  font-size: 50px;
+}
+
+.error-container p {
+  margin: 20px 0;
+  font-size: 20px;
+}
+
+.error-container img {
+  width: 100%;
+  height: auto;
+}
+
+.error-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.error-link:hover {
+  background-color: #45a049;
+}

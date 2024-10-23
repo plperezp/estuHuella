@@ -7,10 +7,12 @@ import ModalForo from '../components/ModalForo'
 import '../css/foro.css'
 import SearchBar from '../components/SearchBar'
 import imgAvatar from '../../utils/avatar'
+import Footer from '../components/Footer'
+import axios from 'axios'
 
 const Foro = () => {
   const navigate = useNavigate()
-  const { loggedUserId } = useContext(AuthContext)
+  const { loggedUserId, isLoggedIn } = useContext(AuthContext)
   const [data, setData] = useState([])
   const [esEditar, setEsEditar] = useState(false)
   const [idEditar, setIdEditar] = useState('')
@@ -20,15 +22,18 @@ const Foro = () => {
   const [errorMessage, setErrorMessage] = useState('')
   const [searchValue, setSearchValue] = useState('')
   const [userData, setUserData] = useState({})
+  const [publicData, setPublicData] = useState({})
 
   useEffect(() => {
     getDataAll()
     getUserData()
+    getPublicData()
   }, [])
 
   const getUserData = async () => {
     try {
       const response = await services.get('/user')
+
       const avatar = imgAvatar(response.data.img)
       setUserData({ ...response.data, avatar: avatar })
     } catch (error) {
@@ -40,9 +45,24 @@ const Foro = () => {
     }
   }
 
+  const getPublicData = async () => {
+    try {
+      const response = await axios.get('/api/public/user')
+      console.log('publico', response)
+      const publicAvatar = imgAvatar(response.data.img)
+      setPublicData({ ...response.data, avatar: publicAvatar })
+    } catch (error) {
+      console.log(error)
+      if (error.response && error.response.status === 400) {
+        setErrorMessage(error.response.data.message)
+        navigate('/error')
+      }
+    }
+  }
   const getDataAll = async () => {
     try {
       const response = await services.get('/foro')
+
       const sortedData = response.data.sort(
         (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
       )
@@ -58,17 +78,20 @@ const Foro = () => {
 
   const handleSubmitCrear = async (e) => {
     e.preventDefault()
+
     try {
       const formPostCreate = {
         title,
         text,
       }
+
       const responsePost = await services.post('/foro', formPostCreate)
       setData([...data, responsePost.data])
       console.log('Post creado correctamente')
       getDataAll()
     } catch (error) {
       console.log(error)
+
       if (error.response && error.response.status === 400) {
         setErrorMessage(error.response.data.message)
       } else {
@@ -129,103 +152,139 @@ const Foro = () => {
   )
 
   if (data.length <= 0 || filteredPosts.length <= 0) {
-    return <h2>...No hay posts</h2>
+    return (
+      <div className="noPost">
+        <h2>Actualmente no hay post en el foro, ¡Se el primero en hacerlo!</h2>
+        <ModalForo
+          esEditar={esEditar}
+          handleSubmitEditar={handleSubmitEditar}
+          handleSubmitCrear={handleSubmitCrear}
+          setIsOpen={setIsOpen}
+          isOpen={isOpen}
+          title={title}
+          text={text}
+          setTitle={setTitle}
+          setText={setText}
+          setEsEditar={setEsEditar}
+          isLoggedIn={isLoggedIn}
+        />
+      </div>
+    )
   }
 
   const [mainPost, ...otherPosts] = filteredPosts
   console.log(userData.avatar)
   return (
-    <div className="fondo-foro">
-      <div className="overlay">
-        <NavBar color={'#7ed282'} />
-        <div style={{ margin: '0 auto' }}>
-          <div className="topForo">
-            <SearchBar
-              getDataAll={getDataAll}
-              searchValue={searchValue}
-              setSearchValue={setSearchValue}
-            />
+    <>
+      <div className="fondo-foro">
+        <div className="overlay">
+          <NavBar color={'#7ed282'} />
+          <div style={{ margin: '0 auto' }}>
+            <div className="topForo">
+              <SearchBar
+                getDataAll={getDataAll}
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+              />
 
-            <ModalForo
-              esEditar={esEditar}
-              handleSubmitEditar={handleSubmitEditar}
-              handleSubmitCrear={handleSubmitCrear}
-              setIsOpen={setIsOpen}
-              isOpen={isOpen}
-              title={title}
-              text={text}
-              setTitle={setTitle}
-              setText={setText}
-              setEsEditar={setEsEditar}
-            />
-          </div>
-          <div className="container-post">
-            {mainPost && (
-              <div className="main-post">
-                <div className="boxname">
-                  <h5>{userData.username}</h5>
-                  <img
-                    src={userData.avatar}
-                    alt="avatar"
-                    className="user-image"
-                  />
+              <ModalForo
+                esEditar={esEditar}
+                handleSubmitEditar={handleSubmitEditar}
+                handleSubmitCrear={handleSubmitCrear}
+                setIsOpen={setIsOpen}
+                isOpen={isOpen}
+                title={title}
+                text={text}
+                setTitle={setTitle}
+                setText={setText}
+                setEsEditar={setEsEditar}
+              />
+            </div>
+            <div className="container-post">
+              {mainPost && (
+                <div className="main-post">
+                  {!isLoggedIn ? (
+                    <div className="boxname">
+                      <h5>{publicData.username}</h5>
+                      <img
+                        src={publicData.avatar}
+                        alt="avatar"
+                        className="user-image"
+                      />{' '}
+                    </div>
+                  ) : (
+                    <div className="boxname">
+                      <h5>{userData.username}</h5>
+                      <img
+                        src={userData.avatar}
+                        alt="avatar"
+                        className="user-image"
+                      />
+                    </div>
+                  )}
+
+                  <h2>{mainPost.title}</h2>
+                  <p>{mainPost.text}</p>
+                  {isLoggedIn && (
+                    <div className="post-actions">
+                      <button
+                        onClick={(e) => handleSubmitEliminar(e, mainPost._id)}
+                        type="button"
+                        className="delete-button"
+                      >
+                        Eliminar
+                      </button>
+                      <button
+                        onClick={(e) => handleEditar(e, mainPost)}
+                        type="button"
+                      >
+                        Editar
+                      </button>
+                    </div>
+                  )}
                 </div>
-                <h2>{mainPost.title}</h2>
-                <p>{mainPost.text}</p>
-                <div className="post-actions">
-                  <button
-                    onClick={(e) => handleSubmitEliminar(e, mainPost._id)}
-                    type="button"
-                    className="delete-button"
-                  >
-                    Eliminar
-                  </button>
-                  <button
-                    onClick={(e) => handleEditar(e, mainPost)}
-                    type="button"
-                  >
-                    Editar
-                  </button>
-                </div>
+              )}
+
+              <div className="posts-grid">
+                {otherPosts.map((post) => (
+                  <div key={post._id} className="post">
+                    <div className="boxname">
+                      <h5>{publicData.username}</h5>
+                      <img
+                        src={publicData.avatar}
+                        alt="avatar"
+                        className="user-image"
+                      />
+                    </div>
+
+                    <h2>{post.title}</h2>
+                    <p>{post.text}</p>
+                    {isLoggedIn && (
+                      <div className="post-actions">
+                        <button
+                          onClick={(e) => handleSubmitEliminar(e, post._id)}
+                          type="button"
+                          className="delete-button"
+                        >
+                          Eliminar
+                        </button>
+                        <button
+                          onClick={(e) => handleEditar(e, post)}
+                          type="button"
+                        >
+                          Editar
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
-            )}
-
-            <div className="posts-grid">
-              {otherPosts.map((post) => (
-                <div key={post._id} className="post">
-                  <div className="boxname">
-                    <h5>{userData.username}</h5>
-                    <img
-                      src={userData.avatar}
-                      alt="avatar"
-                      className="user-image"
-                    />
-                  </div>
-
-                  <h2>{post.title}</h2>
-                  <p>{post.text}</p>
-                  <div className="post-actions">
-                    <button
-                      onClick={(e) => handleSubmitEliminar(e, post._id)}
-                      type="button"
-                      className="delete-button"
-                    >
-                      Eliminar
-                    </button>
-                    <button
-                      onClick={(e) => handleEditar(e, post)}
-                      type="button"
-                    >
-                      Editar
-                    </button>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <Footer fondo={'src/assets/recycling.jpg'} />
+    </>
   )
 }
 

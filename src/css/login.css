@@ -70,3 +70,8 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.spinner {
+  display: flex;
+  justify-content: center;
+}

@@ -6,7 +6,9 @@
   height: 100px;
   align-items: center;
   justify-content: space-between;
-  background-image: url('../assets/tierra.jpg');
+  background-image: url('../assets/macro-water-drop-leaf.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
   color: white;
   padding: 0 50px;
 }
@@ -15,6 +17,7 @@
   display: flex;
   width: 50%;
   gap: 25px;
+  justify-content: flex-end;
 }
 
 .socialMedia {
@@ -22,4 +25,8 @@
   width: 50%;
   gap: 25px;
   justify-content: flex-end;
+}
+
+.socialMedia img {
+  width: 20px;
 }

@@ -186,7 +186,7 @@ function CalculoHuella({ handleNextCategory, setStart }) {
       let huella = cantidadDiaria * factor
 
       if (esRenovable) {
-        huella *= 0.9
+        huella *= 0.5
       }
 
       huellaTotal += huella

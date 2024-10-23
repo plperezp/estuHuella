@@ -121,6 +121,14 @@ function PrivateArea() {
   }
 
   const avatar = imgAvatar(dataUser.img)
+  const imageMediahuella = (mediaHuella) => {
+    if (mediaHuella >= 30) {
+      return 'src/assets/factory.jpg'
+    } else {
+      return 'src/assets/fondoBosque.jpg'
+    }
+  }
+  const imageFondo = imageMediahuella(mediaHuella)
 
   const mensajeHuella = (mediaHuella) => {
     if (mediaHuella <= 16) {
@@ -149,7 +157,10 @@ function PrivateArea() {
 
   return (
     <>
-      <div className="conatainer-areaprivada">
+      <div
+        className="conatainer-areaprivada"
+        style={{ backgroundImage: `url(${imageFondo})` }}
+      >
         <div className="overlay">
           <NavBar color={'#d7d742'} avatar={avatar} />
           <AnimacionAvatar handleGetUser={handleGetUser} />

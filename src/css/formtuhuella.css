@@ -1,24 +1,14 @@
 .formtuhuella-container {
   background-image: url('../assets/nubes.jpg');
   background-size: cover;
-  background-repeat: repeat;
+  background-repeat: no-repeat;
   height: 100vh;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.big-button {
-  background-color: #4e7294;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 24px;
-  font-weight: bold;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  margin-top: 20px;
-}
+
 .overlay-form {
   display: flex;
   flex-direction: column;
@@ -28,37 +18,23 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+  background: rgba(0, 0, 0, 0.5);
   z-index: 1;
-}
+  border-radius: 10px;
 
-.big-button:hover {
-  background-color: #274561;
-  transform: scale(1.2);
-}
-
-.big-button:active {
-  background-color: #284968;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .card-container {
   width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  width: 500px;
-  height: 300px;
-}
-.card-container.active {
+  max-width: 500px;
+  height: auto;
   opacity: 1;
-  z-index: 2;
 }
 
 .card {
-  margin-top: 50px;
-  width: 100%;
-  background-color: #fff;
+  margin-top: 20px;
+  background-color: #ffffff;
   border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -68,30 +44,125 @@
   align-items: center;
   text-align: center;
   padding: 20px;
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    opacity 0.3s ease-in-out;
+  transition: transform 0.3s ease;
 }
 
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #829981;
-  color: white;
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card h2 {
+  color: #4e7294;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.card form {
+  width: 100%;
+}
+
+.card label {
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.card select,
+.card input {
+  font-family: 'Roboto', sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 0 0 15px;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.card select:focus,
+.card input:focus {
+  border-color: #4e7294;
+}
+
+.card button {
+  font-family: 'Roboto', sans-serif;
+  background: #4e7294;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
+  padding: 15px;
+  font-size: 16px;
+  width: 100%;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
-button:hover {
-  background-color: #404940;
+.card button:hover {
+  background: #3c5867;
 }
 
-.fade-out {
-  opacity: 0;
-  transform: translateX(-100%);
+.card button:active {
+  background: #274561;
 }
 
-.fade-in {
+.card .message {
+  margin-top: 10px;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.explanatory-section {
+  text-align: center;
+  margin: 50px auto;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  max-width: 600px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   opacity: 1;
-  transform: translateX(0);
+  transition: opacity 0.5s ease-in-out, transform 0.3s ease;
+}
+
+.explanatory-section h2 {
+  color: #4e7294;
+  margin-bottom: 15px;
+  font-size: 28px;
+}
+
+.explanatory-section p {
+  color: #555;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.explanatory-section button {
+  background: #4e7294;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-size: 16px;
+  width: 100%;
+}
+
+.explanatory-section button:hover {
+  background: #3c5867;
+}
+
+.slide-out {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.slide-in {
+  opacity: 1;
+  transform: translateY(0);
 }

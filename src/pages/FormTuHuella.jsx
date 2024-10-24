@@ -252,7 +252,6 @@ function FormTuHuella() {
     setCurrentCardIndex(0)
     setCurrentCategory('transporte')
     setMostraInstrucciones(false)
-    setIsVisiblemensaje(false)
   }
   const [hasShown, setHasShown] = useState(false)
 
@@ -263,6 +262,7 @@ function FormTuHuella() {
 
     if (!lastShown || lastShown !== today) {
       setHasShown(true)
+      setIsVisiblemensaje(false)
       localStorage.setItem('formShown', today)
     }
   }, [])
@@ -542,10 +542,67 @@ function FormTuHuella() {
 
           {isVisiblemensaje && !hasShown && (
             <div
-              className="message"
+              className="message-huella"
               style={{ display: !hasShown ? 'flex' : 'none' }}
             >
-              <h1>Esta es tu huella de hoy{dataUser} </h1>
+              <h1>Esta es tu huella de hoy {dataUser} kg CO₂ </h1>
+              {dataUser < 16 ? (
+                <div>
+                  <h2>Recomendaciones si tu huella de carbono es baja:</h2>
+                  <p>
+                    ¡Excelente trabajo! Sigue manteniendo hábitos sostenibles.
+                  </p>
+                  <ul>
+                    <li>Continúa utilizando transporte público o bicicleta.</li>
+                    <li>Opta por productos locales y de temporada.</li>
+                    <li>
+                      Reduce el consumo de carne y opta por dietas más basadas
+                      en plantas.
+                    </li>
+                  </ul>
+                </div>
+              ) : dataUser >= 10 && dataUser <= 25 ? (
+                <>
+                  <h2>Recomendaciones si tu huella de carbono es promedio:</h2>
+                  <p>
+                    Considera hacer algunos cambios para reducir tu impacto
+                    ambiental.
+                  </p>
+                  <ul>
+                    <li>
+                      Reducir el uso del coche y optar por compartir viajes.
+                    </li>
+                    <li>Incrementar la eficiencia energética en casa.</li>
+                    <li>Considerar energías renovables para tu hogar.</li>
+                  </ul>
+                </>
+              ) : (
+                <>
+                  <h2>Recomendaciones si tu huella de carbono es alta:</h2>
+                  <p>
+                    Es importante tomar medidas para reducir tu huella de
+                    carbono.
+                  </p>
+                  <ul>
+                    <li>
+                      <strong>Utiliza transporte público:</strong> Reduce el uso
+                      del coche siempre que sea posible.
+                    </li>
+                    <li>
+                      <strong>Aumenta el reciclaje:</strong> Asegúrate de
+                      reciclar adecuadamente los residuos.
+                    </li>
+                    <li>
+                      <strong>Reduce el consumo de energía:</strong> Apaga los
+                      dispositivos cuando no los uses.
+                    </li>
+                    <li>
+                      <strong>Opta por una dieta más sostenible:</strong> Come
+                      menos carne y más vegetales.
+                    </li>
+                  </ul>
+                </>
+              )}
             </div>
           )}
         </div>

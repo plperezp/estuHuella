@@ -43,12 +43,12 @@
   font-size: 14px;
 }
 
-.form-login .message {
+.form-login {
   margin: 15px 0 0;
   color: #b3b3b3;
   font-size: 12px;
 }
-.form-login .message a {
+.form-login a {
   color: #aae343;
   text-decoration: none;
 }
@@ -70,4 +70,9 @@
 .spinner {
   display: flex;
   justify-content: center;
+}
+.message-login {
+  padding-top: 10px;
+  color: grey;
+  font-size: 15px;
 }

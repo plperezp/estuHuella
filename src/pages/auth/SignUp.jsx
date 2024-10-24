@@ -99,7 +99,7 @@ function SignUp() {
               />
               <button type="submit">Registrarte</button>
 
-              <p className="message">
+              <p className="message-login">
                 ¿Estás registrado? <Link to="/login">Sign In</Link>
               </p>
             </form>

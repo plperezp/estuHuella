@@ -159,6 +159,7 @@ const Foro = () => {
   }
 
   const [mainPost, ...otherPosts] = filteredPosts
+
   return (
     <>
       <div className="fondo-foro">
@@ -199,7 +200,7 @@ const Foro = () => {
 
                   <h2>{mainPost.title}</h2>
                   <p>{mainPost.text}</p>
-                  {isLoggedIn === mainPost.user._id && (
+                  {loggedUserId === mainPost.user._id && (
                     <div className="post-actions">
                       <button
                         onClick={(e) => handleSubmitEliminar(e, mainPost._id)}
@@ -233,7 +234,7 @@ const Foro = () => {
 
                     <h2>{post.title}</h2>
                     <p>{post.text}</p>
-                    {isLoggedIn && (
+                    {loggedUserId === mainPost.user._id && (
                       <div className="post-actions">
                         <button
                           onClick={(e) => handleSubmitEliminar(e, post._id)}

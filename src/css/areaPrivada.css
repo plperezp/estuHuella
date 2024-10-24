@@ -117,7 +117,7 @@ h4 {
 
 .clockLoader {
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  background-image: url('../assets/home-fondo.jpg');
-  backdrop-filter: blur(10px);
+  width: 500px;
 }

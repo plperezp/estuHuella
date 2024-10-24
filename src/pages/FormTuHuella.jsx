@@ -11,7 +11,6 @@ import Footer from '../components/Footer'
 
 function FormTuHuella() {
   const navigate = useNavigate()
-  const params = useParams()
   const [vehiculo, setVehiculo] = useState('')
   const [tiempo, setTiempo] = useState(0)
   const [motor, setMotor] = useState('')
@@ -28,8 +27,8 @@ function FormTuHuella() {
   const [currentCategory, setCurrentCategory] = useState('transporte')
   const [start, setStart] = useState(false)
   const [mostrasInstrucciones, setMostraInstrucciones] = useState(true)
+  const [dataUser, setDataUser] = useState(0)
 
-  const [dataUser, setDataUser] = useState({})
   const cards = [
     {
       title: `Habito 1`,
@@ -233,9 +232,9 @@ function FormTuHuella() {
     try {
       const response = await services.get(`/user`)
 
-      setDataUser(response.data)
+      setDataUser(response.data.huella[0])
 
-      console.log(response.data)
+      console.log()
     } catch (error) {
       if (error.response.status === 400) {
         setErrorMesage(error.response.data.message)
@@ -249,239 +248,268 @@ function FormTuHuella() {
     setCurrentCategory('transporte')
     setMostraInstrucciones(false)
   }
+  const [hasShown, setHasShown] = useState(false)
+
+  useEffect(() => {
+    const today = new Date().toISOString().slice(0, 10)
+    const lastShown = localStorage.getItem('formShown')
+
+    if (!lastShown || lastShown !== today) {
+      setHasShown(true)
+      localStorage.setItem('formShown', today)
+    }
+  }, [])
 
   return (
     <>
       <div className="formtuhuella-container">
         <div className="overlay-form">
           <NavBar color={'#73abdf'} />
-          {mostrasInstrucciones ? (
-            <div
-              className={`explanatory-section ${
-                isAnimating ? 'fade-out' : 'fade-in'
-              }`}
-            >
-              <h2>Bienvenido Calcula tu huella!!!</h2>
-              <p>
-                Este formulario está diseñado para ayudarte a calcular tu huella
-                de carbono a través de diferentes hábitos relacionados con el
-                transporte, el consumo de energía y la alimentación. Completa
-                cada sección y proporciona la información solicitada para
-                obtener una estimación de tu huella.
-              </p>
-              <p>
-                Cada categoría incluye varios hábitos que debes registrar. Una
-                vez que completes todos los hábitos, podrás ver los resultados.
-              </p>
-              <button className="big-button" onClick={startForm}>
-                Comenzar
-              </button>
-            </div>
-          ) : (
-            currentCategory === 'transporte' && (
-              <div
-                className={`card-container ${currentCategory ? 'active' : ''}`}
-              >
-                <div className={`card ${isAnimating ? 'fade-out' : 'fade-in'}`}>
-                  <h2>{cards[currentCardIndex].title}</h2>
-                  <p>{cards[currentCardIndex].content}</p>
-
-                  <form
-                    onSubmit={handleFormTransporteSubmit}
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      flexDirection: 'column',
-                      background: '#6a92b736',
-                      padding: '20px',
-                      gap: '20px',
-                      width: '100%',
-                    }}
-                  >
-                    <label>Medio de transporte:</label>
-                    <select
-                      onChange={handleOnChangeVehiculo}
-                      name="transportes"
-                      multiple
-                      required
-                    >
-                      <option value="">--Selecciona una opción--</option>
-                      <option value="coche">Coche</option>
-                      <option value="autobús">Autobús</option>
-                      <option value="tren">Tren</option>
-                      <option value="metro">Metro</option>
-                      <option value="bicicleta">Bicicleta</option>
-                      <option value="caminar">Caminar</option>
-                    </select>
-
-                    <label>Tiempo (minutos):</label>
-                    <input
-                      type="number"
-                      name="tiempo"
-                      value={tiempo}
-                      onChange={handleOnChangeTiempo}
-                      min="1"
-                      max="450"
-                      required
-                    />
-
-                    <label>Tipo de motor:</label>
-                    <select
-                      onChange={handleOnChangeMotor}
-                      name="motor"
-                      disabled={vehiculo !== 'coche'}
-                      required={vehiculo === 'coche'}
-                    >
-                      <option value="">--Selecciona una opción--</option>
-                      <option value="gasolina">Gasolina</option>
-                      <option value="diesel">Diesel</option>
-                      <option value="electrico">Eléctrico</option>
-                      <option value="hibrido">Híbrido</option>
-                    </select>
-
-                    <button type="submit" style={{ marginTop: '20px' }}>
-                      Registrar nuevo {currentCategory}
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        handleNextCategory('consumo')
-                      }}
-                    >
-                      Continuar
-                    </button>
-                  </form>
+          {hasShown && (
+            <>
+              {mostrasInstrucciones ? (
+                <div
+                  className={`explanatory-section ${
+                    isAnimating ? 'fade-out' : 'fade-in'
+                  }`}
+                >
+                  <h2>Bienvenido Calcula tu huella!!!</h2>
+                  <p>
+                    Este formulario está diseñado para ayudarte a calcular tu
+                    huella de carbono a través de diferentes hábitos
+                    relacionados con el transporte, el consumo de energía y la
+                    alimentación. Completa cada sección y proporciona la
+                    información solicitada para obtener una estimación de tu
+                    huella.
+                  </p>
+                  <p>
+                    Cada categoría incluye varios hábitos que debes registrar.
+                    Una vez que completes todos los hábitos, podrás ver los
+                    resultados.
+                  </p>
+                  <button className="big-button" onClick={startForm}>
+                    Comenzar
+                  </button>
                 </div>
-              </div>
-            )
+              ) : (
+                <>
+                  {currentCategory === 'transporte' && (
+                    <div
+                      className={`card-container ${
+                        isAnimating ? 'slide-out' : 'slide-in'
+                      }`}
+                    >
+                      <div className="card">
+                        <h2>{cards[currentCardIndex].title}</h2>
+                        <p>{cards[currentCardIndex].content}</p>
+                        <form
+                          onSubmit={handleFormTransporteSubmit}
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            flexDirection: 'column',
+                            background: '#6a92b736',
+                            padding: '20px',
+                            gap: '20px',
+                            width: '100%',
+                          }}
+                        >
+                          <label>Medio de transporte:</label>
+                          <select
+                            onChange={handleOnChangeVehiculo}
+                            name="transportes"
+                            multiple
+                            required
+                          >
+                            <option value="">--Selecciona una opción--</option>
+                            <option value="coche">Coche</option>
+                            <option value="autobús">Autobús</option>
+                            <option value="tren">Tren</option>
+                            <option value="metro">Metro</option>
+                            <option value="bicicleta">Bicicleta</option>
+                            <option value="caminar">Caminar</option>
+                          </select>
+
+                          <label>Tiempo (minutos):</label>
+                          <input
+                            type="number"
+                            name="tiempo"
+                            value={tiempo}
+                            onChange={handleOnChangeTiempo}
+                            min="1"
+                            max="450"
+                            required
+                          />
+
+                          <label>Tipo de motor:</label>
+                          <select
+                            onChange={handleOnChangeMotor}
+                            name="motor"
+                            disabled={vehiculo !== 'coche'}
+                            required={vehiculo === 'coche'}
+                          >
+                            <option value="">--Selecciona una opción--</option>
+                            <option value="gasolina">Gasolina</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="electrico">Eléctrico</option>
+                            <option value="hibrido">Híbrido</option>
+                          </select>
+
+                          <button type="submit" style={{ marginTop: '20px' }}>
+                            Registrar nuevo {currentCategory}
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => handleNextCategory('consumo')}
+                          >
+                            Continuar
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  )}
+
+                  {currentCategory === 'consumo' && (
+                    <div
+                      className={`card-container ${
+                        isAnimating ? 'slide-out' : 'slide-in'
+                      }`}
+                    >
+                      <div className="card">
+                        <h2>{cards[currentCardIndex].title}</h2>
+                        <p>{cards[currentCardIndex].content}</p>
+                        <form
+                          onSubmit={handleFormOtrosSubmit}
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            flexDirection: 'column',
+                            background: '#6a92b736',
+                            padding: '20px',
+                            gap: '20px',
+                            width: '100%',
+                          }}
+                        >
+                          <label>Consumo energético:</label>
+                          <select
+                            onChange={handleOnChangeConsumoEnergetico}
+                            name="consumoEnergetico"
+                            required
+                          >
+                            <option value="">--Selecciona una opción--</option>
+                            <option value="electricidad">Electricidad</option>
+                            <option value="gas natural">Gas Natural</option>
+                            <option value="butano">Butano</option>
+                          </select>
+
+                          <label>¿Es renovable?</label>
+                          <input
+                            onChange={handleOnChangeEsRenovable}
+                            checked={esRenovable}
+                            type="checkbox"
+                            name="esRenovable"
+                          />
+                          <label>¿Reciclas?</label>
+                          <input
+                            onChange={handleOnChangeRecicla}
+                            checked={recicla}
+                            type="checkbox"
+                            name="recicla"
+                          />
+
+                          <button type="submit" style={{ marginTop: '20px' }}>
+                            Registrar nuevo {currentCategory}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleNextCategory('alimentacion')}
+                          >
+                            Continuar
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  )}
+
+                  {currentCategory === 'alimentacion' && (
+                    <div
+                      className={`card-container ${
+                        currentCategory ? 'active' : ''
+                      }`}
+                    >
+                      <div
+                        className={`card ${
+                          isAnimating ? 'fade-out' : 'fade-in'
+                        }`}
+                      >
+                        <h2>{cards[currentCardIndex].title}</h2>
+                        <p>{cards[currentCardIndex].content}</p>
+                        <form
+                          onSubmit={handleFormAlimentacionSubmit}
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            flexDirection: 'column',
+                            background: '#6a92b736',
+                            padding: '20px',
+                            gap: '20px',
+                            width: '100%',
+                          }}
+                        >
+                          <label>Tipo de alimentación:</label>
+                          <select
+                            required
+                            onChange={handleOnChangeAlimento}
+                            name="alimentacion"
+                            multiple
+                          >
+                            <option value="pollo">Pollo</option>
+                            <option value="cerdo">Cerdo</option>
+                            <option value="ternera">Ternera</option>
+                            <option value="vegetales">Vegetales</option>
+                          </select>
+
+                          <label>Cantidad (gramos):</label>
+                          <input
+                            onChange={handleOnChangeCantidad}
+                            value={cantidad}
+                            type="number"
+                            name="cantidadCarne"
+                            min="0"
+                          />
+
+                          <label>¿Es de proximidad?</label>
+                          <input
+                            onChange={handleOnChangeEsDeProximidad}
+                            checked={esDeProximidad}
+                            type="checkbox"
+                            name="esDeProximidad"
+                          />
+                          <button type="submit" style={{ marginTop: '20px' }}>
+                            Registrar nuevo {currentCategory}
+                          </button>
+                        </form>
+                        <CalculoHuella
+                          setStart={setStart}
+                          handleNextCategory={handleNextCategory}
+                          comenzar={start}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
+              <AnimacionPorcentaje comenzar={start} />
+            </>
           )}
 
-          {currentCategory === 'consumo' && (
-            <div
-              className={`card-container ${currentCategory ? 'active' : ''}`}
-            >
-              <div className={`card ${isAnimating ? 'fade-out' : 'fade-in'}`}>
-                <h2>{cards[currentCardIndex].title}</h2>
-                <p>{cards[currentCardIndex].content}</p>
-                <form
-                  onSubmit={handleFormOtrosSubmit}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    flexDirection: 'column',
-                    background: '#6a92b736',
-                    padding: '20px',
-                    gap: '20px',
-                    width: '100%',
-                  }}
-                >
-                  <label>Consumo energético:</label>
-                  <select
-                    onChange={handleOnChangeConsumoEnergetico}
-                    name="consumoEnergetico"
-                    required
-                  >
-                    <option value="">--Selecciona una opción--</option>
-                    <option value="electricidad">Electricidad</option>
-                    <option value="gas natural">Gas Natural</option>
-                    <option value="butano">Butano</option>
-                  </select>
-
-                  <label>¿Es renovable?</label>
-                  <input
-                    onChange={handleOnChangeEsRenovable}
-                    checked={esRenovable}
-                    type="checkbox"
-                    name="esRenovable"
-                  />
-                  <label>¿Reciclas?</label>
-                  <input
-                    onChange={handleOnChangeRecicla}
-                    checked={recicla}
-                    type="checkbox"
-                    name="recicla"
-                  />
-
-                  <button type="submit" style={{ marginTop: '20px' }}>
-                    Registrar nuevo {currentCategory}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      handleNextCategory('alimentacion')
-                    }}
-                  >
-                    Continuar
-                  </button>
-                </form>
-              </div>
-            </div>
-          )}
-          {currentCategory === 'alimentacion' && (
-            <div
-              className={`card-container ${currentCategory ? 'active' : ''}`}
-            >
-              <div className={`card ${isAnimating ? 'fade-out' : 'fade-in'}`}>
-                <h2>{cards[currentCardIndex].title}</h2>
-                <p>{cards[currentCardIndex].content}</p>
-                <form
-                  onSubmit={handleFormAlimentacionSubmit}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    flexDirection: 'column',
-                    background: '#6a92b736',
-                    padding: '20px',
-                    gap: '20px',
-                    width: '100%',
-                  }}
-                >
-                  <label>Tipo de alimentación:</label>
-                  <select
-                    required
-                    onChange={handleOnChangeAlimento}
-                    name="alimentacion"
-                    multiple
-                  >
-                    <option value="pollo">Pollo</option>
-                    <option value="cerdo">Cerdo</option>
-                    <option value="ternera">Ternera</option>
-                    <option value="vegetales">Vegetales</option>
-                  </select>
-
-                  <label>Cantidad (gramos):</label>
-                  <input
-                    onChange={handleOnChangeCantidad}
-                    value={cantidad}
-                    type="number"
-                    name="cantidadCarne"
-                    min="0"
-                  />
-
-                  <label>¿Es de proximidad?</label>
-                  <input
-                    onChange={handleOnChangeEsDeProximidad}
-                    checked={esDeProximidad}
-                    type="checkbox"
-                    name="esDeProximidad"
-                  />
-                  <button type="submit" style={{ marginTop: '20px' }}>
-                    Registrar nuevo {currentCategory}
-                  </button>
-                </form>
-                <CalculoHuella
-                  setStart={setStart}
-                  handleNextCategory={handleNextCategory}
-                  comenzar={start}
-                />
-              </div>
-            </div>
-          )}
-          <AnimacionPorcentaje dataUser={dataUser} comenzar={start} />
+          <div className="message">
+            <h1>Esta es tu huella de hoy {dataUser} </h1>
+          </div>
         </div>
       </div>
       <Footer fondo={'src/assets/ocean.jpg'} />

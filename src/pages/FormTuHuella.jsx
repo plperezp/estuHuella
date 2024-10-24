@@ -172,9 +172,7 @@ function FormTuHuella() {
       await services.post('/huella/alimentacion', formAlimentacion)
       handleNextCard
       handleNextCard()
-      console.log('Añadido correctamente')
     } catch (error) {
-      console.log(error)
       if (error.response.status === 400) {
         setErrorMesage(error.response.data.message)
       } else {
@@ -244,8 +242,6 @@ function FormTuHuella() {
       const response = await services.get(`/user`)
 
       setDataUser(response.data)
-
-      console.log(response.data)
     } catch (error) {
       if (error.response.status === 400) {
         setErrorMesage(error.response.data.message)

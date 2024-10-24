@@ -37,7 +37,6 @@ const Foro = () => {
       const avatar = imgAvatar(response.data.img)
       setUserData({ ...response.data, avatar: avatar })
     } catch (error) {
-      console.log(error)
       if (error.response && error.response.status === 400) {
         setErrorMessage(error.response.data.message)
         navigate('/error')
@@ -54,7 +53,6 @@ const Foro = () => {
       const publicAvatar = imgAvatar(response.data.img)
       setPublicData({ ...response.data, avatar: publicAvatar })
     } catch (error) {
-      console.log(error)
       if (error.response && error.response.status === 400) {
         setErrorMessage(error.response.data.message)
         navigate('/error')
@@ -70,7 +68,6 @@ const Foro = () => {
       )
       setData(sortedData)
     } catch (error) {
-      console.log(error)
       if (error.response && error.response.status === 400) {
         setErrorMessage(error.response.data.message)
         navigate('/error')
@@ -175,7 +172,7 @@ const Foro = () => {
   }
 
   const [mainPost, ...otherPosts] = filteredPosts
-  console.log(userData.avatar)
+
   return (
     <>
       <div className="fondo-foro">

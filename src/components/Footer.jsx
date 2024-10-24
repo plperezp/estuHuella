@@ -5,7 +5,6 @@ import facebook from '../assets/facebook.png'
 import youtube from '../assets/youtube.png'
 import { Link } from 'react-router-dom'
 function Footer(props) {
-  //FALTAN LINK TO PARA LOS REPOS
   return (
     <div
       className="footer-container"

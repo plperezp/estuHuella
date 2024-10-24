@@ -456,14 +456,10 @@ function FormTuHuella() {
                   {currentCategory === 'alimentacion' && (
                     <div
                       className={`card-container ${
-                        currentCategory ? 'active' : ''
+                        isAnimating ? 'slide-out' : 'slide-in'
                       }`}
                     >
-                      <div
-                        className={`card ${
-                          isAnimating ? 'fade-out' : 'fade-in'
-                        }`}
-                      >
+                      <div className="card">
                         <div className="botonAtras">
                           <img
                             src={back}

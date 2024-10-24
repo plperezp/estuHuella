@@ -234,7 +234,7 @@ const Foro = () => {
 
                     <h2>{post.title}</h2>
                     <p>{post.text}</p>
-                    {loggedUserId === mainPost.user._id && (
+                    {loggedUserId === otherPosts.user._id && (
                       <div className="post-actions">
                         <button
                           onClick={(e) => handleSubmitEliminar(e, post._id)}

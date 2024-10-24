@@ -145,7 +145,7 @@ function Dashboard() {
         </div>
         <div>{/*<TravelCO2Calculator />*/}</div>
       </div>
-      <Footer fondo={'src/assets/leaf.jpg'} />
+      <Footer fondo={'src/assets/leaf.png'} />
     </>
   )
 }

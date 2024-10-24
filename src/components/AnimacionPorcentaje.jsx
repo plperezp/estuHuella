@@ -28,9 +28,9 @@ const AnimacionPorcentaje = ({
     } else if (progress === 100) {
       setIsAnimating(false)
       setTimeout(() => {
-        navigate('/huella')
         setIsVisible(true)
         setIsVisiblemensaje(true)
+        navigate('/huella')
       }, 500)
     }
     return () => clearInterval(interval)

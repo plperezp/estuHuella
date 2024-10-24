@@ -373,16 +373,6 @@ function FormTuHuella() {
               className={`card-container ${currentCategory ? 'active' : ''}`}
             >
               <div className={`card ${isAnimating ? 'fade-out' : 'fade-in'}`}>
-                <div className="botonAtras">
-                  <img
-                    src={backImg}
-                    alt="back"
-                    style={{ width: '20px' }}
-                    onClick={() => {
-                      handleBackCategory('transporte')
-                    }}
-                  />
-                </div>
                 <h2>{cards[currentCardIndex].title}</h2>
                 <p>{cards[currentCardIndex].content}</p>
                 <form

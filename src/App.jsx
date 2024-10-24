@@ -8,6 +8,7 @@ import Login from '../src/pages/auth/Login'
 import Error from './pages/Error'
 import FormTuHuella from './pages/FormTuHuella'
 import NotFound from './pages/NotFound'
+import Private from './components/auth/Private'
 
 function App() {
   return (
@@ -16,9 +17,23 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/huella" element={<FormTuHuella />} />
+        <Route
+          path="/huella"
+          element={
+            <Private>
+              <FormTuHuella />
+            </Private>
+          }
+        />
         <Route path="/foro" element={<Foro />} />
-        <Route path="/private" element={<PrivateArea />} />
+        <Route
+          path="/private"
+          element={
+            <Private>
+              <PrivateArea />
+            </Private>
+          }
+        />
         <Route path="/error" element={<Error />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -172,3 +172,9 @@
   font-weight: bold;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
+
+.botonAtras {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+}

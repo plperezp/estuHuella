@@ -408,6 +408,8 @@ function FormTuHuella() {
                           <label>¿Es renovable?</label>
                           <input
                             onChange={handleOnChangeEsRenovable}
+                            git
+                            pull
                             checked={esRenovable}
                             type="checkbox"
                             name="esRenovable"
@@ -508,7 +510,7 @@ function FormTuHuella() {
           )}
 
           <div className="message">
-            <h1>Esta es tu huella de hoy {dataUser} </h1>
+            <h1>Esta es tu huella de hoy{dataUser} </h1>
           </div>
         </div>
       </div>

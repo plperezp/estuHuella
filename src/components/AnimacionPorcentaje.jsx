@@ -35,24 +35,19 @@ const AnimacionPorcentaje = ({ comenzar, dataUser }) => {
 
   return (
     <div className="porcentaje">
-      {isVisible &&
-        (!isVisiblemensaje ? (
-          <div className="pie">
-            <div
-              className="circle"
-              style={{
-                background: `conic-gradient(#73abdf ${progress}%, #2f3e46 ${progress}% 100%)`,
-              }}
-            ></div>
-            <div className="percent">
-              <div className="number">{progress}%</div>
-            </div>
+      {isVisible && (
+        <div className="pie">
+          <div
+            className="circle"
+            style={{
+              background: `conic-gradient(#73abdf ${progress}%, #2f3e46 ${progress}% 100%)`,
+            }}
+          ></div>
+          <div className="percent">
+            <div className="number">{progress}%</div>
           </div>
-        ) : (
-          <div className="message">
-            <h1>Esta es tu huella de hoy {dataUser.huella[0]}</h1>
-          </div>
-        ))}
+        </div>
+      )}
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import { Popconfirm } from 'antd'
 import services from '../services/config'
 import { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -234,13 +235,18 @@ function CalculoHuella({ handleNextCategory, setStart, comenzar }) {
     setStart(true)
   }
   return (
-    <button
-      disabled={comenzar}
-      className="big-button"
-      onClick={handleClickPach}
+    <Popconfirm
+      title="Confirmar huella"
+      description="¿Quieres guardar los cambios efectuados en el formulario?"
+      okText="Si"
+      onConfirm={handleClickPach}
+      cancelText="No"
+      onCancel={null}
     >
-      Guardar Huella
-    </button>
+      <button disabled={comenzar} className="big-button">
+        Generar Huella
+      </button>
+    </Popconfirm>
   )
 }
 

@@ -160,7 +160,7 @@ const Foro = () => {
 
   const [mainPost, ...otherPosts] = filteredPosts
 
-  console.log(otherPosts.user._id)
+  console.log(otherPosts)
   console.log(loggedUserId)
 
   return (
@@ -237,7 +237,7 @@ const Foro = () => {
 
                     <h2>{post.title}</h2>
                     <p>{post.text}</p>
-                    {loggedUserId === otherPosts.user._id && (
+                    {loggedUserId === post.user._id && (
                       <div className="post-actions">
                         <button
                           onClick={(e) => handleSubmitEliminar(e, post._id)}

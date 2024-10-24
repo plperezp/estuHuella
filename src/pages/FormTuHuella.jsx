@@ -29,7 +29,7 @@ function FormTuHuella() {
   const [start, setStart] = useState(false)
   const [mostrasInstrucciones, setMostraInstrucciones] = useState(true)
   const [dataUser, setDataUser] = useState(0)
-  const [isVisiblemensaje, setIsVisiblemensaje] = useState(false)
+  const [isVisiblemensaje, setIsVisiblemensaje] = useState(true)
 
   const cards = [
     {
@@ -256,6 +256,7 @@ function FormTuHuella() {
     setCurrentCardIndex(0)
     setCurrentCategory('transporte')
     setMostraInstrucciones(false)
+    setIsVisiblemensaje(false)
   }
   const [hasShown, setHasShown] = useState(false)
 
@@ -543,8 +544,11 @@ function FormTuHuella() {
             </>
           )}
 
-          {isVisiblemensaje && (
-            <div className="message" style={{ opacity: start ? ' 1' : '0}' }}>
+          {isVisiblemensaje && !hasShown && (
+            <div
+              className="message"
+              style={{ display: !hasShown ? 'flex' : 'none' }}
+            >
               <h1>Esta es tu huella de hoy{dataUser} </h1>
             </div>
           )}

@@ -27,7 +27,6 @@ const Foro = () => {
   useEffect(() => {
     getDataAll()
     getUserData()
-    getPublicData()
   }, [])
 
   const getUserData = async () => {
@@ -45,30 +44,17 @@ const Foro = () => {
     }
   }
 
-  const getPublicData = async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_SERVER_URL}/api/public/user/`
-      )
-      console.log('publico', response)
-      const publicAvatar = imgAvatar(response.data.img)
-      setPublicData({ ...response.data, avatar: publicAvatar })
-    } catch (error) {
-      console.log(error)
-      if (error.response && error.response.status === 400) {
-        setErrorMessage(error.response.data.message)
-        navigate('/error')
-      }
-    }
-  }
   const getDataAll = async () => {
     try {
       const response = await services.get('/foro')
-
       const sortedData = response.data.sort(
-        (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       )
-      setData(sortedData)
+      const dataconAvatar = sortedData.map((cadaData) => {
+        const avatar = imgAvatar(cadaData.user.img)
+        return { ...cadaData, avatar: avatar }
+      })
+      setData(dataconAvatar)
     } catch (error) {
       console.log(error)
       if (error.response && error.response.status === 400) {
@@ -101,7 +87,7 @@ const Foro = () => {
       }
     }
   }
-
+  const userfilter = data.map((cadauser) => cadauser.user)
   const handleSubmitEditar = async (e) => {
     e.preventDefault()
     try {
@@ -175,7 +161,8 @@ const Foro = () => {
   }
 
   const [mainPost, ...otherPosts] = filteredPosts
-  console.log(userData.avatar)
+  const [mainUser, ...otherUser] = userfilter
+  console.log(mainUser)
   return (
     <>
       <div className="fondo-foro">
@@ -205,25 +192,14 @@ const Foro = () => {
             <div className="container-post">
               {mainPost && (
                 <div className="main-post">
-                  {!isLoggedIn ? (
-                    <div className="boxname">
-                      <h5>{publicData.username}</h5>
-                      <img
-                        src={publicData.avatar}
-                        alt="avatar"
-                        className="user-image"
-                      />{' '}
-                    </div>
-                  ) : (
-                    <div className="boxname">
-                      <h5>{userData.username}</h5>
-                      <img
-                        src={userData.avatar}
-                        alt="avatar"
-                        className="user-image"
-                      />
-                    </div>
-                  )}
+                  <div className="boxname">
+                    <h5>{mainPost.user.username}</h5>
+                    <img
+                      src={mainPost.avatar}
+                      alt="avatar"
+                      className="user-image"
+                    />
+                  </div>
 
                   <h2>{mainPost.title}</h2>
                   <p>{mainPost.text}</p>
@@ -251,9 +227,9 @@ const Foro = () => {
                 {otherPosts.map((post) => (
                   <div key={post._id} className="post">
                     <div className="boxname">
-                      <h5>{publicData.username}</h5>
+                      <h5>{post.user.username}</h5>
                       <img
-                        src={publicData.avatar}
+                        src={post.avatar}
                         alt="avatar"
                         className="user-image"
                       />

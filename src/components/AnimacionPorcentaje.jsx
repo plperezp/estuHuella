@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import '../css/animacionPorcentaje.css'
+import { useNavigate } from 'react-router-dom'
 
 const AnimacionPorcentaje = ({
   comenzar,
@@ -9,15 +10,12 @@ const AnimacionPorcentaje = ({
   const [progress, setProgress] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
-
-  const [message, setMessage] = useState('')
-
+  const navigate = useNavigate()
   useEffect(() => {
     if (comenzar) {
       setProgress(0)
       setIsAnimating(true)
       setIsVisible(true)
-      setMessage('')
     }
   }, [comenzar])
 
@@ -30,6 +28,7 @@ const AnimacionPorcentaje = ({
     } else if (progress === 100) {
       setIsAnimating(false)
       setTimeout(() => {
+        navigate('/huella')
         setIsVisible(true)
         setIsVisiblemensaje(true)
       }, 500)
@@ -44,7 +43,7 @@ const AnimacionPorcentaje = ({
         display: isVisiblemensaje ? 'none' : 'flex',
       }}
     >
-      {!isVisiblemensaje && isVisible && (
+      {isVisible && (
         <div className="pie">
           <div
             className="circle"

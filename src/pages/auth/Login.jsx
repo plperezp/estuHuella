@@ -73,7 +73,7 @@ function Login() {
                   'Login' // Texto normal del botón
                 )}
               </button>
-              <p class="message">
+              <p class="message-login">
                 No esta registrado? <Link to={'/signup'}>Registrar</Link>
               </p>
             </form>

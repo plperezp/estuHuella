@@ -28,7 +28,6 @@ function Login() {
       }
 
       const response = await services.post('/auth/login', userCredentials)
-      console.log(response)
 
       localStorage.setItem('authToken', response.data.authToken)
       await authenticateUser()

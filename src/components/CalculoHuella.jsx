@@ -210,14 +210,14 @@ function CalculoHuella({ handleNextCategory, setStart, comenzar }) {
   )
 
   const huellaDiaria = huellaTotal.toFixed(2)
-  console.log(huellaDiaria)
+
   if (dataHabitos.length === undefined) {
     return <h3>Loading...o eso creo</h3>
   }
 
   const patchTotalHuella = () => {
     const huella = parseFloat(huellaDiaria)
-    console.log('Enviando huella:', huella)
+
     try {
       services.patch('/user/huella', { huella: huella })
     } catch (error) {
@@ -229,7 +229,6 @@ function CalculoHuella({ handleNextCategory, setStart, comenzar }) {
     }
   }
   const handleClickPach = () => {
-    console.log('Botón presionado, llamando a patchTotalHuella')
     patchTotalHuella()
     handleNextCategory()
     setStart(true)

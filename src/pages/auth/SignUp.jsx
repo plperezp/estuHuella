@@ -98,13 +98,7 @@ function SignUp() {
                 onChange={handlePasswordChange}
               />
               <button type="submit">Registrarte</button>
-              <button
-                type="button"
-                style={{ backgroundColor: 'blue' }}
-                onClick={handleGetGoogle}
-              >
-                google
-              </button>
+
               <p className="message">
                 ¿Estás registrado? <Link to="/login">Sign In</Link>
               </p>

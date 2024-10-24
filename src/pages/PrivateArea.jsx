@@ -17,11 +17,19 @@ import 'ag-charts-enterprise'
 import AnimacionAvatar from '../components/AnimacionAvatar'
 import Footer from '../components/Footer'
 import { ClockLoader } from 'react-spinners'
+import factoryImage from '../assets/factory.jpg'
+import bosqueImage from '../assets/fondoBosque.jpg'
 
 function PrivateArea() {
   const navigate = useNavigate()
   const [dataUser, setDataUser] = useState({})
   const [mediaHuella, setMediaHuella] = useState(0)
+
+  const imageMediahuella = (mediaHuella) => {
+    return mediaHuella >= 30 ? factoryImage : bosqueImage
+  }
+
+  const imageFondo = imageMediahuella(mediaHuella)
 
   const [options, setOptions] = useState({
     type: 'radial-gauge',
@@ -121,14 +129,6 @@ function PrivateArea() {
   }
 
   const avatar = imgAvatar(dataUser.img)
-  const imageMediahuella = (mediaHuella) => {
-    if (mediaHuella >= 30) {
-      return 'src/assets/factory.jpg'
-    } else {
-      return 'src/assets/fondoBosque.jpg'
-    }
-  }
-  const imageFondo = imageMediahuella(mediaHuella)
 
   const mensajeHuella = (mediaHuella) => {
     if (mediaHuella <= 16) {

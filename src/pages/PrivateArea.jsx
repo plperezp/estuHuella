@@ -92,9 +92,9 @@ function PrivateArea() {
 
   if (dataUser.huella === undefined) {
     return (
-      <h3 className="clockLoader">
-        <ClockLoader />
-      </h3>
+      <div>
+        <ClockLoader className="clockLoader" />
+      </div>
     )
   }
 

@@ -19,6 +19,10 @@ const AnimacionPorcentaje = ({
     }
   }, [comenzar])
 
+  function refreshPage() {
+    window.location.reload()
+  }
+
   useEffect(() => {
     let interval
     if (isAnimating && progress < 100) {
@@ -30,8 +34,8 @@ const AnimacionPorcentaje = ({
       setTimeout(() => {
         setIsVisible(true)
         setIsVisiblemensaje(true)
-        navigate('/huella')
-      }, 500)
+        refreshPage()
+      }, 10)
     }
     return () => clearInterval(interval)
   }, [isAnimating, progress])

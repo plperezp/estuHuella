@@ -112,7 +112,12 @@ h4 {
 .frase {
   font-size: 20px;
   font-weight: 700px, bold;
-  color: white;
+  color: rgb(255, 255, 255);
+  width: 500px;
+  max-width: 500px;
+  background-color: rgba(255, 255, 255, 0.185);
+  text-align: center;
+  padding: 0px 20px;
 }
 
 .clockLoader {

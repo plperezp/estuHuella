@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react'
 import services from '../services/config'
 import '../css/App.css'
+import { MoonLoader } from 'react-spinners'
 
 const AuthContext = createContext()
 

@@ -549,7 +549,7 @@ function FormTuHuella() {
               <h1>Esta es tu huella de hoy {dataUser} kg CO₂ </h1>
               {dataUser < 16 ? (
                 <div>
-                  <h2>Recomendaciones si tu huella de carbono es baja:</h2>
+                  <h2> Enhorabuena </h2>
                   <p>
                     ¡Excelente trabajo! Sigue manteniendo hábitos sostenibles.
                   </p>
@@ -564,7 +564,7 @@ function FormTuHuella() {
                 </div>
               ) : dataUser >= 10 && dataUser <= 25 ? (
                 <>
-                  <h2>Recomendaciones si tu huella de carbono es promedio:</h2>
+                  <h2>Estas en la media</h2>
                   <p>
                     Considera hacer algunos cambios para reducir tu impacto
                     ambiental.
@@ -579,7 +579,7 @@ function FormTuHuella() {
                 </>
               ) : (
                 <>
-                  <h2>Recomendaciones si tu huella de carbono es alta:</h2>
+                  <h2>Mal contaminas mas que la media</h2>
                   <p>
                     Es importante tomar medidas para reducir tu huella de
                     carbono.

@@ -2,7 +2,8 @@
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
-  height: 100vh;
+  height: 100%;
+  background-image: url('../assets/fondoBosque.jpg');
 }
 .overlay {
   display: flex;

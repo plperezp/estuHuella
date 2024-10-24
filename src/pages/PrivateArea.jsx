@@ -16,8 +16,8 @@ import { AgGauge } from 'ag-charts-react'
 import 'ag-charts-enterprise'
 import AnimacionAvatar from '../components/AnimacionAvatar'
 import { ClockLoader } from 'react-spinners'
-import factoryImage from '../assets/factory.jpg'
-import bosqueImage from '../assets/fondoBosque.jpg'
+import bosque from '../assets/fondoBosque.jpg'
+import fabrica from '../assets/factory.jpg'
 
 function PrivateArea() {
   const navigate = useNavigate()
@@ -148,7 +148,7 @@ function PrivateArea() {
   }
   const frase = mensajeHuella(mediaHuella)
   const imageMediahuella = (mediaHuella) => {
-    return mediaHuella >= 25 ? factoryImage : bosqueImage
+    return mediaHuella >= 25 ? fabrica : bosque
   }
 
   const imageFondo = imageMediahuella(mediaHuella)

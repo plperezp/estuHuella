@@ -8,16 +8,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute; /* Posiciona el overlay sobre el contenedor */
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100%; /* Ocupa todo el ancho */
-  height: 100%; /* Ocupa toda la altura */
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0)
-  ); /* Degradado de oscuro a claro */
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
   z-index: 1;
 }
 .avatar {

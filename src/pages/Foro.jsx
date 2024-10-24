@@ -199,7 +199,7 @@ const Foro = () => {
 
                   <h2>{mainPost.title}</h2>
                   <p>{mainPost.text}</p>
-                  {isLoggedIn && (
+                  {isLoggedIn === mainPost.user._id && (
                     <div className="post-actions">
                       <button
                         onClick={(e) => handleSubmitEliminar(e, mainPost._id)}

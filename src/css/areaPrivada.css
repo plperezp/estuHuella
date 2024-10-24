@@ -1,8 +1,10 @@
 .conatainer-areaprivada {
   background-size: cover;
+  background-image: url('../assets/fondoBosque.jpg');
   background-repeat: no-repeat;
   position: relative;
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
 }
 .overlay {
   display: flex;

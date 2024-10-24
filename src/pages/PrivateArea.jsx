@@ -153,49 +153,44 @@ function PrivateArea() {
 
   const imageFondo = imageMediahuella(mediaHuella)
   return (
-    <>
-      <div
-        className="conatainer-areaprivada"
-        style={{ backgroundImage: `url(${imageFondo})` }}
-      >
-        <div className="overlay">
-          <NavBar color={'#d7d742'} avatar={avatar} />
-          <AnimacionAvatar handleGetUser={handleGetUser} />
-          <div className="info-user">
-            <div className="tu-huella">
-              <h1 style={{ color: 'white', fontSize: '50px' }}>
-                Es tu Huella de hoy: {dataUser.huella[0]}kg CO₂
-              </h1>
-              <div className="graficaMediHuella">
-                <h2 style={{ color: 'white', fontSize: '35px' }}>
-                  El progreso de tu Huella
-                </h2>
-                <AgGauge
-                  options={options}
-                  style={{ width: '500px', height: '300px' }}
-                />
-              </div>
-              <p className="frase">{frase}</p>
+    <div className="conatainer-areaprivada">
+      <div className="overlay">
+        <NavBar color={'#d7d742'} avatar={avatar} />
+        <AnimacionAvatar handleGetUser={handleGetUser} />
+        <div className="info-user">
+          <div className="tu-huella">
+            <h1 style={{ color: 'white', fontSize: '50px' }}>
+              Es tu Huella de hoy: {dataUser.huella[0]}kg CO₂
+            </h1>
+            <div className="graficaMediHuella">
+              <h2 style={{ color: 'white', fontSize: '35px' }}>
+                El progreso de tu Huella
+              </h2>
+              <AgGauge
+                options={options}
+                style={{ width: '500px', height: '300px' }}
+              />
             </div>
-            <div className="avatar">
-              <img style={{ width: '250px' }} src={avatar} alt="avatar" />
-            </div>
+            <p className="frase">{frase}</p>
           </div>
-
-          <div className="info-avatar">
-            <h3>
-              Name: <span>{dataUser.name}</span>
-            </h3>
-            <h4>
-              Username: <span>{dataUser.username}</span>
-            </h4>
-            <h4>
-              Email: <span>{dataUser.email}</span>
-            </h4>
+          <div className="avatar">
+            <img style={{ width: '250px' }} src={avatar} alt="avatar" />
           </div>
         </div>
+
+        <div className="info-avatar">
+          <h3>
+            Name: <span>{dataUser.name}</span>
+          </h3>
+          <h4>
+            Username: <span>{dataUser.username}</span>
+          </h4>
+          <h4>
+            Email: <span>{dataUser.email}</span>
+          </h4>
+        </div>
       </div>
-    </>
+    </div>
   )
 }
 

@@ -160,6 +160,9 @@ const Foro = () => {
 
   const [mainPost, ...otherPosts] = filteredPosts
 
+  console.log(otherPosts.user._id)
+  console.log(loggedUserId)
+
   return (
     <>
       <div className="fondo-foro">

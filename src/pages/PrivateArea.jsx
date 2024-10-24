@@ -198,7 +198,6 @@ function PrivateArea() {
           </div>
         </div>
       </div>
-      <Footer fondo={'src/assets/tierra2.jpg'} />
     </>
   )
 }

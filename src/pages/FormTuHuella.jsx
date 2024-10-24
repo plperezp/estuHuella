@@ -8,6 +8,7 @@ import '../css/formtuhuella.css'
 import CalculoHuella from '../components/CalculoHuella'
 import AnimacionPorcentaje from '../components/AnimacionPorcentaje'
 import Footer from '../components/Footer'
+import backImg from '../assets/back.png'
 
 function FormTuHuella() {
   const navigate = useNavigate()
@@ -225,6 +226,15 @@ function FormTuHuella() {
       setCurrentCategory('')
     }
   }
+
+  const handleBackCategory = () => {
+    if (currentCategory === 'consumo') {
+      setCurrentCategory('transporte')
+    } else if (currentCategory === 'alimentacion') {
+      setCurrentCategory('consumo')
+    }
+  }
+
   useEffect(() => {
     handleGetUser()
   }, [start])
@@ -341,7 +351,7 @@ function FormTuHuella() {
                     </select>
 
                     <button type="submit" style={{ marginTop: '20px' }}>
-                      Registrar nuevo {currentCategory}
+                      Guardar habito {currentCategory}
                     </button>
 
                     <button
@@ -363,6 +373,16 @@ function FormTuHuella() {
               className={`card-container ${currentCategory ? 'active' : ''}`}
             >
               <div className={`card ${isAnimating ? 'fade-out' : 'fade-in'}`}>
+                <div className="botonAtras">
+                  <img
+                    src={backImg}
+                    alt="back"
+                    style={{ width: '20px' }}
+                    onClick={() => {
+                      handleBackCategory('transporte')
+                    }}
+                  />
+                </div>
                 <h2>{cards[currentCardIndex].title}</h2>
                 <p>{cards[currentCardIndex].content}</p>
                 <form
@@ -406,7 +426,7 @@ function FormTuHuella() {
                   />
 
                   <button type="submit" style={{ marginTop: '20px' }}>
-                    Registrar nuevo {currentCategory}
+                    Guardar Habito {currentCategory}
                   </button>
                   <button
                     type="button"
@@ -425,6 +445,16 @@ function FormTuHuella() {
               className={`card-container ${currentCategory ? 'active' : ''}`}
             >
               <div className={`card ${isAnimating ? 'fade-out' : 'fade-in'}`}>
+                <div className="botonAtras">
+                  <img
+                    src={backImg}
+                    alt="back"
+                    style={{ width: '20px' }}
+                    onClick={() => {
+                      handleBackCategory('consumo')
+                    }}
+                  />
+                </div>
                 <h2>{cards[currentCardIndex].title}</h2>
                 <p>{cards[currentCardIndex].content}</p>
                 <form
@@ -470,9 +500,10 @@ function FormTuHuella() {
                     name="esDeProximidad"
                   />
                   <button type="submit" style={{ marginTop: '20px' }}>
-                    Registrar nuevo {currentCategory}
+                    Guardar habito {currentCategory}
                   </button>
                 </form>
+
                 <CalculoHuella
                   setStart={setStart}
                   handleNextCategory={handleNextCategory}

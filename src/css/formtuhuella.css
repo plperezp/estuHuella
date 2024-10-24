@@ -166,3 +166,9 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+.botonAtras {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+}

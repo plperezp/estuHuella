@@ -23,11 +23,9 @@ const Foro = () => {
   const [searchValue, setSearchValue] = useState('')
   const [userData, setUserData] = useState({})
   const [publicData, setPublicData] = useState({})
-
   useEffect(() => {
     getDataAll()
     getUserData()
-    getPublicData()
   }, [])
 
   const getUserData = async () => {
@@ -45,28 +43,18 @@ const Foro = () => {
     }
   }
 
-  const getPublicData = async () => {
-    try {
-      const response = await axios.get('/api/public/user')
-      console.log('publico', response)
-      const publicAvatar = imgAvatar(response.data.img)
-      setPublicData({ ...response.data, avatar: publicAvatar })
-    } catch (error) {
-      console.log(error)
-      if (error.response && error.response.status === 400) {
-        setErrorMessage(error.response.data.message)
-        navigate('/error')
-      }
-    }
-  }
   const getDataAll = async () => {
     try {
       const response = await services.get('/foro')
 
       const sortedData = response.data.sort(
-        (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       )
-      setData(sortedData)
+      const dataconAvatar = sortedData.map((cadaData) => {
+        const avatar = imgAvatar(cadaData.user.img)
+        return { ...cadaData, avatar: avatar }
+      })
+      setData(dataconAvatar)
     } catch (error) {
       console.log(error)
       if (error.response && error.response.status === 400) {
@@ -87,7 +75,7 @@ const Foro = () => {
 
       const responsePost = await services.post('/foro', formPostCreate)
       setData([...data, responsePost.data])
-      console.log('Post creado correctamente')
+
       getDataAll()
     } catch (error) {
       console.log(error)
@@ -151,6 +139,8 @@ const Foro = () => {
     post.title.toLowerCase().startsWith(searchValue.toLowerCase())
   )
 
+  const userfilter = data.map((cadauser) => cadauser.user)
+
   if (data.length <= 0 || filteredPosts.length <= 0) {
     return (
       <div className="noPost">
@@ -173,7 +163,9 @@ const Foro = () => {
   }
 
   const [mainPost, ...otherPosts] = filteredPosts
-  console.log(userData.avatar)
+  console.log(otherPosts)
+  const [mainUser, ...otherUser] = userfilter
+
   return (
     <>
       <div className="fondo-foro">
@@ -200,29 +192,18 @@ const Foro = () => {
                 setEsEditar={setEsEditar}
               />
             </div>
-            <div className="container-post">
-              {mainPost && (
-                <div className="main-post">
-                  {!isLoggedIn ? (
-                    <div className="boxname">
-                      <h5>{publicData.username}</h5>
-                      <img
-                        src={publicData.avatar}
-                        alt="avatar"
-                        className="user-image"
-                      />{' '}
-                    </div>
-                  ) : (
-                    <div className="boxname">
-                      <h5>{userData.username}</h5>
-                      <img
-                        src={userData.avatar}
-                        alt="avatar"
-                        className="user-image"
-                      />
-                    </div>
-                  )}
 
+            <div className="container-post">
+              {mainUser && (
+                <div className="main-post">
+                  <div className="boxname">
+                    <h5>{mainUser.username}</h5>
+                    <img
+                      src={mainPost.avatar}
+                      alt="avatar"
+                      className="user-image"
+                    />
+                  </div>
                   <h2>{mainPost.title}</h2>
                   <p>{mainPost.text}</p>
                   {isLoggedIn && (
@@ -249,9 +230,9 @@ const Foro = () => {
                 {otherPosts.map((post) => (
                   <div key={post._id} className="post">
                     <div className="boxname">
-                      <h5>{publicData.username}</h5>
+                      <h5>{post.user.username}</h5>
                       <img
-                        src={publicData.avatar}
+                        src={post.avatar}
                         alt="avatar"
                         className="user-image"
                       />

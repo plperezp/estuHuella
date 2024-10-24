@@ -43,7 +43,6 @@ export default function AnimacionAvatar(props) {
   const changeImg = async (avatarName) => {
     try {
       await services.patch('/user', { img: avatarName })
-      console.log('Avatar actualizado:', avatarName)
     } catch (error) {
       console.log('Error al actualizar el avatar:', error)
     }

@@ -275,7 +275,6 @@ function FormTuHuella() {
       <div className="formtuhuella-container">
         <div className="overlay-form">
           <NavBar color={'#73abdf'} />
-<<<<<<< HEAD
           {hasShown && (
             <>
               {mostrasInstrucciones ? (
@@ -283,130 +282,6 @@ function FormTuHuella() {
                   className={`explanatory-section ${
                     isAnimating ? 'fade-out' : 'fade-in'
                   }`}
-=======
-          {mostrasInstrucciones ? (
-            <div
-              className={`explanatory-section ${
-                isAnimating ? 'fade-out' : 'fade-in'
-              }`}
-            >
-              <h2>Bienvenido Calcula tu huella!!!</h2>
-              <p>
-                Este formulario está diseñado para ayudarte a calcular tu huella
-                de carbono a través de diferentes hábitos relacionados con el
-                transporte, el consumo de energía y la alimentación. Completa
-                cada sección y proporciona la información solicitada para
-                obtener una estimación de tu huella.
-              </p>
-              <p>
-                Cada categoría incluye varios hábitos que debes registrar. Una
-                vez que completes todos los hábitos, podrás ver los resultados.
-              </p>
-              <button className="big-button" onClick={startForm}>
-                Comenzar
-              </button>
-            </div>
-          ) : (
-            currentCategory === 'transporte' && (
-              <div
-                className={`card-container ${currentCategory ? 'active' : ''}`}
-              >
-                <div className={`card ${isAnimating ? 'fade-out' : 'fade-in'}`}>
-                  <h2>{cards[currentCardIndex].title}</h2>
-                  <p>{cards[currentCardIndex].content}</p>
-
-                  <form
-                    onSubmit={handleFormTransporteSubmit}
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      flexDirection: 'column',
-                      background: '#6a92b736',
-                      padding: '20px',
-                      gap: '20px',
-                      width: '100%',
-                    }}
-                  >
-                    <label>Medio de transporte:</label>
-                    <select
-                      onChange={handleOnChangeVehiculo}
-                      name="transportes"
-                      multiple
-                      required
-                    >
-                      <option value="">--Selecciona una opción--</option>
-                      <option value="coche">Coche</option>
-                      <option value="autobús">Autobús</option>
-                      <option value="tren">Tren</option>
-                      <option value="metro">Metro</option>
-                      <option value="bicicleta">Bicicleta</option>
-                      <option value="caminar">Caminar</option>
-                    </select>
-
-                    <label>Tiempo (minutos):</label>
-                    <input
-                      type="number"
-                      name="tiempo"
-                      value={tiempo}
-                      onChange={handleOnChangeTiempo}
-                      min="1"
-                      max="450"
-                      required
-                    />
-
-                    <label>Tipo de motor:</label>
-                    <select
-                      onChange={handleOnChangeMotor}
-                      name="motor"
-                      disabled={vehiculo !== 'coche'}
-                      required={vehiculo === 'coche'}
-                    >
-                      <option value="">--Selecciona una opción--</option>
-                      <option value="gasolina">Gasolina</option>
-                      <option value="diesel">Diesel</option>
-                      <option value="electrico">Eléctrico</option>
-                      <option value="hibrido">Híbrido</option>
-                    </select>
-
-                    <button type="submit" style={{ marginTop: '20px' }}>
-                      Guardar habito {currentCategory}
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        handleNextCategory('consumo')
-                      }}
-                    >
-                      Continuar
-                    </button>
-                  </form>
-                </div>
-              </div>
-            )
-          )}
-
-          {currentCategory === 'consumo' && (
-            <div
-              className={`card-container ${currentCategory ? 'active' : ''}`}
-            >
-              <div className={`card ${isAnimating ? 'fade-out' : 'fade-in'}`}>
-                <h2>{cards[currentCardIndex].title}</h2>
-                <p>{cards[currentCardIndex].content}</p>
-                <form
-                  onSubmit={handleFormOtrosSubmit}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    flexDirection: 'column',
-                    background: '#6a92b736',
-                    padding: '20px',
-                    gap: '20px',
-                    width: '100%',
-                  }}
->>>>>>> 3ffdeea0256c060c61e4b613cb5d946551f1c260
                 >
                   <h2>Bienvenido Calcula tu huella!!!</h2>
                   <p>

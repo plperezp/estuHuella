@@ -8,6 +8,7 @@ import '../css/formtuhuella.css'
 import CalculoHuella from '../components/CalculoHuella'
 import AnimacionPorcentaje from '../components/AnimacionPorcentaje'
 import Footer from '../components/Footer'
+import back from '../assets/back.png'
 
 function FormTuHuella() {
   const navigate = useNavigate()
@@ -28,6 +29,7 @@ function FormTuHuella() {
   const [start, setStart] = useState(false)
   const [mostrasInstrucciones, setMostraInstrucciones] = useState(true)
   const [dataUser, setDataUser] = useState(0)
+  const [isVisiblemensaje, setIsVisiblemensaje] = useState(false)
 
   const cards = [
     {
@@ -224,6 +226,13 @@ function FormTuHuella() {
       setCurrentCategory('')
     }
   }
+  const handleBackCategory = () => {
+    if (currentCategory === 'consumo') {
+      setCurrentCategory('transporte')
+    } else if (currentCategory === 'alimentacion') {
+      setCurrentCategory('consumo')
+    }
+  }
   useEffect(() => {
     handleGetUser()
   }, [start])
@@ -250,8 +259,9 @@ function FormTuHuella() {
   }
   const [hasShown, setHasShown] = useState(false)
 
+  const today = new Date().toISOString().slice(0, 10)
+
   useEffect(() => {
-    const today = new Date().toISOString().slice(0, 10)
     const lastShown = localStorage.getItem('formShown')
 
     if (!lastShown || lastShown !== today) {
@@ -378,6 +388,16 @@ function FormTuHuella() {
                       }`}
                     >
                       <div className="card">
+                        <div className="botonAtras">
+                          <img
+                            src={back}
+                            alt="back"
+                            style={{ width: '20px' }}
+                            onClick={() => {
+                              handleBackCategory('transporte')
+                            }}
+                          />
+                        </div>
                         <h2>{cards[currentCardIndex].title}</h2>
                         <p>{cards[currentCardIndex].content}</p>
                         <form
@@ -447,6 +467,16 @@ function FormTuHuella() {
                           isAnimating ? 'fade-out' : 'fade-in'
                         }`}
                       >
+                        <div className="botonAtras">
+                          <img
+                            src={back}
+                            alt="back"
+                            style={{ width: '20px' }}
+                            onClick={() => {
+                              handleBackCategory('transporte')
+                            }}
+                          />
+                        </div>
                         <h2>{cards[currentCardIndex].title}</h2>
                         <p>{cards[currentCardIndex].content}</p>
                         <form
@@ -505,13 +535,19 @@ function FormTuHuella() {
                   )}
                 </>
               )}
-              <AnimacionPorcentaje comenzar={start} />
+              <AnimacionPorcentaje
+                setIsVisiblemensaje={setIsVisiblemensaje}
+                isVisiblemensaje={isVisiblemensaje}
+                comenzar={start}
+              />
             </>
           )}
 
-          <div className="message">
-            <h1>Esta es tu huella de hoy{dataUser} </h1>
-          </div>
+          {isVisiblemensaje && (
+            <div className="message" style={{ opacity: start ? ' 1' : '0}' }}>
+              <h1>Esta es tu huella de hoy{dataUser} </h1>
+            </div>
+          )}
         </div>
       </div>
       <Footer fondo={'src/assets/ocean.jpg'} />

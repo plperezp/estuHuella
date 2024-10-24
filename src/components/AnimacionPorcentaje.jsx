@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import '../css/animacionPorcentaje.css'
 
-const AnimacionPorcentaje = ({ comenzar, dataUser }) => {
+const AnimacionPorcentaje = ({
+  comenzar,
+  setIsVisiblemensaje,
+  isVisiblemensaje,
+}) => {
   const [progress, setProgress] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
-  const [isVisiblemensaje, setIsVisiblemensaje] = useState(false)
+
   const [message, setMessage] = useState('')
 
   useEffect(() => {
@@ -34,8 +38,13 @@ const AnimacionPorcentaje = ({ comenzar, dataUser }) => {
   }, [isAnimating, progress])
 
   return (
-    <div className="porcentaje">
-      {isVisible && (
+    <div
+      className="porcentaje"
+      style={{
+        display: isVisiblemensaje ? 'none' : 'flex',
+      }}
+    >
+      {!isVisiblemensaje && isVisible && (
         <div className="pie">
           <div
             className="circle"

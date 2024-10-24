@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 //import TravelCO2Calculator from '../components/TravelCO2Calculator'
 import FadeInSection from '../components/FadeinSection'
 import Footer from '../components/Footer'
+import ImgFooter from '../assets/leaf.png'
 
 function Dashboard() {
   return (
@@ -145,7 +146,7 @@ function Dashboard() {
         </div>
         <div>{/*<TravelCO2Calculator />*/}</div>
       </div>
-      <Footer fondo={'src/assets/leaf.png'} />
+      <Footer fondo={ImgFooter} />
     </>
   )
 }

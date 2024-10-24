@@ -9,6 +9,7 @@ import CalculoHuella from '../components/CalculoHuella'
 import AnimacionPorcentaje from '../components/AnimacionPorcentaje'
 import Footer from '../components/Footer'
 import back from '../assets/back.png'
+import footerImg from '../assets/ocean.png'
 
 function FormTuHuella() {
   const navigate = useNavigate()
@@ -603,7 +604,7 @@ function FormTuHuella() {
           )}
         </div>
       </div>
-      <Footer fondo={'src/assets/ocean.png'} />
+      <Footer fondo={'../assets/ocean.png'} />
     </>
   )
 }

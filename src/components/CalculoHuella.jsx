@@ -2,7 +2,7 @@ import services from '../services/config'
 import { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function CalculoHuella({ handleNextCategory, setStart }) {
+function CalculoHuella({ handleNextCategory, setStart, comenzar }) {
   const navigate = useNavigate()
   const [dataHabitos, setDataHabitos] = useState([])
 
@@ -234,7 +234,11 @@ function CalculoHuella({ handleNextCategory, setStart }) {
     setStart(true)
   }
   return (
-    <button className="big-button" onClick={handleClickPach}>
+    <button
+      disabled={comenzar}
+      className="big-button"
+      onClick={handleClickPach}
+    >
       Guardar Huella
     </button>
   )

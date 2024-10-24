@@ -476,6 +476,7 @@ function FormTuHuella() {
                 <CalculoHuella
                   setStart={setStart}
                   handleNextCategory={handleNextCategory}
+                  comenzar={start}
                 />
               </div>
             </div>

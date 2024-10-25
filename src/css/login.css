@@ -58,6 +58,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin: 100px;
 }
 
 .home-container {
@@ -78,6 +79,9 @@
   font-size: 15px;
 }
 @media (max-width: 600px) {
+  .box-login {
+    margin: 10px;
+  }
   .form-login {
     width: 80%;
     padding: 40px;

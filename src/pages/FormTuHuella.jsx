@@ -335,6 +335,7 @@ function FormTuHuella() {
                             <option value="autobús">Autobús</option>
                             <option value="tren">Tren</option>
                             <option value="metro">Metro</option>
+                            <option value="avion">Avión</option>
                             <option value="bicicleta">Bicicleta</option>
                             <option value="caminar">Caminar</option>
                           </select>
@@ -457,14 +458,10 @@ function FormTuHuella() {
                   {currentCategory === 'alimentacion' && (
                     <div
                       className={`card-container ${
-                        currentCategory ? 'active' : ''
+                        isAnimating ? 'slide-out' : 'slide-in'
                       }`}
                     >
-                      <div
-                        className={`card ${
-                          isAnimating ? 'fade-out' : 'fade-in'
-                        }`}
-                      >
+                      <div className="card">
                         <div className="botonAtras">
                           <img
                             src={back}
@@ -500,6 +497,7 @@ function FormTuHuella() {
                             <option value="pollo">Pollo</option>
                             <option value="cerdo">Cerdo</option>
                             <option value="ternera">Ternera</option>
+                            <option value="pescado">Pescado</option>
                             <option value="vegetales">Vegetales</option>
                           </select>
 

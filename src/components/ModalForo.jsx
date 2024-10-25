@@ -49,12 +49,6 @@ function ModalForo({
     setText('')
   }
 
-  // useEffect(() => {
-  //   if (!isLoggedIn) {
-  //     navigate('/login')
-  //   }
-  // }, [handleAbrir])
-
   return (
     <div>
       <button className="botonCrear" onClick={handleAbrir}>

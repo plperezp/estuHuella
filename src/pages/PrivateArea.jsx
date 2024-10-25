@@ -153,28 +153,39 @@ function PrivateArea() {
 
   const imageFondo = imageMediahuella(mediaHuella)
   return (
-    <div className="conatainer-areaprivada">
+    <div
+      className="conatainer-areaprivada"
+      //style={{ backgroundImage: url(imageFondo) }}
+    >
       <div className="overlay">
         <NavBar color={'#d7d742'} avatar={avatar} />
-        <AnimacionAvatar handleGetUser={handleGetUser} />
+        <div className="animaciones">
+          <AnimacionAvatar handleGetUser={handleGetUser} />
+        </div>
         <div className="info-user">
           <div className="tu-huella">
-            <h1 style={{ color: 'white', fontSize: '50px' }}>
-              Es tu Huella de hoy: {dataUser.huella[0]}kg CO₂
+            <h1 style={{ color: 'white' }}>
+              Es tu Huella de hoy: {dataUser.huella[0]} kg CO₂
             </h1>
             <div className="graficaMediHuella">
-              <h2 style={{ color: 'white', fontSize: '35px' }}>
-                El progreso de tu Huella
+              <h2 style={{ color: 'white' }}>
+                El progreso de tu Huella {mediaHuella} kg CO₂
               </h2>
-              <AgGauge
-                options={options}
-                style={{ width: '500px', height: '300px' }}
-              />
+
+              <div className="animaciones">
+                <AgGauge
+                  options={options}
+                  style={{ width: '500px', height: '300px' }}
+                />
+              </div>
             </div>
             <p className="frase">{frase}</p>
           </div>
-          <div className="avatar">
-            <img style={{ width: '250px' }} src={avatar} alt="avatar" />
+
+          <div className="animaciones">
+            <div className="avatar">
+              <img style={{ width: '250px' }} src={avatar} alt="avatar" />
+            </div>
           </div>
         </div>
 

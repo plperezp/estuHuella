@@ -3,10 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import BtnNav from './BtnNav'
 import { AuthContext } from '../context/auth.context'
 import services from '../services/config'
-import { useParams } from 'react-router-dom'
 import imgAvatar from '../../utils/avatar'
+import LongMenu from '../components/Menu-movil.jsx'
 function NavBar(porps) {
-  const params = useParams()
   const navigate = useNavigate()
   const [userData, setUserData] = useState({})
   const { color, avatar } = porps
@@ -34,6 +33,23 @@ function NavBar(porps) {
         setErrorMessage(error.response.data.message)
         navigate('/error')
       }
+    }
+  }
+  const handleOptionSelect = (option) => {
+    if (option === 'Home') {
+      navigate('/')
+    } else if (option === 'Sign up') {
+      navigate('/signup')
+    } else if (option === 'Login') {
+      navigate('/login')
+    } else if (option === 'Foro') {
+      navigate('/foro')
+    } else if (option === 'Crea tu huella') {
+      navigate('/huella')
+    } else if (option === 'Area privada') {
+      navigate('/private')
+    } else if (option === 'Log out') {
+      handleLogout()
     }
   }
 
@@ -81,6 +97,9 @@ function NavBar(porps) {
             alt="avatar"
           />
         )}
+      </div>
+      <div className="nav-menu mobile-only">
+        <LongMenu handleOptionSelect={handleOptionSelect} />
       </div>
     </div>
   )

@@ -186,3 +186,79 @@
   justify-content: flex-start;
   flex-direction: row;
 }
+@media (max-width: 600px) {
+  .formtuhuella-container {
+    padding: 8px;
+    height: 110vh;
+  }
+  .card-container {
+    width: 90%; /* Set width to 100% to avoid overflow */
+    padding: 8px;
+    margin: 10px;
+    box-sizing: border-box;
+  }
+
+  .card {
+    padding: 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+
+  .card h2 {
+    font-size: 18px;
+  }
+
+  .card p {
+    font-size: 13px;
+  }
+
+  .card input,
+  .card select {
+    font-size: 11px;
+    padding: 6px;
+    width: calc(100% - 12px);
+    box-sizing: border-box;
+  }
+
+  .card button {
+    padding: 10px;
+    font-size: 13px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .explanatory-section {
+    padding: 15px;
+    margin: 100px auto;
+    max-width: 85%;
+    box-sizing: border-box;
+  }
+
+  .explanatory-section h2 {
+    font-size: 22px; /* Font size for headings */
+  }
+
+  .explanatory-section p {
+    font-size: 13px; /* Font size for explanatory text */
+  }
+
+  .explanatory-section button {
+    font-size: 13px;
+    padding: 8px;
+    width: 90%; /* Full-width button */
+    box-sizing: border-box; /* Include padding in width */
+  }
+
+  .message-huella {
+    width: 85%;
+    margin: 100px 10px;
+    padding: 8px;
+    font-size: 0.9em; /* Font size for message */
+  }
+
+  .botonAtras {
+    padding: 8px;
+    width: 100%; /* Full-width back button */
+    box-sizing: border-box; /* Include padding in width */
+  }
+}

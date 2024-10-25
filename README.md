@@ -1,39 +1,39 @@
 # EstuHuella
 
-## [See the App!](https://estuhuella.netlify.app/)
+## [¡Accede a la app!](https://estuhuella.netlify.app/)
 
 ![App Logo](src/assets/estuhuellaLogo.png)
 
-## Description
+## Descripcion
 
-**NOTE -** Describe your project in one/two lines.
+Descubre tu impacto ambiental con esta innovadora app que mide tu huella de carbono y te ofrece recomendaciones personalizadas para reducirla. Conecta con otros usuarios en un foro interactivo y lleva el control de tu progreso en un área privada, donde también podrás personalizar tu perfil con avatares únicos.
 
-#### [Client Repo here](www.your-github-url-here.com)
+#### [Client Repo here](https://github.com/plperezp/estuHuella)
 
-#### [Server Repo here](www.your-github-url-here.com)
+#### [Server Repo here](https://github.com/plperezp/EstuHuellaBackend)
 
 ## Technologies & Libraries used
 
-**NOTE -** List here all technologies used in the project like HTML, CSS, Javascript, React, axios, React Context, etc.
+HTML, CSS, Javascript, React, axios, React Context,
 
 ## Backlog Functionalities
 
-**NOTE -** List here all functionalities you wish to add to your proyect later or you are currently working on
+- Implementacion de sistema de comentarios en el foro
+- Minijuego de memorización con tematica de reciclaje
 
-# Client Structure
+# Estructura Cliente
 
 ## User Stories
 
-**NOTE -** List here all the actions a user can do in the app. Example:
-
-- **404** - As a user I want to see a nice 404 page when I go to a page that doesn’t exist so that I know it was my fault
-- **500** - As a user I want to see a nice error page when the super team screws it up so that I know that is not my fault
-- **homepage** - As a user I want to be able to access the homepage so that I see what the app is about and login and signup
-- **sign up** - As a user I want to sign up on the webpage so that I can see all the events that I could attend
-- **login** - As a user I want to be able to log in on the webpage so that I can get back to my account
-- **logout** - As a user I want to be able to log out from the webpage so that I can make sure no one will access my account
-- **events list** - As a user I want to see all the events available so that I can choose which ones I want to attend
-- **events create** - As a user I want to create an event so that I can invite others to attend
+- **404** - Como usuario, quiero ver una página de error 404 agradable cuando acceda a una página que no existe para saber que fue mi error.
+- **500** - Como usuario, quiero ver una página de error agradable cuando el equipo de desarrollo comete un error para saber que no es mi culpa.
+- **homepage** - Como usuario, quiero poder acceder a la página de inicio para ver de qué trata la app y acceder a las opciones de inicio de sesión y registro.
+- **sign up** - Como usuario, quiero registrarme en la página web para poder ver todos los eventos a los que podría asistir.
+- **login** - Como usuario, quiero poder iniciar sesión en la página web para volver a acceder a mi cuenta.
+- **logout** - Como usuario, quiero poder cerrar sesión en la página web para asegurarme de que nadie acceda a mi cuenta.
+- **foro** - Como usuario, quiero ver todos los post generados por los diferentes usuarios en el foro
+- **post create** - Como usuario, quiero crear un post para interactuar con otros usuarios.
+- **crea tu huella** - Como usuario, quiero poder obtener mi huella tras rellenar un formulario con mis habitos. -**area privada** - Como usuario, deseo poder acceder a mi area privada donde visualizar mis datos personales, el record de mi huella asi como mi avatar
 
 ## Client Routes
 
@@ -41,15 +41,16 @@
 
 ## React Router Routes (React App)
 
-| Path                | Page          | Components        | Permissions             | Behavior                                                      |
-| ------------------- | ------------- | ----------------- | ----------------------- | ------------------------------------------------------------- |
-| `/`                 | Home          |                   | public                  | Home page                                                     |
-| `/signup`           | Signup        |                   | anon only `<IsAnon>`    | Signup form, link to login, navigate to homepage after signup |
-| `/login`            | Login         |                   | anon only `<IsAnon>`    | Login form, link to signup, navigate to homepage after login  |
-| `/profile`          | Profile       | EditProfile       | user only `<IsPrivate>` | Navigate to homepage after logout, expire session             |
-| `/games/list`       | GameList      | AddGame, GameCard | user only `<IsPrivate>` | Shows all films on backlog                                    |
-| `/games/edit`       | GamesEdit     |                   | user only `<IsPrivate>` | Shows all games on backlog                                    |
-| `/games/favourites` | FavouriteList | GameCard          | user only `<IsPrivate>` | Shows all games on backlog                                    |
+| Path       | Page           | Components                         | Permissions                 | Behavior                                                     |
+| ---------- | -------------- | ---------------------------------- | --------------------------- | ------------------------------------------------------------ |
+| `/`        | Home           | AnimationLogo                      | public                      | Home page                                                    |
+| `/signup`  | Signup         |                                    |                             | Signup form,link to login, navigate to login                 |
+| `/login`   | Login          |                                    |                             | Login form, link to signup, navigate to homepage after login |
+| `/huella`  | Crea tu huella | AnimacionPorcentaje, CalculoHuella | user only `<Private>`       | Crea tu huella page                                          |
+| `/foro`    | Foro           | ModalForo SearchBar                | user `<Private>` and public | Shows all post and let create a new one if is logged in      |
+| `/private` | Area Privada   | AnimacionAvatar                    | user only `<Private>`       | Shows private area                                           |
+| `/error`   | ErrorPage      |                                    | public                      | Shows error 500                                              |
+| `/*`       | NotFoundPage   |                                    | public                      | Shows error 404                                              |
 
 ## Other Components
 
@@ -65,40 +66,42 @@
   - auth.verify()
 
 - Backlog Service
-  - game.filter(type, status)
-  - game.detail(id)
-  - game.add(id)
-  - game.delete(id)
-  - game.update(id)
-- External API
-  - gameApi.details
-  - gameApi.list
+
+  - foro.filter(text)
+  - huella.create
+  - huella.update
+  - medihuella.create
+  - post.create
+  - post.update(id)
+  - post.delete(id)
+  - post.details
+  - habito.create
+  - habito.detalis
 
 ## Context
 
 - auth.context
-- theme.context
 
 ## Links
 
 ### Collaborators
 
-[Developer 1 name](www.github-url.com)
+[Pedro Perez](https://github.com/plperezp)
 
-[Developer 2 name](www.github-url.com)
+[Javier Gascon](https://github.com/Javitocatral)
 
 ### Project
 
-[Repository Link Client](www.your-github-url-here.com)
+[Repository Link Client](https://github.com/plperezp/estuHuella)
 
-[Repository Link Server](www.your-github-url-here.com)
+[Repository Link Server](https://github.com/plperezp/EstuHuellaBackend)
 
-[Deploy Link](www.your-deploy-url-here.com)
+[Deploy Link](https://estuhuella.netlify.app/)
 
-### Trello
+### Figma
 
-[Link to your trello board](www.your-trello-url-here.com)
+[Link to Figma board](https://www.figma.com/board/M510f4zYpGq3Z3zKPJlnfl/Proyecto-3-Concepto?node-id=0-1&node-type=canvas&t=a8997toAEHOPyQ6U-0)
 
 ### Slides
 
-[Slides Link](www.your-slides-url-here.com)
+[Slides Link](https://docs.google.com/presentation/d/1MX8W-Ci-ZkHRk1eyR087m2wlMNpNEcPWQS_2-rd7DWE/edit#slide=id.p)

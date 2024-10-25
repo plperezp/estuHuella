@@ -32,13 +32,16 @@
   flex-direction: column;
   text-align: left;
 }
+.container-avatar-ani {
+  width: 100%;
+}
 
 .info-avatar {
   background-color: #ffffff;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  padding: 40px;
-  margin: 40px 20px 20px;
+  padding: 10px;
+  margin: 20px 20px 20px;
   width: 400px;
   transition: transform 0.3s ease;
   text-align: left;
@@ -82,30 +85,6 @@ h4 {
   text-align: center;
 }
 
-.big-button {
-  background-color: #4caf50;
-  border: none;
-  color: white;
-  padding: 20px 40px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 24px;
-  font-weight: bold;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.big-button:hover {
-  background-color: #45a049;
-}
-
-.big-button:active {
-  background-color: #3e8e41;
-  transform: scale(0.98);
-}
-
 .frase {
   font-size: 20px;
   font-weight: 700px, bold;
@@ -125,4 +104,57 @@ h4 {
   background-color: #3e8e41;
   height: 100vh;
   width: 100%;
+}
+.tu-huella h1 {
+  font-size: 50px;
+  padding: 10px;
+}
+.graficaMediHuella h2 {
+  font-size: 35px;
+}
+@media (max-width: 600px) {
+  .tu-huella h1 {
+    font-size: 30px;
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+  }
+
+  .graficaMediHuella h2 {
+    padding: 30px;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .info-avatar {
+    padding: 20px;
+    margin: 20px 10px 10px;
+    width: 90%;
+  }
+
+  .avatar {
+    padding: 20px;
+  }
+
+  .frase {
+    font-size: 16px;
+    width: 90%;
+    padding: 10px;
+  }
+  .huella-text {
+    color: white;
+    font-size: 2em;
+  }
+
+  .grafica-title {
+    color: white;
+    font-size: 1.5em;
+  }
+
+  .avatar-img {
+    width: 250px;
+  }
+  .animaciones {
+    display: none;
+  }
 }

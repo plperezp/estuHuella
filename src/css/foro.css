@@ -141,3 +141,29 @@
 .noPost h2 {
   padding-bottom: 20px;
 }
+@media (max-width: 600px) {
+  .menu {
+    display: none;
+  }
+  .nav-menu {
+    padding: 20px;
+  }
+  .topForo {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .main-post {
+    max-width: 300px;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  .post {
+    width: 150px;
+    padding: 5px;
+  }
+  .post-actions button {
+    padding: 10px;
+    font-size: 10px;
+  }
+}

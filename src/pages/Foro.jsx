@@ -8,7 +8,7 @@ import '../css/foro.css'
 import SearchBar from '../components/SearchBar'
 import imgAvatar from '../../utils/avatar'
 import Footer from '../components/Footer'
-import axios from 'axios'
+import footeerimage from '../assets/recycling.jpg'
 
 const Foro = () => {
   const navigate = useNavigate()
@@ -221,7 +221,7 @@ const Foro = () => {
               )}
 
               <div className="posts-grid">
-                {otherPosts.map((post) => (
+                {otherPosts.slice(0, 8).map((post) => (
                   <div key={post._id} className="post">
                     <div className="boxname">
                       <h5>{post.user.username}</h5>
@@ -258,7 +258,7 @@ const Foro = () => {
           </div>
         </div>
       </div>
-      <Footer fondo={'src/assets/recycling.jpg'} />
+      <Footer fondo={footeerimage} />
     </>
   )
 }

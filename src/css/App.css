@@ -162,3 +162,38 @@ th {
   width: 100%;
   height: 100vh;
 }
+.nav-menu {
+  display: none;
+}
+.navBar .menu.desktop-only {
+  display: flex;
+}
+
+.navBar .nav-menu.mobile-only {
+  display: none;
+}
+@media (max-width: 600px) {
+  .menu {
+    display: none;
+  }
+  .nav-menu {
+    padding: 20px;
+  }
+  .fade-in-section-scroll {
+    display: block;
+  }
+  #search-bar {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+}
+
+/* Para pantallas pequeñas */
+@media (max-width: 768px) {
+  .navBar .menu.desktop-only {
+    display: none;
+  }
+  .navBar .nav-menu.mobile-only {
+    display: flex;
+  }
+}

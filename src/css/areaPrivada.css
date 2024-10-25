@@ -1,6 +1,6 @@
 .conatainer-areaprivada {
   background-size: cover;
-  background-image: url('../assets/fondoBosque.jpg');
+  background-image: var(--background-image);
   background-repeat: no-repeat;
   position: relative;
   height: 100vh;

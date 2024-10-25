@@ -155,7 +155,7 @@ function PrivateArea() {
   return (
     <div
       className="conatainer-areaprivada"
-      //style={{ backgroundImage: url(imageFondo) }}
+      style={{ '--background-image': imageFondo }}
     >
       <div className="overlay">
         <NavBar color={'#d7d742'} avatar={avatar} />

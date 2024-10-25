@@ -8,7 +8,6 @@ import '../css/foro.css'
 import SearchBar from '../components/SearchBar'
 import imgAvatar from '../../utils/avatar'
 import Footer from '../components/Footer'
-import axios from 'axios'
 
 const Foro = () => {
   const navigate = useNavigate()
@@ -221,7 +220,7 @@ const Foro = () => {
               )}
 
               <div className="posts-grid">
-                {otherPosts.map((post) => (
+                {otherPosts.slice(0, 8).map((post) => (
                   <div key={post._id} className="post">
                     <div className="boxname">
                       <h5>{post.user.username}</h5>

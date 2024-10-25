@@ -8,6 +8,7 @@ import '../css/foro.css'
 import SearchBar from '../components/SearchBar'
 import imgAvatar from '../../utils/avatar'
 import Footer from '../components/Footer'
+import footeerimage from '../assets/recycling.jpg'
 
 const Foro = () => {
   const navigate = useNavigate()
@@ -257,7 +258,7 @@ const Foro = () => {
           </div>
         </div>
       </div>
-      <Footer fondo={'src/assets/recycling.jpg'} />
+      <Footer fondo={footeerimage} />
     </>
   )
 }

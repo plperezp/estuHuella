@@ -608,7 +608,7 @@ function FormTuHuella() {
           )}
         </div>
       </div>
-      <Footer fondo={'../assets/ocean.png'} />
+      <Footer fondo={footerImg} />
     </>
   )
 }

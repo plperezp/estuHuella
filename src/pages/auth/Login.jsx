@@ -62,7 +62,7 @@ function Login() {
                 name="password"
                 value={password}
                 onChange={handlePasswordChange}
-                placeholder="password"
+                placeholder="8-cart una mayuscula, numero y letras"
               />
               <button disabled={isLoading} className="botonLogin">
                 {isLoading ? (

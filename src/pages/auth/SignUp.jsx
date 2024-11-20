@@ -92,7 +92,7 @@ function SignUp() {
               />
               <input
                 type="password"
-                placeholder="Password"
+                placeholder="8CAR: MAY/NÚM/LET"
                 name="password"
                 value={password}
                 onChange={handlePasswordChange}
